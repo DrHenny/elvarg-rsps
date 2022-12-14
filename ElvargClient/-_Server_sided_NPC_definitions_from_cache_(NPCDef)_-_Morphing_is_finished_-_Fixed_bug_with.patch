@@ -1,0 +1,3897 @@
+Index: ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java b/ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java
+--- a/ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java	(date 1671021389020)
+@@ -90,7 +90,7 @@
+             0, 0, 0, 0, -1, -1, 5, 0, 0, 0, // 160
+             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 170
+             0, 8, 0, 2, 4, 4, 5, 6, 8, 1, // 180
+-            0, 0, 12, 0, 0, 0, 0, 0, 0, 0, // 190
++            9, 9, 12, 0, 0, 0, 0, 0, 0, 0, // 190
+             2, 0, 0, 0, 2, 0, 0, 0, 4, 0, // 200
+             4, 0, 0, 0, 9, 8, 8, 0, 10, 0, // 210
+             0, 0, 3, 2, 0, 0, -1, 0, 6, 1, // 220
+Index: ElvargServer/src/main/java/com/elvarg/game/GameBuilder.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/GameBuilder.java b/ElvargServer/src/main/java/com/elvarg/game/GameBuilder.java
+--- a/ElvargServer/src/main/java/com/elvarg/game/GameBuilder.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/game/GameBuilder.java	(date 1671021389014)
+@@ -5,6 +5,7 @@
+ 
+ import com.elvarg.game.collision.RegionManager;
+ import com.elvarg.game.content.clan.ClanChatManager;
++import com.elvarg.game.definition.NPCDef;
+ import com.elvarg.game.definition.loader.impl.ItemDefinitionLoader;
+ import com.elvarg.game.definition.loader.impl.NpcDefinitionLoader;
+ import com.elvarg.game.definition.loader.impl.NpcDropDefinitionLoader;
+@@ -71,6 +72,7 @@
+         tasks.add(PlayerPunishment::init);
+ 
+         // Load definitions..
++        tasks.add(NPCDef::init);
+         tasks.add(new ObjectSpawnDefinitionLoader());
+         tasks.add(new ItemDefinitionLoader());
+         tasks.add(new ShopDefinitionLoader());
+Index: ElvargClient/-_Implemented__Teleport_To_____Teleport_to_me__options_on_friends_list1.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargClient/-_Implemented__Teleport_To_____Teleport_to_me__options_on_friends_list1.patch b/ElvargClient/-_Implemented__Teleport_To_____Teleport_to_me__options_on_friends_list1.patch
+new file mode 100644
+--- /dev/null	(date 1671021389013)
++++ b/ElvargClient/-_Implemented__Teleport_To_____Teleport_to_me__options_on_friends_list1.patch	(date 1671021389013)
+@@ -0,0 +1,617 @@
++Index: ElvargClient/src/main/java/com/runescape/Client.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/ElvargClient/src/main/java/com/runescape/Client.java b/ElvargClient/src/main/java/com/runescape/Client.java
++--- a/ElvargClient/src/main/java/com/runescape/Client.java	(revision 97deb0ec5a32a90fc70bd662b8520cdd9c6f4502)
+++++ b/ElvargClient/src/main/java/com/runescape/Client.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -1849,6 +1849,54 @@
++                             }
++                         }
++                     }
+++
+++                    if (type == 12 && isFriendOrSelf(name)) {
+++                        if (chatTypeView == 3 || chatTypeView == 0) {
+++                            newRegularFont.drawBasicString(name + " " + message,
+++                                    11, yPos + yOffset, 0x0000FF, shadow);
+++                            j++;
+++                            j77++;
+++                        }
+++                        if (type == 11 && (clanChatMode == 0)) {
+++                            if (chatTypeView == 11) {
+++                                newRegularFont.drawBasicString(
+++                                        name + " " + message, 11,
+++                                        yPos + yOffset, 0x0000FF, shadow);
+++                                j++;
+++                                j77++;
+++                            }
+++                            if (type == 12) {
+++                                newRegularFont.drawBasicString(message + "",
+++                                        11, yPos + yOffset, 0x0000FF, shadow);
+++                                j++;
+++                            }
+++                        }
+++                    }
+++
+++                    if (type == 13 && isFriendOrSelf(name)) {
+++                        if (chatTypeView == 3 || chatTypeView == 0) {
+++                            newRegularFont.drawBasicString(name + " " + message,
+++                                    11, yPos + yOffset, 0x0000FF, shadow);
+++                            j++;
+++                            j77++;
+++                        }
+++                        if (type == 11 && (clanChatMode == 0)) {
+++                            if (chatTypeView == 11) {
+++                                newRegularFont.drawBasicString(
+++                                        name + " " + message, 11,
+++                                        yPos + yOffset, 0x0000FF, shadow);
+++                                j++;
+++                                j77++;
+++                            }
+++                            if (type == 12) {
+++                                newRegularFont.drawBasicString(message + "",
+++                                        11, yPos + yOffset, 0x0000FF, shadow);
+++                                j++;
+++                            }
+++                        }
+++                    }
+++
+++
++                     if (type == 16) {
++                         if (chatTypeView == 11 || chatTypeView == 0) {
++ 
++@@ -6898,6 +6946,43 @@
++                 packetSender.sendUseItemOnPlayer(anInt1284, clicked, anInt1285, anInt1283);
++             }
++         }
+++
+++        if (action == 560 || action == 559) {
+++            String text = menuActionText[id];
+++            int indexOf = text.indexOf("@whi@");
+++            if (indexOf != -1) {
+++                long usernameHash = StringUtils.encodeBase37(text.substring(indexOf + 5).trim());
+++                int resultIndex = -1;
+++                for (int friendIndex = 0; friendIndex < friendsCount; friendIndex++) {
+++                    if (friendsListAsLongs[friendIndex] != usernameHash) {
+++                        continue;
+++                    }
+++                    resultIndex = friendIndex;
+++                    break;
+++                }
+++                packetSender.sendTeleportRequest(friendsListAsLongs[resultIndex], action == 560);
+++            }
+++            return;
+++        }
+++
+++        if (action == 562 || action == 563) {
+++            String text = menuActionText[id];
+++            int pIndex = -1;
+++            int indexOf = text.indexOf("@whi@");
+++            if (indexOf != -1) {
+++                long usernameHash = StringUtils.encodeBase37(text.substring(indexOf + 5).trim());
+++                int resultIndex = -1;
+++                for (int friendIndex = 0; friendIndex < friendsCount; friendIndex++) {
+++                    if (friendsListAsLongs[friendIndex] != usernameHash) {
+++                        continue;
+++                    }
+++                    pIndex = friendIndex;
+++                    break;
+++                }
+++            }
+++            packetSender.sendAcceptedTeleport(action == 562 ? 1 : 2, friendsListAsLongs[pIndex]);
+++            return;
+++        }
++         
++         if (action == 639) {
++             String text = menuActionText[id];
++@@ -7864,6 +7949,30 @@
++                     menuActionText[menuActionRow] = "Accept challenge @whi@" + name;
++                     menuActionTypes[menuActionRow] = 6;
++                     menuActionRow++;
+++                }
+++                l++;
+++            }
+++            if (chatTypeView == 4 && chatType == 13 && isFriendOrSelf(name)) {
+++                if (j > k1 - 14 && j <= k1) {
+++                    menuActionText[menuActionRow] = "Accept Teleport Request @whi@" + name;
+++                    menuActionTypes[menuActionRow] = 563;
+++                    menuActionRow++;
+++                }
+++                l++;
+++            }
+++            if (chatTypeView == 4 && chatType == 12 && isFriendOrSelf(name)) {
+++                if (j > k1 - 14 && j <= k1) {
+++                    menuActionText[menuActionRow] = "Accept Teleport Request @whi@" + name;
+++                    menuActionTypes[menuActionRow] = 562;
+++                    menuActionRow++;
+++                }
+++                l++;
+++            }
+++            if (chatTypeView == 4 && chatType == 12 && isFriendOrSelf(name)) {
+++                if (j > k1 - 14 && j <= k1) {
+++                    menuActionText[menuActionRow] = "Accept Teleport Request @whi@" + name;
+++                    menuActionTypes[menuActionRow] = 562;
+++                    menuActionRow++;
++                 }
++                 l++;
++             }
++@@ -8016,6 +8125,22 @@
++                     menuActionText[menuActionRow] = "Accept challenge @whi@" + chatName;
++                     menuActionTypes[menuActionRow] = 6;
++                     menuActionRow++;
+++                }
+++                l++;
+++            }
+++            if (chatType == 13 && isFriendOrSelf(chatName)) {
+++                if (j > k1 - 14 && j <= k1) {
+++                    menuActionText[menuActionRow] = "Accept Teleport Request @whi@" + chatName;
+++                    menuActionTypes[menuActionRow] = 563;
+++                    menuActionRow++;
+++                }
+++                l++;
+++            }
+++            if (chatType == 12 && isFriendOrSelf(chatName)) {
+++                if (j > k1 - 14 && j <= k1) {
+++                    menuActionText[menuActionRow] = "Accept Teleport Request @whi@" + chatName;
+++                    menuActionTypes[menuActionRow] = 562;
+++                    menuActionRow++;
++                 }
++                 l++;
++             }
++@@ -10458,6 +10583,12 @@
++                 i -= 101;
++             else
++                 i--;
+++            menuActionText[menuActionRow] = "Teleport To @whi@" + friendsList[i];
+++            menuActionTypes[menuActionRow] = 560;
+++            menuActionRow++;
+++            menuActionText[menuActionRow] = "Teleport To Me @whi@" + friendsList[i];
+++            menuActionTypes[menuActionRow] = 559;
+++            menuActionRow++;
++             menuActionText[menuActionRow] = "Remove @whi@" + friendsList[i];
++             menuActionTypes[menuActionRow] = 792;
++             menuActionRow++;
++@@ -14645,6 +14776,30 @@
++                     }
++                     if (!ignored && onTutorialIsland == 0)
++                         sendMessage("wishes to duel with you.", 8, name);
+++                } else if (message.endsWith(":teletoreq:")) {
+++                    String name = message.substring(0, message.indexOf(":"));
+++                    long encodedName = StringUtils.encodeBase37(name);
+++                    boolean ignored = false;
+++                    for (int count = 0; count < ignoreCount; count++) {
+++                        if (ignoreListAsLongs[count] != encodedName)
+++                            continue;
+++                        ignored = true;
+++
+++                    }
+++                    if (!ignored && onTutorialIsland == 0)
+++                        sendMessage("has requested to teleport to you. Click to accept.", 12, name);
+++                } else if (message.endsWith(":teletomereq:")) {
+++                    String name = message.substring(0, message.indexOf(":"));
+++                    long encodedName = StringUtils.encodeBase37(name);
+++                    boolean ignored = false;
+++                    for (int count = 0; count < ignoreCount; count++) {
+++                        if (ignoreListAsLongs[count] != encodedName)
+++                            continue;
+++                        ignored = true;
+++
+++                    }
+++                    if (!ignored && onTutorialIsland == 0)
+++                        sendMessage("has requested to teleport you to their location. Click to accept.", 13, name);
++                 } else if (message.endsWith(":chalreq:")) {
++                     String name = message.substring(0, message.indexOf(":"));
++                     long encodedName = StringUtils.encodeBase37(name);
++Index: ElvargClient/src/main/java/com/runescape/io/PacketSender.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/ElvargClient/src/main/java/com/runescape/io/PacketSender.java b/ElvargClient/src/main/java/com/runescape/io/PacketSender.java
++--- a/ElvargClient/src/main/java/com/runescape/io/PacketSender.java	(revision 97deb0ec5a32a90fc70bd662b8520cdd9c6f4502)
+++++ b/ElvargClient/src/main/java/com/runescape/io/PacketSender.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -436,8 +436,20 @@
++             buffer.writeByte(colours[l1]);
++         }
++     }
+++
+++    public void sendTeleportRequest(long username, boolean teleportToRequest) {
+++        buffer.writeOpcode(190);
+++        buffer.writeLong(username);
+++        buffer.writeByte(teleportToRequest ? 1 : 0);
+++    }
++     
++     public Buffer getBuffer() {
++         return buffer;
++     }
+++
+++    public void sendAcceptedTeleport(int type, long nameHash) {
+++        buffer.writeOpcode(191);
+++        buffer.writeByte(type);
+++        buffer.writeLong(nameHash);
+++    }
++ }
++Index: ElvargServer/src/main/java/com/elvarg/game/content/teleporting/RequestType.java
++===================================================================
++diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/RequestType.java b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/RequestType.java
++new file mode 100644
++--- /dev/null	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
+++++ b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/RequestType.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -0,0 +1,11 @@
+++package com.elvarg.game.content.teleporting;
+++
+++/**
+++ * @author Ynneh | 08/12/2022 - 12:33
+++ * <https://github.com/drhenny>
+++ */
+++public enum RequestType {
+++
+++    TELE_TO,
+++    TELE_TO_ME
+++}
++Index: ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequest.java
++===================================================================
++diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequest.java b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequest.java
++new file mode 100644
++--- /dev/null	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
+++++ b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequest.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -0,0 +1,25 @@
+++package com.elvarg.game.content.teleporting;
+++
+++import com.elvarg.game.entity.impl.player.Player;
+++
+++/**
+++ * @author Ynneh | 08/12/2022 - 12:34
+++ * <https://github.com/drhenny>
+++ */
+++public class TeleportRequest {
+++
+++    public Player player;
+++
+++    public Player requester;
+++
+++    public long requestedAt;
+++
+++    public RequestType requestType;
+++
+++    public TeleportRequest(Player player, Player requester, RequestType requestType) {
+++        this.player = player;
+++        this.requester = requester;
+++        this.requestType = requestType;
+++        this.requestedAt = System.currentTimeMillis();
+++    }
+++}
++Index: ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequestManager.java
++===================================================================
++diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequestManager.java b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequestManager.java
++new file mode 100644
++--- /dev/null	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
+++++ b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequestManager.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -0,0 +1,89 @@
+++package com.elvarg.game.content.teleporting;
+++
+++import com.elvarg.game.World;
+++import com.elvarg.game.entity.impl.player.Player;
+++import com.elvarg.game.model.dialogues.builders.impl.BankerDialogue;
+++import com.elvarg.game.model.teleportation.TeleportHandler;
+++import io.netty.util.internal.ConcurrentSet;
+++
+++import java.util.Optional;
+++import java.util.Set;
+++
+++/**
+++ * @author Ynneh | 08/12/2022 - 12:37
+++ * <https://github.com/drhenny>
+++ */
+++public class TeleportRequestManager {
+++
+++    public Set<TeleportRequest> requests = new ConcurrentSet<>();
+++
+++    private Player player;
+++
+++    public TeleportRequestManager(Player player) {
+++        this.player = player;
+++    }
+++
+++    public void onAccept(Player player, Player requester, RequestType requestType) {
+++
+++        if (requester == null) {
+++            return;
+++        }
+++
+++        Optional<TeleportRequest> request = requests.stream().filter(r -> r.requestType.equals(requestType)).findAny();
+++
+++        if (request == null || !request.isPresent()) {
+++            player.getPacketSender().sendMessage("This teleport request has expired.");
+++            return;
+++        }
+++
+++        TeleportRequest req = request.get();
+++
+++        if (req == null) {
+++            return;
+++        }
+++        if (player.getWildernessLevel() > 0) {
+++            requester.getDialogueManager().start(new TeleportWarningDialogue(player, requestType, req));
+++            return;
+++        }
+++        if (requestType == RequestType.TELE_TO_ME) {
+++            TeleportHandler.teleport(player, requester.getLocation().clone(), player.getSpellbook().getTeleportType(), false);
+++        } else {
+++            TeleportHandler.teleport(requester, player.getLocation().clone(), requester.getSpellbook().getTeleportType(), false);
+++        }
+++        requests.remove(req);
+++    }
+++
+++
+++    public void request(Player player, Player friend, boolean teleportToRequest) {
+++
+++        if (friend == null)
+++            return;
+++
+++        TeleportRequest request = new TeleportRequest(player, friend, teleportToRequest ? RequestType.TELE_TO : RequestType.TELE_TO_ME);
+++
+++        if (friend.teleportRequestManager.requests.contains(request)) {
+++            player.getPacketSender().sendMessage("You already have a "+(teleportToRequest ? "tele to" : "tele to me")+" request pending for "+friend.getUsername());
+++            return;
+++        }
+++        friend.teleportRequestManager.requests.add(request);
+++        friend.getPacketSender().sendMessage(player.getUsername()+ (teleportToRequest ? ":teletoreq:" : ":teletomereq:"));
+++        player.getPacketSender().sendMessage("<col=0000ff>Sent teleport request to "+friend.getUsername()+"...");
+++    }
+++
+++    public void remove(String name, RequestType type) {
+++        /**
+++         * Called when trying to accept requests from OFFLINE PLAYERS!
+++         */
+++        requests.stream().filter(n -> n.player.getUsername().equalsIgnoreCase(name)).filter(t -> t.requestType.equals(type)).forEach(t -> requests.remove(t));
+++    }
+++
+++    public void afterDialogue(Player player, Player requester, RequestType requestType, TeleportRequest req) {
+++        if (requestType == RequestType.TELE_TO_ME) {
+++            TeleportHandler.teleport(requester, player.getLocation().clone(), requester.getSpellbook().getTeleportType(), false);
+++        } else {
+++            TeleportHandler.teleport(player, requester.getLocation().clone(), player.getSpellbook().getTeleportType(), false);
+++        }
+++        requests.remove(req);
+++    }
+++}
+++
++Index: ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportWarningDialogue.java
++===================================================================
++diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportWarningDialogue.java b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportWarningDialogue.java
++new file mode 100644
++--- /dev/null	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
+++++ b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportWarningDialogue.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -0,0 +1,38 @@
+++package com.elvarg.game.content.teleporting;
+++
+++import com.elvarg.game.entity.impl.player.Player;
+++import com.elvarg.game.model.dialogues.builders.DynamicDialogueBuilder;
+++import com.elvarg.game.model.dialogues.entries.impl.OptionDialogue;
+++
+++/**
+++ * @author Ynneh | 09/12/2022 - 12:47
+++ * <https://github.com/drhenny>
+++ */
+++public class TeleportWarningDialogue extends DynamicDialogueBuilder {
+++
+++    private RequestType requestType;
+++    private TeleportRequest req;
+++
+++    private Player requester;
+++
+++    public TeleportWarningDialogue(Player requester, RequestType requestType, TeleportRequest req) {
+++        super();
+++        this.requester = requester;
+++        this.requestType = requestType;
+++        this.req = req;
+++    }
+++
+++    @Override
+++    public void build(Player player) {
+++        add(new OptionDialogue(0, "Teleport to Wilderness?", (option) -> {
+++            switch (option) {
+++                case FIRST_OPTION:
+++                    player.teleportRequestManager.afterDialogue(player, requester, requestType, req);
+++                    break;
+++                default:
+++
+++                    break;
+++            }
+++        }, "Yes, let's go.", "No, bruv."));
+++    }
+++}
++Index: ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java b/ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java
++--- a/ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java	(revision 97deb0ec5a32a90fc70bd662b8520cdd9c6f4502)
+++++ b/ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -39,6 +39,7 @@
++ import com.elvarg.game.content.skill.skillable.impl.Runecrafting.Pouch;
++ import com.elvarg.game.content.skill.skillable.impl.Runecrafting.PouchContainer;
++ import com.elvarg.game.content.skill.slayer.ActiveSlayerTask;
+++import com.elvarg.game.content.teleporting.TeleportRequestManager;
++ import com.elvarg.game.definition.ItemDefinition;
++ import com.elvarg.game.definition.PlayerBotDefinition;
++ import com.elvarg.game.entity.impl.Mobile;
++@@ -135,6 +136,8 @@
++ 	private Presetable[] presets = new Presetable[Presetables.MAX_PRESETS];
++ 	private boolean openPresetsOnDeath = true;
++ 
+++	public TeleportRequestManager teleportRequestManager = new TeleportRequestManager(this);
+++
++ 	private String username;
++ 	private String passwordHashWithSalt;
++ 	private String hostAddress;
++Index: ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java b/ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java
++--- a/ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java	(revision 97deb0ec5a32a90fc70bd662b8520cdd9c6f4502)
+++++ b/ElvargServer/src/main/java/com/elvarg/net/codec/PacketDecoder.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -90,7 +90,7 @@
++             0, 0, 0, 0, 5, -1, 5, 0, 0, 0, // 160
++             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 170
++             0, 8, 0, 2, 4, 4, 5, 6, 8, 1, // 180
++-            0, 0, 12, 0, 0, 0, 0, 0, 0, 0, // 190
+++            9, 9, 12, 0, 0, 0, 0, 0, 0, 0, // 190
++             2, 0, 0, 0, 2, 0, 0, 0, 4, 0, // 200
++             4, 0, 0, 0, 9, 8, 8, 0, 10, 0, // 210
++             0, 0, 3, 2, 0, 0, -1, 0, 6, 1, // 220
++Index: ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java b/ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java
++--- a/ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java	(revision 97deb0ec5a32a90fc70bd662b8520cdd9c6f4502)
+++++ b/ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -155,5 +155,8 @@
++ 
++ 		PACKETS[TRADE_REQUEST_OPCODE] = new TradeRequestPacketListener();
++ 		PACKETS[CREATION_MENU_OPCODE] = new CreationMenuPacketListener();
+++
+++		PACKETS[190] = new TeleportRequestListener();
+++		PACKETS[191] = new TeleportAcceptListener();
++ 	}
++ }
++Index: ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportAcceptListener.java
++===================================================================
++diff --git a/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportAcceptListener.java b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportAcceptListener.java
++new file mode 100644
++--- /dev/null	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
+++++ b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportAcceptListener.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -0,0 +1,58 @@
+++package com.elvarg.net.packet.impl;
+++
+++import com.elvarg.game.World;
+++import com.elvarg.game.content.teleporting.RequestType;
+++import com.elvarg.game.entity.impl.player.Player;
+++import com.elvarg.net.packet.Packet;
+++import com.elvarg.net.packet.PacketExecutor;
+++import com.elvarg.util.Misc;
+++
+++import java.util.Optional;
+++
+++/**
+++ * @author Ynneh | 09/12/2022 - 11:02
+++ * <https://github.com/drhenny>
+++ */
+++public class TeleportAcceptListener implements PacketExecutor {
+++
+++    @Override
+++    public void execute(Player player, Packet packet) {
+++        int typeIndex = packet.readByte();
+++
+++        if (typeIndex > RequestType.values().length)
+++            return;
+++
+++        RequestType type = RequestType.values()[typeIndex - 1];
+++
+++        if (type == null) {
+++            return;
+++        }
+++
+++        Long nameHash = packet.readLong();
+++
+++        if (nameHash == null) {
+++            System.err.println("invalid namehash..");
+++            return;
+++        }
+++
+++        String name = Misc.longToString(nameHash);
+++
+++        if (name == null)
+++            return;
+++
+++        Optional<Player> p = World.getPlayers().stream().filter(n -> n != null).filter(n -> n.getUsername().equalsIgnoreCase(name)).findFirst();
+++
+++        if (p == null || !p.isPresent()) {
+++            player.teleportRequestManager.remove(name, type);
+++            return;
+++        }
+++
+++        Player requester = p.get();
+++
+++        if (requester == null)
+++            return;
+++
+++        player.teleportRequestManager.onAccept(player, requester, type);
+++
+++    }
+++}
++Index: ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportRequestListener.java
++===================================================================
++diff --git a/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportRequestListener.java b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportRequestListener.java
++new file mode 100644
++--- /dev/null	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
+++++ b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportRequestListener.java	(revision 0e8772dcbe1945d4bfa761ed31cd9373af04d129)
++@@ -0,0 +1,60 @@
+++package com.elvarg.net.packet.impl;
+++
+++import com.elvarg.game.World;
+++import com.elvarg.game.entity.impl.player.Player;
+++import com.elvarg.game.model.PlayerRelations;
+++import com.elvarg.net.packet.Packet;
+++import com.elvarg.net.packet.PacketExecutor;
+++import com.elvarg.util.Misc;
+++
+++import java.util.List;
+++import java.util.Optional;
+++
+++/**
+++ * @author Ynneh | 08/12/2022 - 11:16
+++ * <https://github.com/drhenny>
+++ */
+++public class TeleportRequestListener implements PacketExecutor {
+++
+++    @Override
+++    public void execute(Player player, Packet packet) {
+++
+++        Long usernameHash = packet.readLong();
+++
+++        if (usernameHash == null)
+++            return;
+++
+++        String username = Misc.longToString(usernameHash);
+++
+++        if (username == null)
+++            return;
+++
+++        Optional<Player> searchedPlayer = World.getPlayers().stream().filter(p -> p != null).filter(p -> p.getUsername().equalsIgnoreCase(username)).findFirst();
+++
+++        if (searchedPlayer == null) {
+++            /**
+++             * Null
+++             */
+++            System.err.println("here 1..");
+++            return;
+++        }
+++
+++        Player friend = searchedPlayer.get();
+++
+++        if (friend == null) {
+++            /**
+++             * TODO message w offline blabla
+++             */
+++            System.err.println("here 2..");
+++            return;
+++        }
+++
+++        boolean teleportToRequest = packet.readByte() == 1;
+++
+++        if (friend.getRelations().getStatus().equals(PlayerRelations.PrivateChatStatus.OFF)) {
+++            /** Should only appear for the requester a.k.a player **/
+++            return;
+++        }
+++        player.teleportRequestManager.request(player, friend, teleportToRequest);
+++    }
+++}
++\ No newline at end of file
+Index: ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java b/ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java
+--- a/ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/net/packet/PacketConstants.java	(date 1671021389020)
+@@ -155,5 +155,8 @@
+ 
+ 		PACKETS[TRADE_REQUEST_OPCODE] = new TradeRequestPacketListener();
+ 		PACKETS[CREATION_MENU_OPCODE] = new CreationMenuPacketListener();
++
++		PACKETS[190] = new TeleportRequestListener();
++		PACKETS[191] = new TeleportAcceptListener();
+ 	}
+ }
+Index: ElvargServer/src/main/java/com/elvarg/game/cache/BZip2DecompressionState.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/cache/BZip2DecompressionState.java b/ElvargServer/src/main/java/com/elvarg/game/cache/BZip2DecompressionState.java
+new file mode 100644
+--- /dev/null	(date 1671021389014)
++++ b/ElvargServer/src/main/java/com/elvarg/game/cache/BZip2DecompressionState.java	(date 1671021389014)
+@@ -0,0 +1,64 @@
++package com.elvarg.game.cache;
++
++/**
++ * @author Ynneh | 13/12/2022 - 12:56
++ * <https://github.com/drhenny>
++ */
++final class BZip2DecompressionState {
++
++    public static int[] tt;
++    final int[] unzftab;
++    final int[] cftab;
++    final boolean[] inUse;
++    final boolean[] inUse16;
++    final byte[] seqToUnseq;
++    final byte[] mtfa;
++    final int[] mtfbase;
++    final byte[] selector;
++    final byte[] selectorMtf;
++    final byte[][] len;
++    final int[][] limit;
++    final int[][] base;
++    final int[][] perm;
++    final int[] minLens;
++    byte[] compressed;
++    int nextIn;
++    int decompressedLength;
++    int totalInLo32;
++    int totalInHi32;
++    byte[] decompressed;
++    int nextOut;
++    int length;
++    int totalOutLo32;
++    int totalOutHigh32;
++    byte aByte573;
++    int anInt574;
++    int bsBuff;
++    int bsLive;
++    int anInt578;
++    int currentBlock;
++    int randomised;
++    int anInt581;
++    int anInt582;
++    int anInt584;
++    int nInUse;
++    int anInt601;
++
++    BZip2DecompressionState() {
++        unzftab = new int[256];
++        cftab = new int[257];
++        inUse = new boolean[256];
++        inUse16 = new boolean[16];
++        seqToUnseq = new byte[256];
++        mtfa = new byte[4096];
++        mtfbase = new int[16];
++        selector = new byte[18002];
++        selectorMtf = new byte[18002];
++        len = new byte[6][258];
++        limit = new int[6][258];
++        base = new int[6][258];
++        perm = new int[6][258];
++        minLens = new int[6];
++    }
++}
++
+Index: ElvargClient/src/main/java/com/runescape/cache/def/ItemDefinition.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargClient/src/main/java/com/runescape/cache/def/ItemDefinition.java b/ElvargClient/src/main/java/com/runescape/cache/def/ItemDefinition.java
+--- a/ElvargClient/src/main/java/com/runescape/cache/def/ItemDefinition.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargClient/src/main/java/com/runescape/cache/def/ItemDefinition.java	(date 1671021389013)
+@@ -191,6 +191,11 @@
+                 itemDef.actions[1] = "Wield";
+                 itemDef.actions[2] = "Check";
+                 break;
++            case 773:
++                itemDef.actions = new String[5];
++                itemDef.name = "Ring of Morphing";
++                itemDef.actions[0] = "Morph";
++                break;
+         }
+         return itemDef;
+     }
+Index: ElvargServer/src/main/java/com/elvarg/net/packet/impl/ItemActionPacketListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/net/packet/impl/ItemActionPacketListener.java b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/ItemActionPacketListener.java
+--- a/ElvargServer/src/main/java/com/elvarg/net/packet/impl/ItemActionPacketListener.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/ItemActionPacketListener.java	(date 1671021389021)
+@@ -6,6 +6,8 @@
+ import com.elvarg.game.content.PotionConsumable;
+ import com.elvarg.game.content.combat.CombatSpecial;
+ import com.elvarg.game.content.minigames.Barrows;
++import com.elvarg.game.content.morphing.MorphSelection;
++import com.elvarg.game.content.morphing.RingOfMorphing;
+ import com.elvarg.game.content.skill.skillable.impl.Herblore;
+ import com.elvarg.game.content.skill.skillable.impl.Prayer;
+ import com.elvarg.game.content.skill.skillable.impl.Runecrafting;
+@@ -85,6 +87,10 @@
+ 				}
+ 			});
+ 			break;
++			case 773: {
++				player.getDialogueManager().start(new MorphSelection());
++				return;
++			}
+ 		case Gambling.MITHRIL_SEEDS:
+ 			Gambling.plantFlower(player);
+ 			break;
+Index: ElvargServer/src/main/java/com/elvarg/game/entity/updating/PlayerUpdating.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/entity/updating/PlayerUpdating.java b/ElvargServer/src/main/java/com/elvarg/game/entity/updating/PlayerUpdating.java
+--- a/ElvargServer/src/main/java/com/elvarg/game/entity/updating/PlayerUpdating.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/game/entity/updating/PlayerUpdating.java	(date 1671024871608)
+@@ -1,6 +1,7 @@
+ package com.elvarg.game.entity.updating;
+ 
+ import com.elvarg.game.World;
++import com.elvarg.game.content.morphing.MorphInfo;
+ import com.elvarg.game.definition.ItemDefinition;
+ import com.elvarg.game.entity.impl.Mobile;
+ import com.elvarg.game.entity.impl.player.Player;
+@@ -25,216 +26,211 @@
+ 
+ public class PlayerUpdating {
+ 
+-	/**
+-	 * The max amount of players that can be added per cycle.
+-	 */
+-	private static final int MAX_NEW_PLAYERS_PER_CYCLE = 25;
++    /**
++     * The max amount of players that can be added per cycle.
++     */
++    private static final int MAX_NEW_PLAYERS_PER_CYCLE = 25;
+ 
+-	/**
+-	 * Loops through the associated player's {@code localPlayer} list and updates
+-	 * them.
+-	 *
+-	 * @return The PlayerUpdating instance.
+-	 */
++    /**
++     * Loops through the associated player's {@code localPlayer} list and updates
++     * them.
++     *
++     * @return The PlayerUpdating instance.
++     */
+ 
+-	public static void update(final Player player) {
+-		PacketBuilder update = new PacketBuilder();
+-		PacketBuilder packet = new PacketBuilder(81, PacketType.VARIABLE_SHORT);
+-		packet.initializeAccess(AccessType.BIT);
+-		updateMovement(player, packet);
+-		appendUpdates(player, update, player, false, true);
+-		packet.putBits(8, player.getLocalPlayers().size());
+-		for (Iterator<Player> playerIterator = player.getLocalPlayers().iterator(); playerIterator.hasNext();) {
+-			Player otherPlayer = playerIterator.next();
+-			if (World.getPlayers().get(otherPlayer.getIndex()) != null
+-					&& otherPlayer.getLocation().isViewableFrom(player.getLocation()) 
+-					&& !otherPlayer.isNeedsPlacement()
+-					&& otherPlayer.getPrivateArea() == player.getPrivateArea()) {
+-				updateOtherPlayerMovement(packet, otherPlayer);
+-				if (otherPlayer.getUpdateFlag().isUpdateRequired()) {
+-					appendUpdates(player, update, otherPlayer, false, false);
+-				}
+-			} else {
+-				playerIterator.remove();
+-				packet.putBits(1, 1);
+-				packet.putBits(2, 3);
+-			}
+-		}
+-		int playersAdded = 0;
++    public static void update(final Player player) {
++        PacketBuilder update = new PacketBuilder();
++        PacketBuilder packet = new PacketBuilder(81, PacketType.VARIABLE_SHORT);
++        packet.initializeAccess(AccessType.BIT);
++        updateMovement(player, packet);
++        appendUpdates(player, update, player, false, true);
++        packet.putBits(8, player.getLocalPlayers().size());
++        for (Iterator<Player> playerIterator = player.getLocalPlayers().iterator(); playerIterator.hasNext(); ) {
++            Player otherPlayer = playerIterator.next();
++            if (World.getPlayers().get(otherPlayer.getIndex()) != null
++                    && otherPlayer.getLocation().isViewableFrom(player.getLocation())
++                    && !otherPlayer.isNeedsPlacement()
++                    && otherPlayer.getPrivateArea() == player.getPrivateArea()) {
++                updateOtherPlayerMovement(packet, otherPlayer);
++                if (otherPlayer.getUpdateFlag().isUpdateRequired()) {
++                    appendUpdates(player, update, otherPlayer, false, false);
++                }
++            } else {
++                playerIterator.remove();
++                packet.putBits(1, 1);
++                packet.putBits(2, 3);
++            }
++        }
++        int playersAdded = 0;
+ 
+-		for (Player otherPlayer : World.getPlayers()) {
+-			if (player.getLocalPlayers().size() >= 79 || playersAdded > MAX_NEW_PLAYERS_PER_CYCLE)
+-				break;
+-			if (otherPlayer == null || otherPlayer == player || player.getLocalPlayers().contains(otherPlayer)
+-					|| !otherPlayer.getLocation().isViewableFrom(player.getLocation())
+-					|| otherPlayer.getPrivateArea() != player.getPrivateArea()) {
+-				continue;
+-			}
+-			player.getLocalPlayers().add(otherPlayer);
+-			addPlayer(player, otherPlayer, packet);
+-			appendUpdates(player, update, otherPlayer, true, false);
+-			playersAdded++;
+-		}
++        for (Player otherPlayer : World.getPlayers()) {
++            if (player.getLocalPlayers().size() >= 79 || playersAdded > MAX_NEW_PLAYERS_PER_CYCLE)
++                break;
++            if (otherPlayer == null || otherPlayer == player || player.getLocalPlayers().contains(otherPlayer)
++                    || !otherPlayer.getLocation().isViewableFrom(player.getLocation())
++                    || otherPlayer.getPrivateArea() != player.getPrivateArea()) {
++                continue;
++            }
++            player.getLocalPlayers().add(otherPlayer);
++            addPlayer(player, otherPlayer, packet);
++            appendUpdates(player, update, otherPlayer, true, false);
++            playersAdded++;
++        }
+ 
+-		if (update.buffer().writerIndex() > 0) {
+-			packet.putBits(11, 2047);
+-			packet.initializeAccess(AccessType.BYTE);
+-			packet.putBytes(update.buffer());
+-		} else {
+-			packet.initializeAccess(AccessType.BYTE);
+-		}
+-		player.getSession().write(packet);
+-	}
++        if (update.buffer().writerIndex() > 0) {
++            packet.putBits(11, 2047);
++            packet.initializeAccess(AccessType.BYTE);
++            packet.putBytes(update.buffer());
++        } else {
++            packet.initializeAccess(AccessType.BYTE);
++        }
++        player.getSession().write(packet);
++    }
+ 
+-	/**
+-	 * Adds a new player to the associated player's client.
+-	 *
+-	 * @param target
+-	 *            The player to add to the other player's client.
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void addPlayer(Player player, Player target, PacketBuilder builder) {
+-		builder.putBits(11, target.getIndex());
+-		builder.putBits(1, 1);
+-		builder.putBits(1, 1);
+-		int yDiff = target.getLocation().getY() - player.getLocation().getY();
+-		int xDiff = target.getLocation().getX() - player.getLocation().getX();
+-		builder.putBits(5, yDiff);
+-		builder.putBits(5, xDiff);
+-	}
++    /**
++     * Adds a new player to the associated player's client.
++     *
++     * @param target  The player to add to the other player's client.
++     * @param builder The packet builder to write information on.
++     * @return The PlayerUpdating instance.
++     */
++    private static void addPlayer(Player player, Player target, PacketBuilder builder) {
++        builder.putBits(11, target.getIndex());
++        builder.putBits(1, 1);
++        builder.putBits(1, 1);
++        int yDiff = target.getLocation().getY() - player.getLocation().getY();
++        int xDiff = target.getLocation().getX() - player.getLocation().getX();
++        builder.putBits(5, yDiff);
++        builder.putBits(5, xDiff);
++    }
+ 
+-	/**
+-	 * Updates the associated player's movement queue.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateMovement(Player player, PacketBuilder builder) {
+-		/*
+-		 * Check if the player is teleporting.
+-		 */
+-		if (player.isNeedsPlacement()) {
+-			/*
+-			 * They are, so an update is required.
+-			 */
+-			builder.putBits(1, 1);
++    /**
++     * Updates the associated player's movement queue.
++     *
++     * @param builder The packet builder to write information on.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateMovement(Player player, PacketBuilder builder) {
++        /*
++         * Check if the player is teleporting.
++         */
++        if (player.isNeedsPlacement()) {
++            /*
++             * They are, so an update is required.
++             */
++            builder.putBits(1, 1);
+ 
+-			/*
+-			 * This value indicates the player teleported.
+-			 */
+-			builder.putBits(2, 3);
++            /*
++             * This value indicates the player teleported.
++             */
++            builder.putBits(2, 3);
+ 
+-			/*
+-			 * This is the new player height.
+-			 */
+-			builder.putBits(2, player.getLocation().getZ());
++            /*
++             * This is the new player height.
++             */
++            builder.putBits(2, player.getLocation().getZ());
+ 
+-			/*
+-			 * This indicates that the client should discard the walking queue.
+-			 */
+-			builder.putBits(1, player.isResetMovementQueue() ? 1 : 0);
++            /*
++             * This indicates that the client should discard the walking queue.
++             */
++            builder.putBits(1, player.isResetMovementQueue() ? 1 : 0);
+ 
+-			/*
+-			 * This flag indicates if an update block is appended.
+-			 */
+-			builder.putBits(1, player.getUpdateFlag().isUpdateRequired() ? 1 : 0);
++            /*
++             * This flag indicates if an update block is appended.
++             */
++            builder.putBits(1, player.getUpdateFlag().isUpdateRequired() ? 1 : 0);
+ 
+-			/*
+-			 * These are the positions.
+-			 */
+-			builder.putBits(7, player.getLocation().getLocalY(player.getLastKnownRegion()));
+-			builder.putBits(7, player.getLocation().getLocalX(player.getLastKnownRegion()));
+-		} else
+-		/*
+-		 * Otherwise, check if the player moved.
+-		 */
+-		if (player.getWalkingDirection().getId() == -1) {
+-			/*
+-			 * The player didn't move. Check if an update is required.
+-			 */
+-			if (player.getUpdateFlag().isUpdateRequired()) {
+-				/*
+-				 * Signifies an update is required.
+-				 */
+-				builder.putBits(1, 1);
++            /*
++             * These are the positions.
++             */
++            builder.putBits(7, player.getLocation().getLocalY(player.getLastKnownRegion()));
++            builder.putBits(7, player.getLocation().getLocalX(player.getLastKnownRegion()));
++        } else
++            /*
++             * Otherwise, check if the player moved.
++             */
++            if (player.getWalkingDirection().getId() == -1) {
++                /*
++                 * The player didn't move. Check if an update is required.
++                 */
++                if (player.getUpdateFlag().isUpdateRequired()) {
++                    /*
++                     * Signifies an update is required.
++                     */
++                    builder.putBits(1, 1);
+ 
+-				/*
+-				 * But signifies that we didn't move.
+-				 */
+-				builder.putBits(2, 0);
+-			} else
+-				/*
+-				 * Signifies that nothing changed.
+-				 */
+-				builder.putBits(1, 0);
+-		} else /*
+-				 * Check if the player was running.
+-				 */
+-		if (player.getRunningDirection().getId() == -1) {
+-			/*
+-			 * The player walked, an update is required.
+-			 */
+-			builder.putBits(1, 1);
++                    /*
++                     * But signifies that we didn't move.
++                     */
++                    builder.putBits(2, 0);
++                } else
++                    /*
++                     * Signifies that nothing changed.
++                     */
++                    builder.putBits(1, 0);
++            } else /*
++             * Check if the player was running.
++             */
++                if (player.getRunningDirection().getId() == -1) {
++                    /*
++                     * The player walked, an update is required.
++                     */
++                    builder.putBits(1, 1);
+ 
+-			/*
+-			 * This indicates the player only walked.
+-			 */
+-			builder.putBits(2, 1);
++                    /*
++                     * This indicates the player only walked.
++                     */
++                    builder.putBits(2, 1);
+ 
+-			/*
+-			 * This is the player's walking direction.
+-			 */
++                    /*
++                     * This is the player's walking direction.
++                     */
+ 
+-			builder.putBits(3, player.getWalkingDirection().getId());
++                    builder.putBits(3, player.getWalkingDirection().getId());
+ 
+-			/*
+-			 * This flag indicates an update block is appended.
+-			 */
+-			builder.putBits(1, player.getUpdateFlag().isUpdateRequired() ? 1 : 0);
+-		} else {
++                    /*
++                     * This flag indicates an update block is appended.
++                     */
++                    builder.putBits(1, player.getUpdateFlag().isUpdateRequired() ? 1 : 0);
++                } else {
+ 
+-			/*
+-			 * The player ran, so an update is required.
+-			 */
+-			builder.putBits(1, 1);
++                    /*
++                     * The player ran, so an update is required.
++                     */
++                    builder.putBits(1, 1);
+ 
+-			/*
+-			 * This indicates the player ran.
+-			 */
+-			builder.putBits(2, 2);
++                    /*
++                     * This indicates the player ran.
++                     */
++                    builder.putBits(2, 2);
+ 
+-			/*
+-			 * This is the walking direction.
+-			 */
+-			builder.putBits(3, player.getWalkingDirection().getId());
++                    /*
++                     * This is the walking direction.
++                     */
++                    builder.putBits(3, player.getWalkingDirection().getId());
+ 
+-			/*
+-			 * And this is the running direction.
+-			 */
+-			builder.putBits(3, player.getRunningDirection().getId());
++                    /*
++                     * And this is the running direction.
++                     */
++                    builder.putBits(3, player.getRunningDirection().getId());
+ 
+-			/*
+-			 * And this flag indicates an update block is appended.
+-			 */
+-			builder.putBits(1, player.getUpdateFlag().isUpdateRequired() ? 1 : 0);
+-		}
+-	}
++                    /*
++                     * And this flag indicates an update block is appended.
++                     */
++                    builder.putBits(1, player.getUpdateFlag().isUpdateRequired() ? 1 : 0);
++                }
++    }
+ 
+-	/**
+-	 * Updates another player's movement queue.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update movement for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateOtherPlayerMovement(PacketBuilder builder, Player target) {
++    /**
++     * Updates another player's movement queue.
++     *
++     * @param builder The packet builder to write information on.
++     * @param target  The player to update movement for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateOtherPlayerMovement(PacketBuilder builder, Player target) {
+ 
+-		// TODO: Teleport
++        // TODO: Teleport
+ 		/*if (target.isNeedsPlacement()) {
+ 			builder.putBits(1, target.getUpdateFlag().isUpdateRequired() ? 1 : 0);
+ 			builder.putBits(2, 3); // Teleport
+@@ -243,471 +239,460 @@
+ 			return;
+ 		}*/
+ 
+-		/*
+-		 * Check which type of movement took place.
+-		 */
+-		if (target.getWalkingDirection().getId() == -1) {
+-			/*
+-			 * If no movement did, check if an update is required.
+-			 */
+-			if (target.getUpdateFlag().isUpdateRequired()) {
+-				/*
+-				 * Signify that an update happened.
+-				 */
+-				builder.putBits(1, 1);
++        /*
++         * Check which type of movement took place.
++         */
++        if (target.getWalkingDirection().getId() == -1) {
++            /*
++             * If no movement did, check if an update is required.
++             */
++            if (target.getUpdateFlag().isUpdateRequired()) {
++                /*
++                 * Signify that an update happened.
++                 */
++                builder.putBits(1, 1);
+ 
+-				/*
+-				 * Signify that there was no movement.
+-				 */
+-				builder.putBits(2, 0);
+-			} else {
+-				/*
+-				 * Signify that nothing changed.
+-				 */
+-				builder.putBits(1, 0);
+-			}
+-		} else if (target.getRunningDirection().getId() == -1) {
+-			/*
+-			 * The player moved but didn't run. Signify that an update is required.
+-			 */
+-			builder.putBits(1, 1);
++                /*
++                 * Signify that there was no movement.
++                 */
++                builder.putBits(2, 0);
++            } else {
++                /*
++                 * Signify that nothing changed.
++                 */
++                builder.putBits(1, 0);
++            }
++        } else if (target.getRunningDirection().getId() == -1) {
++            /*
++             * The player moved but didn't run. Signify that an update is required.
++             */
++            builder.putBits(1, 1);
+ 
+-			/*
+-			 * Signify we moved one tile.
+-			 */
+-			builder.putBits(2, 1);
++            /*
++             * Signify we moved one tile.
++             */
++            builder.putBits(2, 1);
+ 
+-			/*
+-			 * Write the primary sprite (i.e. walk direction).
+-			 */
+-			builder.putBits(3, target.getWalkingDirection().getId());
++            /*
++             * Write the primary sprite (i.e. walk direction).
++             */
++            builder.putBits(3, target.getWalkingDirection().getId());
+ 
+-			/*
+-			 * Write a flag indicating if a block update happened.
+-			 */
+-			builder.putBits(1, target.getUpdateFlag().isUpdateRequired() ? 1 : 0);
+-		} else {
+-			/*
+-			 * The player ran. Signify that an update happened.
+-			 */
+-			builder.putBits(1, 1);
++            /*
++             * Write a flag indicating if a block update happened.
++             */
++            builder.putBits(1, target.getUpdateFlag().isUpdateRequired() ? 1 : 0);
++        } else {
++            /*
++             * The player ran. Signify that an update happened.
++             */
++            builder.putBits(1, 1);
+ 
+-			/*
+-			 * Signify that we moved two tiles.
+-			 */
+-			builder.putBits(2, 2);
++            /*
++             * Signify that we moved two tiles.
++             */
++            builder.putBits(2, 2);
+ 
+-			/*
+-			 * Write the primary sprite (i.e. walk direction).
+-			 */
+-			builder.putBits(3, target.getWalkingDirection().getId());
++            /*
++             * Write the primary sprite (i.e. walk direction).
++             */
++            builder.putBits(3, target.getWalkingDirection().getId());
+ 
+-			/*
+-			 * Write the secondary sprite (i.e. run direction).
+-			 */
+-			builder.putBits(3, target.getRunningDirection().getId());
++            /*
++             * Write the secondary sprite (i.e. run direction).
++             */
++            builder.putBits(3, target.getRunningDirection().getId());
+ 
+-			/*
+-			 * Write a flag indicating if a block update happened.
+-			 */
+-			builder.putBits(1, target.getUpdateFlag().isUpdateRequired() ? 1 : 0);
+-		}
+-	}
++            /*
++             * Write a flag indicating if a block update happened.
++             */
++            builder.putBits(1, target.getUpdateFlag().isUpdateRequired() ? 1 : 0);
++        }
++    }
+ 
+-	/**
+-	 * Appends a player's update mask blocks.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update masks for.
+-	 * @param updateAppearance
+-	 *            Update the player's appearance without the flag being set?
+-	 * @param noChat
+-	 *            Do not allow player to chat?
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void appendUpdates(Player player, PacketBuilder builder, Player target, boolean updateAppearance,
+-			boolean noChat) {
+-		if (!target.getUpdateFlag().isUpdateRequired() && !updateAppearance)
+-			return;
++    /**
++     * Appends a player's update mask blocks.
++     *
++     * @param builder          The packet builder to write information on.
++     * @param target           The player to update masks for.
++     * @param updateAppearance Update the player's appearance without the flag being set?
++     * @param noChat           Do not allow player to chat?
++     * @return The PlayerUpdating instance.
++     */
++    private static void appendUpdates(Player player, PacketBuilder builder, Player target, boolean updateAppearance,
++                                      boolean noChat) {
++        if (!target.getUpdateFlag().isUpdateRequired() && !updateAppearance)
++            return;
+ 
+-		// If we don't need to update again, simply send the cached update block
+-		// if it's available.
+-		/*
+-		 * if (player.getCachedUpdateBlock() != null && !player.equals(target) &&
+-		 * !updateAppearance && !noChat) {
+-		 * builder.putBytes(player.getCachedUpdateBlock()); return; }
+-		 */
++        // If we don't need to update again, simply send the cached update block
++        // if it's available.
++        /*
++         * if (player.getCachedUpdateBlock() != null && !player.equals(target) &&
++         * !updateAppearance && !noChat) {
++         * builder.putBytes(player.getCachedUpdateBlock()); return; }
++         */
+ 
+-		final UpdateFlag flag = target.getUpdateFlag();
+-		int mask = 0;
+-		if (flag.flagged(Flag.GRAPHIC) && target.getGraphic() != null) {
+-			mask |= 0x100;
+-		}
+-		if (flag.flagged(Flag.ANIMATION) && target.getAnimation() != null) {
+-			mask |= 0x8;
+-		}
+-		if (flag.flagged(Flag.FORCED_CHAT) && target.getForcedChat() != null) {
+-			mask |= 0x4;
+-		}
+-		if (flag.flagged(Flag.CHAT) && target.getCurrentChatMessage() != null && !noChat
+-				&& !player.getRelations().getIgnoreList().contains(target.getLongUsername())) {
+-			mask |= 0x80;
+-		}
+-		if (flag.flagged(Flag.ENTITY_INTERACTION)) {
+-			mask |= 0x1;
+-		}
+-		if (flag.flagged(Flag.APPEARANCE) || updateAppearance) {
+-			mask |= 0x10;
+-		}
+-		if (flag.flagged(Flag.FACE_POSITION) && target.getPositionToFace() != null) {
+-			mask |= 0x2;
+-		}
+-		if (flag.flagged(Flag.SINGLE_HIT)) {
+-			mask |= 0x20;
+-		}
+-		if (flag.flagged(Flag.DOUBLE_HIT)) {
+-			mask |= 0x200;
+-		}
+-		if (flag.flagged(Flag.FORCED_MOVEMENT) && target.getForceMovement() != null) {
+-			mask |= 0x400;
+-		}
+-		if (mask >= 0x100) {
+-			mask |= 0x40;
+-			builder.putShort(mask, ByteOrder.LITTLE);
+-		} else {
+-			builder.put(mask);
+-		}
+-		if (flag.flagged(Flag.FORCED_MOVEMENT) && target.getForceMovement() != null) {
+-			updateForcedMovement(player, builder, target);
+-		}
+-		if (flag.flagged(Flag.GRAPHIC) && target.getGraphic() != null) {
+-			updateGraphics(builder, target);
+-		}
+-		if (flag.flagged(Flag.ANIMATION) && target.getAnimation() != null) {
+-			updateAnimation(builder, target);
+-		}
+-		if (flag.flagged(Flag.FORCED_CHAT) && target.getForcedChat() != null) {
+-			updateForcedChat(builder, target);
+-		}
+-		if (flag.flagged(Flag.CHAT) && target.getCurrentChatMessage() != null && !noChat
+-				&& !player.getRelations().getIgnoreList().contains(target.getLongUsername())) {
+-			updateChat(builder, target, player);
+-		}
+-		if (flag.flagged(Flag.ENTITY_INTERACTION)) {
+-			updateEntityInteraction(builder, target);
+-		}
+-		if (flag.flagged(Flag.APPEARANCE) || updateAppearance) {
+-			updateAppearance(player, builder, target);
+-		}
+-		if (flag.flagged(Flag.FACE_POSITION) && target.getPositionToFace() != null) {
+-			updateFacingPosition(builder, target);
+-		}
+-		if (flag.flagged(Flag.SINGLE_HIT)) {
+-			updateSingleHit(builder, target);
+-		}
+-		if (flag.flagged(Flag.DOUBLE_HIT)) {
+-			updateDoubleHit(builder, target);
+-		}
++        final UpdateFlag flag = target.getUpdateFlag();
++        int mask = 0;
++        if (flag.flagged(Flag.GRAPHIC) && target.getGraphic() != null) {
++            mask |= 0x100;
++        }
++        if (flag.flagged(Flag.ANIMATION) && target.getAnimation() != null) {
++            mask |= 0x8;
++        }
++        if (flag.flagged(Flag.FORCED_CHAT) && target.getForcedChat() != null) {
++            mask |= 0x4;
++        }
++        if (flag.flagged(Flag.CHAT) && target.getCurrentChatMessage() != null && !noChat
++                && !player.getRelations().getIgnoreList().contains(target.getLongUsername())) {
++            mask |= 0x80;
++        }
++        if (flag.flagged(Flag.ENTITY_INTERACTION)) {
++            mask |= 0x1;
++        }
++        if (flag.flagged(Flag.APPEARANCE) || updateAppearance) {
++            mask |= 0x10;
++        }
++        if (flag.flagged(Flag.FACE_POSITION) && target.getPositionToFace() != null) {
++            mask |= 0x2;
++        }
++        if (flag.flagged(Flag.SINGLE_HIT)) {
++            mask |= 0x20;
++        }
++        if (flag.flagged(Flag.DOUBLE_HIT)) {
++            mask |= 0x200;
++        }
++        if (flag.flagged(Flag.FORCED_MOVEMENT) && target.getForceMovement() != null) {
++            mask |= 0x400;
++        }
++        if (mask >= 0x100) {
++            mask |= 0x40;
++            builder.putShort(mask, ByteOrder.LITTLE);
++        } else {
++            builder.put(mask);
++        }
++        if (flag.flagged(Flag.FORCED_MOVEMENT) && target.getForceMovement() != null) {
++            updateForcedMovement(player, builder, target);
++        }
++        if (flag.flagged(Flag.GRAPHIC) && target.getGraphic() != null) {
++            updateGraphics(builder, target);
++        }
++        if (flag.flagged(Flag.ANIMATION) && target.getAnimation() != null) {
++            updateAnimation(builder, target);
++        }
++        if (flag.flagged(Flag.FORCED_CHAT) && target.getForcedChat() != null) {
++            updateForcedChat(builder, target);
++        }
++        if (flag.flagged(Flag.CHAT) && target.getCurrentChatMessage() != null && !noChat
++                && !player.getRelations().getIgnoreList().contains(target.getLongUsername())) {
++            updateChat(builder, target, player);
++        }
++        if (flag.flagged(Flag.ENTITY_INTERACTION)) {
++            updateEntityInteraction(builder, target);
++        }
++        if (flag.flagged(Flag.APPEARANCE) || updateAppearance) {
++            updateAppearance(player, builder, target);
++        }
++        if (flag.flagged(Flag.FACE_POSITION) && target.getPositionToFace() != null) {
++            updateFacingPosition(builder, target);
++        }
++        if (flag.flagged(Flag.SINGLE_HIT)) {
++            updateSingleHit(builder, target);
++        }
++        if (flag.flagged(Flag.DOUBLE_HIT)) {
++            updateDoubleHit(builder, target);
++        }
+ 		/*if (!player.equals(target) && !updateAppearance && !noChat) {
+ 			player.setCachedUpdateBlock(builder.buffer());
+ 		}*/
+-	}
++    }
+ 
+-	/**
+-	 * This update block is used to update player chat.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update chat for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateChat(PacketBuilder builder, Player target, Player receiver) {
+-		ChatMessage message = target.getCurrentChatMessage();
+-		byte[] bytes = message.getText();
+-		builder.putShort(((message.getColour() & 0xff) << 8) | (message.getEffects() & 0xff), ByteOrder.LITTLE);
+-		builder.put(target.getRights().ordinal());
+-		builder.put(target.getDonatorRights().ordinal());
++    /**
++     * This update block is used to update player chat.
++     *
++     * @param builder The packet builder to write information on.
++     * @param target  The player to update chat for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateChat(PacketBuilder builder, Player target, Player receiver) {
++        ChatMessage message = target.getCurrentChatMessage();
++        byte[] bytes = message.getText();
++        builder.putShort(((message.getColour() & 0xff) << 8) | (message.getEffects() & 0xff), ByteOrder.LITTLE);
++        builder.put(target.getRights().ordinal());
++        builder.put(target.getDonatorRights().ordinal());
+         builder.put(bytes.length, ValueType.C);
+         for (int ptr = bytes.length - 1; ptr >= 0; ptr--) {
+             builder.put(bytes[ptr]);
+         }
+ 
+-		if (receiver instanceof PlayerBot && !(target instanceof PlayerBot)) {
+-			// Player Bots: Automatically listen to chat messages
+-			((PlayerBot) receiver).getChatInteraction().heard(message, target);
+-		}
+-	}
++        if (receiver instanceof PlayerBot && !(target instanceof PlayerBot)) {
++            // Player Bots: Automatically listen to chat messages
++            ((PlayerBot) receiver).getChatInteraction().heard(message, target);
++        }
++    }
+ 
+-	/**
+-	 * This update block is used to update forced player chat.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update forced chat for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateForcedChat(PacketBuilder builder, Player target) {
+-		builder.putString(target.getForcedChat());
+-	}
++    /**
++     * This update block is used to update forced player chat.
++     *
++     * @param builder The packet builder to write information on.
++     * @param target  The player to update forced chat for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateForcedChat(PacketBuilder builder, Player target) {
++        builder.putString(target.getForcedChat());
++    }
+ 
+-	/**
+-	 * This update block is used to update forced player movement.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update forced movement for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateForcedMovement(Player player, PacketBuilder builder, Player target) {
+-		int startX = target.getForceMovement().getStart().getLocalX(player.getLastKnownRegion());
+-		int startY = target.getForceMovement().getStart().getLocalY(player.getLastKnownRegion());
+-		int endX = target.getForceMovement().getEnd().getX();
+-		int endY = target.getForceMovement().getEnd().getY();
++    /**
++     * This update block is used to update forced player movement.
++     *
++     * @param builder The packet builder to write information on.
++     * @param target  The player to update forced movement for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateForcedMovement(Player player, PacketBuilder builder, Player target) {
++        int startX = target.getForceMovement().getStart().getLocalX(player.getLastKnownRegion());
++        int startY = target.getForceMovement().getStart().getLocalY(player.getLastKnownRegion());
++        int endX = target.getForceMovement().getEnd().getX();
++        int endY = target.getForceMovement().getEnd().getY();
+ 
+-		builder.put(startX, ValueType.S);
+-		builder.put(startY, ValueType.S);
+-		builder.put(startX + endX, ValueType.S);
+-		builder.put(startY + endY, ValueType.S);
+-		builder.putShort(target.getForceMovement().getSpeed(), ValueType.A, ByteOrder.LITTLE);
+-		builder.putShort(target.getForceMovement().getReverseSpeed(), ValueType.A, ByteOrder.BIG);
+-		builder.putShort(target.getForceMovement().getAnimation(), ValueType.A, ByteOrder.LITTLE);
+-		builder.put(target.getForceMovement().getDirection(), ValueType.S);
+-	}
++        builder.put(startX, ValueType.S);
++        builder.put(startY, ValueType.S);
++        builder.put(startX + endX, ValueType.S);
++        builder.put(startY + endY, ValueType.S);
++        builder.putShort(target.getForceMovement().getSpeed(), ValueType.A, ByteOrder.LITTLE);
++        builder.putShort(target.getForceMovement().getReverseSpeed(), ValueType.A, ByteOrder.BIG);
++        builder.putShort(target.getForceMovement().getAnimation(), ValueType.A, ByteOrder.LITTLE);
++        builder.put(target.getForceMovement().getDirection(), ValueType.S);
++    }
+ 
+-	/**
+-	 * This update block is used to update a player's animation.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update animations for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateAnimation(PacketBuilder builder, Player target) {
+-		builder.putShort(target.getAnimation().getId(), ByteOrder.LITTLE);
+-		builder.put(target.getAnimation().getDelay(), ValueType.C);
+-	}
++    /**
++     * This update block is used to update a player's animation.
++     *
++     * @param builder The packet builder to write information on.
++     * @param target  The player to update animations for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateAnimation(PacketBuilder builder, Player target) {
++        builder.putShort(target.getAnimation().getId(), ByteOrder.LITTLE);
++        builder.put(target.getAnimation().getDelay(), ValueType.C);
++    }
+ 
+-	/**
+-	 * This update block is used to update a player's graphics.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update graphics for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateGraphics(PacketBuilder builder, Player target) {
+-		builder.putShort(target.getGraphic().getId(), ByteOrder.LITTLE);
+-		builder.putInt(
+-				((target.getGraphic().getHeight().ordinal() * 50) << 16) + (target.getGraphic().getDelay() & 0xffff));
+-	}
++    /**
++     * This update block is used to update a player's graphics.
++     *
++     * @param builder The packet builder to write information on.
++     * @param target  The player to update graphics for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateGraphics(PacketBuilder builder, Player target) {
++        builder.putShort(target.getGraphic().getId(), ByteOrder.LITTLE);
++        builder.putInt(
++                ((target.getGraphic().getHeight().ordinal() * 50) << 16) + (target.getGraphic().getDelay() & 0xffff));
++    }
+ 
+-	/**
+-	 * This update block is used to update a player's single hit.
+-	 *
+-	 * @param builder
+-	 *            The packet builder used to write information on.
+-	 * @param target
+-	 *            The player to update the single hit for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateSingleHit(PacketBuilder builder, Player target) {
+-		builder.putShort(target.getPrimaryHit().getDamage());
+-		builder.put(target.getPrimaryHit().getHitmask().ordinal());
+-		builder.putShort(target.getHitpoints());
+-		builder.putShort(target.getSkillManager().getMaxLevel(Skill.HITPOINTS));
+-	}
++    /**
++     * This update block is used to update a player's single hit.
++     *
++     * @param builder The packet builder used to write information on.
++     * @param target  The player to update the single hit for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateSingleHit(PacketBuilder builder, Player target) {
++        builder.putShort(target.getPrimaryHit().getDamage());
++        builder.put(target.getPrimaryHit().getHitmask().ordinal());
++        builder.putShort(target.getHitpoints());
++        builder.putShort(target.getSkillManager().getMaxLevel(Skill.HITPOINTS));
++    }
+ 
+-	/**
+-	 * This update block is used to update a player's double hit.
+-	 *
+-	 * @param builder
+-	 *            The packet builder used to write information on.
+-	 * @param target
+-	 *            The player to update the double hit for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateDoubleHit(PacketBuilder builder, Player target) {
+-		builder.putShort(target.getSecondaryHit().getDamage());
+-		builder.put(target.getSecondaryHit().getHitmask().ordinal());
+-		builder.putShort(target.getHitpoints());
+-		builder.putShort(target.getSkillManager().getMaxLevel(Skill.HITPOINTS));
+-	}
++    /**
++     * This update block is used to update a player's double hit.
++     *
++     * @param builder The packet builder used to write information on.
++     * @param target  The player to update the double hit for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateDoubleHit(PacketBuilder builder, Player target) {
++        builder.putShort(target.getSecondaryHit().getDamage());
++        builder.put(target.getSecondaryHit().getHitmask().ordinal());
++        builder.putShort(target.getHitpoints());
++        builder.putShort(target.getSkillManager().getMaxLevel(Skill.HITPOINTS));
++    }
+ 
+-	/**
+-	 * This update block is used to update a player's face position.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update face position for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateFacingPosition(PacketBuilder builder, Player target) {
+-		final Location position = target.getPositionToFace();
+-		builder.putShort(position.getX() * 2 + 1, ValueType.A, ByteOrder.LITTLE);
+-		builder.putShort(position.getY() * 2 + 1, ByteOrder.LITTLE);
+-	}
++    /**
++     * This update block is used to update a player's face position.
++     *
++     * @param builder The packet builder to write information on.
++     * @param target  The player to update face position for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateFacingPosition(PacketBuilder builder, Player target) {
++        final Location position = target.getPositionToFace();
++        builder.putShort(position.getX() * 2 + 1, ValueType.A, ByteOrder.LITTLE);
++        builder.putShort(position.getY() * 2 + 1, ByteOrder.LITTLE);
++    }
+ 
+-	/**
+-	 * This update block is used to update a player's entity interaction.
+-	 *
+-	 * @param builder
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update entity interaction for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateEntityInteraction(PacketBuilder builder, Player target) {
+-		Mobile entity = target.getInteractingMobile();
+-		if (entity != null) {
+-			int index = entity.getIndex();
+-			if (entity instanceof Player)
+-				index += +32768;
+-			builder.putShort(index, ByteOrder.LITTLE);
+-		} else {
+-			builder.putShort(-1, ByteOrder.LITTLE);
+-		}
+-	}
++    /**
++     * This update block is used to update a player's entity interaction.
++     *
++     * @param builder The packet builder to write information on.
++     * @param target  The player to update entity interaction for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateEntityInteraction(PacketBuilder builder, Player target) {
++        Mobile entity = target.getInteractingMobile();
++        if (entity != null) {
++            int index = entity.getIndex();
++            if (entity instanceof Player)
++                index += +32768;
++            builder.putShort(index, ByteOrder.LITTLE);
++        } else {
++            builder.putShort(-1, ByteOrder.LITTLE);
++        }
++    }
+ 
+-	/**
+-	 * This update block is used to update a player's appearance, this includes
+-	 * their equipment, clothing, combat level, gender, head icons, user name and
+-	 * animations.
+-	 *
+-	 * @param out
+-	 *            The packet builder to write information on.
+-	 * @param target
+-	 *            The player to update appearance for.
+-	 * @return The PlayerUpdating instance.
+-	 */
+-	private static void updateAppearance(Player player, PacketBuilder out, Player target) {
+-		Appearance appearance = target.getAppearance();
+-		Equipment equipment = target.getEquipment();
+-		PacketBuilder properties = new PacketBuilder();
++    /**
++     * This update block is used to update a player's appearance, this includes
++     * their equipment, clothing, combat level, gender, head icons, user name and
++     * animations.
++     *
++     * @param out    The packet builder to write information on.
++     * @param target The player to update appearance for.
++     * @return The PlayerUpdating instance.
++     */
++    private static void updateAppearance(Player player, PacketBuilder out, Player target) {
++        Appearance appearance = target.getAppearance();
++        Equipment equipment = target.getEquipment();
++        PacketBuilder properties = new PacketBuilder();
+ 
+-		properties.put(appearance.isMale() ? 0 : 1);
++        properties.put(appearance.isMale() ? 0 : 1);
+ 
+-		// Head icon, prayers
+-		properties.put(appearance.getHeadHint());
++        // Head icon, prayers
++        properties.put(appearance.getHeadHint());
+ 
+-		// Skull icon
+-		properties.put(target.isSkulled() ? target.getSkullType().getIconId() : -1);
++        // Skull icon
++        properties.put(target.isSkulled() ? target.getSkullType().getIconId() : -1);
+ 
+-		// Some sort of headhint (arrow over head)
+-		properties.put(0);
++        // Some sort of headhint (arrow over head)
++        properties.put(0);
+ 
+-		if (player.getNpcTransformationId() == -1) {
+-			int[] equip = new int[equipment.capacity()];
+-			for (int i = 0; i < equipment.capacity(); i++) {
+-				equip[i] = equipment.getItems()[i].getId();
+-			}
+-			if (equip[Equipment.HEAD_SLOT] > -1) {
+-				properties.putShort(0x200 + equip[Equipment.HEAD_SLOT]);
+-			} else {
+-				properties.put(0);
+-			}
+-			if (equip[Equipment.CAPE_SLOT] > -1) {
+-				properties.putShort(0x200 + equip[Equipment.CAPE_SLOT]);
+-			} else {
+-				properties.put(0);
+-			}
+-			if (equip[Equipment.AMULET_SLOT] > -1) {
+-				properties.putShort(0x200 + equip[Equipment.AMULET_SLOT]);
+-			} else {
+-				properties.put(0);
+-			}
+-			if (equip[Equipment.WEAPON_SLOT] > -1) {
+-				properties.putShort(0x200 + equip[Equipment.WEAPON_SLOT]);
+-			} else {
+-				properties.put(0);
+-			}
+-			if (equip[Equipment.BODY_SLOT] > -1) {
+-				properties.putShort(0x200 + equip[Equipment.BODY_SLOT]);
+-			} else {
+-				properties.putShort(0x100 + appearance.getLook()[Appearance.CHEST]);
+-			}
+-			if (equip[Equipment.SHIELD_SLOT] > -1) {
+-				properties.putShort(0x200 + equip[Equipment.SHIELD_SLOT]);
+-			} else {
+-				properties.put(0);
+-			}
++        boolean hasSlayerMorph = target.slayerMorph != null;
++
++        if (target.getNpcTransformationId() == -1) {
++            int[] equip = new int[equipment.capacity()];
++            for (int i = 0; i < equipment.capacity(); i++) {
++                equip[i] = equipment.getItems()[i].getId();
++            }
++            if (equip[Equipment.HEAD_SLOT] > -1) {
++                properties.putShort(0x200 + equip[Equipment.HEAD_SLOT]);
++            } else {
++                properties.put(0);
++            }
++            if (equip[Equipment.CAPE_SLOT] > -1) {
++                properties.putShort(0x200 + equip[Equipment.CAPE_SLOT]);
++            } else {
++                properties.put(0);
++            }
++            if (equip[Equipment.AMULET_SLOT] > -1) {
++                properties.putShort(0x200 + equip[Equipment.AMULET_SLOT]);
++            } else {
++                properties.put(0);
++            }
++            if (equip[Equipment.WEAPON_SLOT] > -1) {
++                properties.putShort(0x200 + equip[Equipment.WEAPON_SLOT]);
++            } else {
++                properties.put(0);
++            }
++            if (equip[Equipment.BODY_SLOT] > -1) {
++                properties.putShort(0x200 + equip[Equipment.BODY_SLOT]);
++            } else {
++                properties.putShort(0x100 + appearance.getLook()[Appearance.CHEST]);
++            }
++            if (equip[Equipment.SHIELD_SLOT] > -1) {
++                properties.putShort(0x200 + equip[Equipment.SHIELD_SLOT]);
++            } else {
++                properties.put(0);
++            }
+ 
+-			if (ItemDefinition.forId(equip[Equipment.BODY_SLOT]).getEquipmentType() == EquipmentType.PLATEBODY) {
+-				properties.put(0);
+-			} else {
+-				properties.putShort(0x100 + appearance.getLook()[Appearance.ARMS]);
+-			}
++            if (ItemDefinition.forId(equip[Equipment.BODY_SLOT]).getEquipmentType() == EquipmentType.PLATEBODY) {
++                properties.put(0);
++            } else {
++                properties.putShort(0x100 + appearance.getLook()[Appearance.ARMS]);
++            }
+ 
+-			if (equip[Equipment.LEG_SLOT] > -1) {
+-				properties.putShort(0x200 + equip[Equipment.LEG_SLOT]);
+-			} else {
+-				properties.putShort(0x100 + appearance.getLook()[Appearance.LEGS]);
+-			}
++            if (equip[Equipment.LEG_SLOT] > -1) {
++                properties.putShort(0x200 + equip[Equipment.LEG_SLOT]);
++            } else {
++                properties.putShort(0x100 + appearance.getLook()[Appearance.LEGS]);
++            }
+ 
+-			if (ItemDefinition.forId(equip[Equipment.HEAD_SLOT]).getEquipmentType() == EquipmentType.FULL_HELMET
+-					|| ItemDefinition.forId(equip[Equipment.CAPE_SLOT]).getEquipmentType() == EquipmentType.HOODED_CAPE
+-					|| ItemDefinition.forId(equip[Equipment.HEAD_SLOT]).getEquipmentType() == EquipmentType.COIF) {
+-				properties.put(0);
+-			} else {
+-				properties.putShort(0x100 + appearance.getLook()[Appearance.HEAD]);
+-			}
++            if (ItemDefinition.forId(equip[Equipment.HEAD_SLOT]).getEquipmentType() == EquipmentType.FULL_HELMET
++                    || ItemDefinition.forId(equip[Equipment.CAPE_SLOT]).getEquipmentType() == EquipmentType.HOODED_CAPE
++                    || ItemDefinition.forId(equip[Equipment.HEAD_SLOT]).getEquipmentType() == EquipmentType.COIF) {
++                properties.put(0);
++            } else {
++                properties.putShort(0x100 + appearance.getLook()[Appearance.HEAD]);
++            }
+ 
+-			if (equip[Equipment.HANDS_SLOT] > -1) {
+-				properties.putShort(0x200 + equip[Equipment.HANDS_SLOT]);
+-			} else {
+-				properties.putShort(0x100 + appearance.getLook()[Appearance.HANDS]);
+-			}
+-			if (equip[Equipment.FEET_SLOT] > -1) {
+-				properties.putShort(0x200 + equip[Equipment.FEET_SLOT]);
+-			} else {
+-				properties.putShort(0x100 + appearance.getLook()[Appearance.FEET]);
+-			}
+-			if (appearance.getLook()[Appearance.BEARD] <= 0 || !appearance.isMale()
+-					|| ItemDefinition.forId(equip[Equipment.HEAD_SLOT]).getEquipmentType() == EquipmentType.FULL_HELMET
++            if (equip[Equipment.HANDS_SLOT] > -1) {
++                properties.putShort(0x200 + equip[Equipment.HANDS_SLOT]);
++            } else {
++                properties.putShort(0x100 + appearance.getLook()[Appearance.HANDS]);
++            }
++            if (equip[Equipment.FEET_SLOT] > -1) {
++                properties.putShort(0x200 + equip[Equipment.FEET_SLOT]);
++            } else {
++                properties.putShort(0x100 + appearance.getLook()[Appearance.FEET]);
++            }
++            if (appearance.getLook()[Appearance.BEARD] <= 0 || !appearance.isMale()
++                    || ItemDefinition.forId(equip[Equipment.HEAD_SLOT]).getEquipmentType() == EquipmentType.FULL_HELMET
+ 
+-			) {// || ItemDefinition.forId(equip[Equipment.HEAD_SLOT]).isMask()) {
+-				properties.put(0);
+-			} else {
+-				properties.putShort(0x100 + appearance.getLook()[Appearance.BEARD]);
+-			}
+-		} else {
+-			properties.putShort(-1);
+-			properties.putShort(player.getNpcTransformationId());
+-		}
+-		properties.put(appearance.getLook()[Appearance.HAIR_COLOUR]);
+-		properties.put(appearance.getLook()[Appearance.TORSO_COLOUR]);
+-		properties.put(appearance.getLook()[Appearance.LEG_COLOUR]);
+-		properties.put(appearance.getLook()[Appearance.FEET_COLOUR]);
+-		properties.put(appearance.getLook()[Appearance.SKIN_COLOUR]);
++            ) {// || ItemDefinition.forId(equip[Equipment.HEAD_SLOT]).isMask()) {
++                properties.put(0);
++            } else {
++                properties.putShort(0x100 + appearance.getLook()[Appearance.BEARD]);
++            }
++        } else {
++            properties.putShort(-1);//render anim
++            properties.putShort(hasSlayerMorph ? target.slayerMorph.npcId : target.getNpcTransformationId());
++        }
++        properties.put(appearance.getLook()[Appearance.HAIR_COLOUR]);
++        properties.put(appearance.getLook()[Appearance.TORSO_COLOUR]);
++        properties.put(appearance.getLook()[Appearance.LEG_COLOUR]);
++        properties.put(appearance.getLook()[Appearance.FEET_COLOUR]);
++        properties.put(appearance.getLook()[Appearance.SKIN_COLOUR]);
+ 
+-		int skillAnim = target.getSkillAnimation();
+-		if (skillAnim > 0) {
+-			for (int i = 0; i < 7; i++)
+-				properties.putShort(skillAnim);
+-		} else {
+-			ItemDefinition wep = target.getEquipment().getItems()[Equipment.WEAPON_SLOT].getDefinition();
+-			properties.putShort(wep.getStandAnim());
+-			properties.putShort(0x337);
+-			properties.putShort(wep.getWalkAnim());
+-			properties.putShort(0x334);
+-			properties.putShort(0x335);
+-			properties.putShort(0x336);
+-			properties.putShort(wep.getRunAnim());
+-		}
++        if (!hasSlayerMorph) {
++            int skillAnim = target.getSkillAnimation();
++            if (skillAnim > 0) {
++                for (int i = 0; i < 7; i++)
++                    properties.putShort(skillAnim);
++            } else {
++                ItemDefinition wep = target.getEquipment().getItems()[Equipment.WEAPON_SLOT].getDefinition();
++                properties.putShort(wep.getStandAnim());
++                properties.putShort(0x337);
++                properties.putShort(wep.getWalkAnim());
++                properties.putShort(0x334);
++                properties.putShort(0x335);
++                properties.putShort(0x336);
++                properties.putShort(wep.getRunAnim());
++            }
++        } else {
++            MorphInfo morph = target.slayerMorph;
++            properties.putShort(morph.standAnim);
++            properties.putShort(morph.standAnim);
++            properties.putShort(morph.walkAnim);
++            properties.putShort(morph.walkAnim);
++            properties.putShort(morph.walkAnim);
++            properties.putShort(morph.walkAnim);
++            properties.putShort(morph.walkAnim);
++        }
+ 
+-		properties.putLong(target.getLongUsername());
+-		properties.put(target.getSkillManager().getCombatLevel());
+-		properties.put(target.getRights().ordinal());
+-		properties.putString(target.getLoyaltyTitle());
++        properties.putLong(target.getLongUsername());
++        properties.put(target.getSkillManager().getCombatLevel());
++        properties.put(target.getRights().ordinal());
++        properties.putString(target.getLoyaltyTitle());
+ 
+-		out.put(properties.buffer().writerIndex(), ValueType.C);
+-		out.putBytes(properties.buffer());
+-	}
++        out.put(properties.buffer().writerIndex(), ValueType.C);
++        out.putBytes(properties.buffer());
++    }
+ }
+\ No newline at end of file
+Index: ElvargServer/src/main/java/com/elvarg/game/entity/impl/Mobile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/entity/impl/Mobile.java b/ElvargServer/src/main/java/com/elvarg/game/entity/impl/Mobile.java
+--- a/ElvargServer/src/main/java/com/elvarg/game/entity/impl/Mobile.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/game/entity/impl/Mobile.java	(date 1671023174339)
+@@ -361,10 +361,14 @@
+ 
+ 	public Mobile setNpcTransformationId(int npcTransformationId) {
+ 		this.npcTransformationId = npcTransformationId;
+-		getUpdateFlag().flag(Flag.APPEARANCE);
++		this.getUpdateFlag().flag(Flag.APPEARANCE);
+ 		return this;
+ 	}
+ 
++	public boolean isMorphed() {
++		return getNpcTransformationId() != -1;
++	}
++
+ 	public HitDamage decrementHealth(HitDamage hit) {
+ 		if (getHitpoints() <= 0) {
+ 			hit.setDamage(0);
+Index: ElvargServer/src/main/java/com/elvarg/game/model/commands/impl/DebugCommand.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/model/commands/impl/DebugCommand.java b/ElvargServer/src/main/java/com/elvarg/game/model/commands/impl/DebugCommand.java
+--- a/ElvargServer/src/main/java/com/elvarg/game/model/commands/impl/DebugCommand.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/game/model/commands/impl/DebugCommand.java	(date 1671024810568)
+@@ -1,6 +1,7 @@
+ package com.elvarg.game.model.commands.impl;
+ 
+ import com.elvarg.game.collision.RegionManager;
++import com.elvarg.game.definition.NPCDef;
+ import com.elvarg.game.entity.impl.player.Player;
+ import com.elvarg.game.model.commands.Command;
+ import com.elvarg.game.model.dialogues.builders.impl.NieveDialogue;
+@@ -10,12 +11,20 @@
+ 
+     @Override
+     public void execute(Player player, String command, String[] parts) {
+-        System.out.println(RegionManager.wallsExist(player.getLocation().clone(), player.getPrivateArea()));
++        //System.out.println(RegionManager.wallsExist(player.getLocation().clone(), player.getPrivateArea()));
++        try {
++            NPCDef def = NPCDef.lookup(Integer.valueOf(parts[1]));
++            System.err.println("defs for "+def.name+" are..");
++            System.err.println("Walk="+def.walkAnim+" Stand="+def.standAnim+" Id="+def.id+" Size="+def.size+" "+def.turn180AnimIndex+" "+def.turn90CCWAnimIndex+" "+def.turn90CWAnimIndex+" ");
++        } catch (Exception e) {
++            System.err.println("parts="+parts.length+" first="+parts[0]);
++            e.printStackTrace();
++        }
+     }
+ 
+     @Override
+     public boolean canUse(Player player) {
+-        return (player.getRights() == PlayerRights.DEVELOPER);
++        return true;
+     }
+ 
+ }
+Index: ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequest.java b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequest.java
+new file mode 100644
+--- /dev/null	(date 1671021389016)
++++ b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequest.java	(date 1671021389016)
+@@ -0,0 +1,25 @@
++package com.elvarg.game.content.teleporting;
++
++import com.elvarg.game.entity.impl.player.Player;
++
++/**
++ * @author Ynneh | 08/12/2022 - 12:34
++ * <https://github.com/drhenny>
++ */
++public class TeleportRequest {
++
++    public Player player;
++
++    public Player requester;
++
++    public long requestedAt;
++
++    public RequestType requestType;
++
++    public TeleportRequest(Player player, Player requester, RequestType requestType) {
++        this.player = player;
++        this.requester = requester;
++        this.requestType = requestType;
++        this.requestedAt = System.currentTimeMillis();
++    }
++}
+Index: ElvargServer/src/main/java/com/elvarg/game/content/teleporting/RequestType.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/RequestType.java b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/RequestType.java
+new file mode 100644
+--- /dev/null	(date 1671021389016)
++++ b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/RequestType.java	(date 1671021389016)
+@@ -0,0 +1,11 @@
++package com.elvarg.game.content.teleporting;
++
++/**
++ * @author Ynneh | 08/12/2022 - 12:33
++ * <https://github.com/drhenny>
++ */
++public enum RequestType {
++
++    TELE_TO,
++    TELE_TO_ME
++}
+Index: ElvargServer/src/main/java/com/elvarg/game/definition/NpcDefinition.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/definition/NpcDefinition.java b/ElvargServer/src/main/java/com/elvarg/game/definition/NpcDefinition.java
+--- a/ElvargServer/src/main/java/com/elvarg/game/definition/NpcDefinition.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/game/definition/NpcDefinition.java	(date 1671021389018)
+@@ -2,6 +2,7 @@
+ 
+ import java.util.HashMap;
+ import java.util.Map;
++import java.util.Optional;
+ 
+ /**
+  * Represents an npc's definition.
+@@ -57,6 +58,13 @@
+         return definitions.getOrDefault(item, DEFAULT);
+     }
+ 
++    public static NpcDefinition get(String name) {
++        Optional<Map.Entry<Integer, NpcDefinition>> defs = definitions.entrySet().stream().filter(d -> d.getValue().getName().toLowerCase().equalsIgnoreCase(name.toLowerCase())).findFirst();
++        if (!defs.isPresent())
++            return null;
++        return defs.get().getValue();
++    }
++
+     public int getId() {
+         return id;
+     }
+Index: ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportWarningDialogue.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportWarningDialogue.java b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportWarningDialogue.java
+new file mode 100644
+--- /dev/null	(date 1671021389017)
++++ b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportWarningDialogue.java	(date 1671021389017)
+@@ -0,0 +1,38 @@
++package com.elvarg.game.content.teleporting;
++
++import com.elvarg.game.entity.impl.player.Player;
++import com.elvarg.game.model.dialogues.builders.DynamicDialogueBuilder;
++import com.elvarg.game.model.dialogues.entries.impl.OptionDialogue;
++
++/**
++ * @author Ynneh | 09/12/2022 - 12:47
++ * <https://github.com/drhenny>
++ */
++public class TeleportWarningDialogue extends DynamicDialogueBuilder {
++
++    private RequestType requestType;
++    private TeleportRequest req;
++
++    private Player requester;
++
++    public TeleportWarningDialogue(Player requester, RequestType requestType, TeleportRequest req) {
++        super();
++        this.requester = requester;
++        this.requestType = requestType;
++        this.req = req;
++    }
++
++    @Override
++    public void build(Player player) {
++        add(new OptionDialogue(0, "Teleport to Wilderness?", (option) -> {
++            switch (option) {
++                case FIRST_OPTION:
++                    player.teleportRequestManager.afterDialogue(player, requester, requestType, req);
++                    break;
++                default:
++
++                    break;
++            }
++        }, "Yes, let's go.", "No, bruv."));
++    }
++}
+Index: ElvargServer/src/main/java/com/elvarg/game/content/PotionConsumable.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/PotionConsumable.java b/ElvargServer/src/main/java/com/elvarg/game/content/PotionConsumable.java
+--- a/ElvargServer/src/main/java/com/elvarg/game/content/PotionConsumable.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/game/content/PotionConsumable.java	(date 1671034628983)
+@@ -126,6 +126,7 @@
+ 		@Override
+ 		public void onEffect(Player player) {
+ 			PotionConsumable.onPrayerEffect(player, true);
++			PotionConsumable.onSlayerEffect(player, true);
+ 			PotionConsumable.onRestoreEffect(player);
+ 		}
+ 	},
+@@ -316,6 +317,12 @@
+ 		player.getSkillManager().increaseCurrentLevel(Skill.PRAYER, (int) min, maxLevel);
+ 	}
+ 
++	private static void onSlayerEffect(Player player, boolean restorePotion) {
++		int maxLevel = player.getSkillManager().getMaxLevel(Skill.SLAYER);
++		double min = (int) Math.floor((restorePotion ? 8 : 7) + (maxLevel / 4));
++		player.getSkillManager().increaseCurrentLevel(Skill.SLAYER, (int) min, maxLevel);
++	}
++
+ 	/**
+ 	 * The method that executes the restore potion action.
+ 	 *
+Index: ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequestManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequestManager.java b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequestManager.java
+new file mode 100644
+--- /dev/null	(date 1671021389017)
++++ b/ElvargServer/src/main/java/com/elvarg/game/content/teleporting/TeleportRequestManager.java	(date 1671021389017)
+@@ -0,0 +1,89 @@
++package com.elvarg.game.content.teleporting;
++
++import com.elvarg.game.World;
++import com.elvarg.game.entity.impl.player.Player;
++import com.elvarg.game.model.dialogues.builders.impl.BankerDialogue;
++import com.elvarg.game.model.teleportation.TeleportHandler;
++import io.netty.util.internal.ConcurrentSet;
++
++import java.util.Optional;
++import java.util.Set;
++
++/**
++ * @author Ynneh | 08/12/2022 - 12:37
++ * <https://github.com/drhenny>
++ */
++public class TeleportRequestManager {
++
++    public Set<TeleportRequest> requests = new ConcurrentSet<>();
++
++    private Player player;
++
++    public TeleportRequestManager(Player player) {
++        this.player = player;
++    }
++
++    public void onAccept(Player player, Player requester, RequestType requestType) {
++
++        if (requester == null) {
++            return;
++        }
++
++        Optional<TeleportRequest> request = requests.stream().filter(r -> r.requestType.equals(requestType)).findAny();
++
++        if (request == null || !request.isPresent()) {
++            player.getPacketSender().sendMessage("This teleport request has expired.");
++            return;
++        }
++
++        TeleportRequest req = request.get();
++
++        if (req == null) {
++            return;
++        }
++        if (player.getWildernessLevel() > 0) {
++            requester.getDialogueManager().start(new TeleportWarningDialogue(player, requestType, req));
++            return;
++        }
++        if (requestType == RequestType.TELE_TO_ME) {
++            TeleportHandler.teleport(player, requester.getLocation().clone(), player.getSpellbook().getTeleportType(), false);
++        } else {
++            TeleportHandler.teleport(requester, player.getLocation().clone(), requester.getSpellbook().getTeleportType(), false);
++        }
++        requests.remove(req);
++    }
++
++
++    public void request(Player player, Player friend, boolean teleportToRequest) {
++
++        if (friend == null)
++            return;
++
++        TeleportRequest request = new TeleportRequest(player, friend, teleportToRequest ? RequestType.TELE_TO : RequestType.TELE_TO_ME);
++
++        if (friend.teleportRequestManager.requests.contains(request)) {
++            player.getPacketSender().sendMessage("You already have a "+(teleportToRequest ? "tele to" : "tele to me")+" request pending for "+friend.getUsername());
++            return;
++        }
++        friend.teleportRequestManager.requests.add(request);
++        friend.getPacketSender().sendMessage(player.getUsername()+ (teleportToRequest ? ":teletoreq:" : ":teletomereq:"));
++        player.getPacketSender().sendMessage("<col=0000ff>Sent teleport request to "+friend.getUsername()+"...");
++    }
++
++    public void remove(String name, RequestType type) {
++        /**
++         * Called when trying to accept requests from OFFLINE PLAYERS!
++         */
++        requests.stream().filter(n -> n.player.getUsername().equalsIgnoreCase(name)).filter(t -> t.requestType.equals(type)).forEach(t -> requests.remove(t));
++    }
++
++    public void afterDialogue(Player player, Player requester, RequestType requestType, TeleportRequest req) {
++        if (requestType == RequestType.TELE_TO_ME) {
++            TeleportHandler.teleport(requester, player.getLocation().clone(), requester.getSpellbook().getTeleportType(), false);
++        } else {
++            TeleportHandler.teleport(player, requester.getLocation().clone(), player.getSpellbook().getTeleportType(), false);
++        }
++        requests.remove(req);
++    }
++}
++
+Index: ElvargServer/src/main/java/com/elvarg/game/cache/FileArchive.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/cache/FileArchive.java b/ElvargServer/src/main/java/com/elvarg/game/cache/FileArchive.java
+new file mode 100644
+--- /dev/null	(date 1671021389015)
++++ b/ElvargServer/src/main/java/com/elvarg/game/cache/FileArchive.java	(date 1671021389015)
+@@ -0,0 +1,107 @@
++package com.elvarg.game.cache;
++
++import com.elvarg.util.flood.Buffer;
++
++/**
++ * @author Ynneh | 13/12/2022 - 12:55
++ * <https://github.com/drhenny>
++ */
++
++public final class FileArchive {
++
++    /**
++     * The buffer containing the decompressed data in this Archive.
++     */
++    private final byte[] buffer;
++
++    /**
++     * The amount of entries in this Archive.
++     */
++    private final int entries;
++
++    /**
++     * The identifiers (i.e. hashed names) of each of the entries in this Archive.
++     */
++    private final int[] identifiers;
++
++    /**
++     * The raw (i.e. decompressed) sizes of each of the entries in this Archive.
++     */
++    private final int[] extractedSizes;
++
++    /**
++     * The compressed sizes of each of the entries in this Archive.
++     */
++    private final int[] sizes;
++    private final int[] indices;
++
++    /**
++     * Whether or not this Archive was compressed as a whole: if false, decompression will be performed on each of the
++     * individual entries.
++     */
++    private final boolean extracted;
++
++    public FileArchive(byte[] data) {
++        Buffer buffer = new Buffer(data);
++
++        int decompressedLength = buffer.readTriByte();
++        int compressedLength = buffer.readTriByte();
++
++        if (compressedLength != decompressedLength) {
++
++            byte[] output = new byte[decompressedLength];
++
++            BZip2Decompressor.decompress(output, decompressedLength, data, compressedLength, 6);
++
++            this.buffer = output;
++
++            buffer = new Buffer(this.buffer);
++            extracted = true;
++        } else {
++            this.buffer = data;
++            extracted = false;
++        }
++        entries = buffer.readUShort();
++        identifiers = new int[entries];
++        extractedSizes = new int[entries];
++        sizes = new int[entries];
++        indices = new int[entries];
++        int offset = buffer.currentPosition + entries * 10;
++        for (int file = 0; file < entries; file++) {
++            identifiers[file] = buffer.readInt();
++            extractedSizes[file] = buffer.readTriByte();
++            sizes[file] = buffer.readTriByte();
++            indices[file] = offset;
++            offset += sizes[file];
++        }
++    }
++
++    public byte[] readFile(String name) {
++        byte[] output = null;
++        int hash = 0;
++        name = name.toUpperCase();
++        for (int index = 0; index < name.length(); index++) {
++            hash = (hash * 61 + name.charAt(index)) - 32;
++        }
++
++        for (int file = 0; file < entries; file++) {
++            if (identifiers[file] == hash) {
++                if (output == null) {
++                    output = new byte[extractedSizes[file]];
++                }
++                if (!extracted) {
++                    BZip2Decompressor.decompress(output, extractedSizes[file], this.buffer,
++                            sizes[file], indices[file]);
++                } else {
++                    System.arraycopy(this.buffer, indices[file], output,
++                            0, extractedSizes[file]);
++                }
++                return output;
++            }
++        }
++
++        return null;
++    }
++
++}
++
+Index: ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java b/ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java
+--- a/ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/game/entity/impl/player/Player.java	(date 1671034229819)
+@@ -32,6 +32,8 @@
+ import com.elvarg.game.content.combat.magic.Autocasting;
+ import com.elvarg.game.content.minigames.Barrows;
+ import com.elvarg.game.content.minigames.Barrows.Brother;
++import com.elvarg.game.content.morphing.MorphInfo;
++import com.elvarg.game.content.morphing.RingOfMorphing;
+ import com.elvarg.game.content.presets.Presetable;
+ import com.elvarg.game.content.presets.Presetables;
+ import com.elvarg.game.content.skill.SkillManager;
+@@ -39,7 +41,9 @@
+ import com.elvarg.game.content.skill.skillable.impl.Runecrafting.Pouch;
+ import com.elvarg.game.content.skill.skillable.impl.Runecrafting.PouchContainer;
+ import com.elvarg.game.content.skill.slayer.ActiveSlayerTask;
++import com.elvarg.game.content.teleporting.TeleportRequestManager;
+ import com.elvarg.game.definition.ItemDefinition;
++import com.elvarg.game.definition.NpcDefinition;
+ import com.elvarg.game.definition.PlayerBotDefinition;
+ import com.elvarg.game.entity.impl.Mobile;
+ import com.elvarg.game.entity.impl.npc.NPC;
+@@ -129,11 +133,27 @@
+ 	private final Trading trading = new Trading(this);
+ 	private final Dueling dueling = new Dueling(this);
+ 	private final DialogueManager dialogueManager = new DialogueManager(this);
++
++	public RingOfMorphing ringOfMorphing = new RingOfMorphing(this);
++
+ 	// Presets
+ 	private Presetable currentPreset;
+ 	private Presetable[] presets = new Presetable[Presetables.MAX_PRESETS];
+ 	private boolean openPresetsOnDeath = true;
+ 
++	public TeleportRequestManager teleportRequestManager = new TeleportRequestManager(this);
++
++	public MorphInfo slayerMorph;
++
++	public void setSlayerMorph(MorphInfo morph) {
++		this.slayerMorph = morph;
++		this.setNpcTransformationId(morph.npcId);
++	}
++
++	public NpcDefinition getMorphDef() {
++		return NpcDefinition.forId(slayerMorph.npcId);
++	}
++
+ 	private String username;
+ 	private String passwordHashWithSalt;
+ 	private String hostAddress;
+@@ -289,7 +309,8 @@
+ 
+ 	@Override
+ 	public int getAttackAnim() {
+-		return getFightType().getAnimation();
++		NpcDefinition def = getMorphDef();
++		return def == null ? getFightType().getAnimation() : def.getAttackAnim();
+ 	}
+ 
+ 	@Override
+@@ -302,7 +323,8 @@
+ 		final Item shield = getEquipment().getItems()[Equipment.SHIELD_SLOT];
+ 		final Item weapon = getEquipment().getItems()[Equipment.WEAPON_SLOT];
+ 		ItemDefinition definition = shield.getId() > 0 ? shield.getDefinition() : weapon.getDefinition();
+-		return definition.getBlockAnim();
++		NpcDefinition def = getMorphDef();
++		return def == null ? definition.getBlockAnim() : def.getDefenceAnim();
+ 	}
+ 
+ 	@Override
+@@ -415,6 +437,8 @@
+ 		// Process Bounty Hunter
+ 		BountyHunter.process(this);
+ 
++		ringOfMorphing.tick();
++
+ 		// Updates inventory if an update
+ 		// has been requested
+ 		if (isUpdateInventory()) {
+Index: ElvargServer/src/main/java/com/elvarg/game/cache/BZip2Decompressor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/cache/BZip2Decompressor.java b/ElvargServer/src/main/java/com/elvarg/game/cache/BZip2Decompressor.java
+new file mode 100644
+--- /dev/null	(date 1671021389014)
++++ b/ElvargServer/src/main/java/com/elvarg/game/cache/BZip2Decompressor.java	(date 1671021389014)
+@@ -0,0 +1,505 @@
++package com.elvarg.game.cache;
++
++/**
++ * @author Ynneh | 13/12/2022 - 12:56
++ * <https://github.com/drhenny>
++ */
++public final class BZip2Decompressor {
++
++    private static final BZip2DecompressionState state = new BZip2DecompressionState();
++
++    public static int decompress(byte[] output, int length, byte[] compressed, int decompressedLength, int minLen) {
++        synchronized (state) {
++            state.compressed = compressed;
++            state.nextIn = minLen;
++            state.decompressed = output;
++            state.nextOut = 0;
++            state.decompressedLength = decompressedLength;
++            state.length = length;
++            state.bsLive = 0;
++            state.bsBuff = 0;
++            state.totalInLo32 = 0;
++            state.totalInHi32 = 0;
++            state.totalOutLo32 = 0;
++            state.totalOutHigh32 = 0;
++            state.currentBlock = 0;
++            decompress(state);
++            length -= state.length;
++            return length;
++        }
++    }
++
++    private static void method226(BZip2DecompressionState state) {
++        byte byte4 = state.aByte573;
++        int i = state.anInt574;
++        int j = state.anInt584;
++        int k = state.anInt582;
++        int[] ai = BZip2DecompressionState.tt;
++        int l = state.anInt581;
++        byte[] abyte0 = state.decompressed;
++        int i1 = state.nextOut;
++        int j1 = state.length;
++        int k1 = j1;
++        int l1 = state.anInt601 + 1;
++        label0:
++        do {
++            if (i > 0) {
++                do {
++                    if (j1 == 0)
++                        break label0;
++                    if (i == 1)
++                        break;
++                    abyte0[i1] = byte4;
++                    i--;
++                    i1++;
++                    j1--;
++                } while (true);
++                if (j1 == 0) {
++                    i = 1;
++                    break;
++                }
++                abyte0[i1] = byte4;
++                i1++;
++                j1--;
++            }
++            boolean flag = true;
++            while (flag) {
++                flag = false;
++                if (j == l1) {
++                    i = 0;
++                    break label0;
++                }
++                byte4 = (byte) k;
++                l = ai[l];
++                byte byte0 = (byte) (l & 0xff);
++                l >>= 8;
++                j++;
++                if (byte0 != k) {
++                    k = byte0;
++                    if (j1 == 0) {
++                        i = 1;
++                    } else {
++                        abyte0[i1] = byte4;
++                        i1++;
++                        j1--;
++                        flag = true;
++                        continue;
++                    }
++                    break label0;
++                }
++                if (j != l1)
++                    continue;
++                if (j1 == 0) {
++                    i = 1;
++                    break label0;
++                }
++                abyte0[i1] = byte4;
++                i1++;
++                j1--;
++                flag = true;
++            }
++            i = 2;
++            l = ai[l];
++            byte byte1 = (byte) (l & 0xff);
++            l >>= 8;
++            if (++j != l1)
++                if (byte1 != k) {
++                    k = byte1;
++                } else {
++                    i = 3;
++                    l = ai[l];
++                    byte byte2 = (byte) (l & 0xff);
++                    l >>= 8;
++                    if (++j != l1)
++                        if (byte2 != k) {
++                            k = byte2;
++                        } else {
++                            l = ai[l];
++                            byte byte3 = (byte) (l & 0xff);
++                            l >>= 8;
++                            j++;
++                            i = (byte3 & 0xff) + 4;
++                            l = ai[l];
++                            k = (byte) (l & 0xff);
++                            l >>= 8;
++                            j++;
++                        }
++                }
++        } while (true);
++        int i2 = state.totalOutLo32;
++        state.totalOutLo32 += k1 - j1;
++        if (state.totalOutLo32 < i2)
++            state.totalOutHigh32++;
++        state.aByte573 = byte4;
++        state.anInt574 = i;
++        state.anInt584 = j;
++        state.anInt582 = k;
++        BZip2DecompressionState.tt = ai;
++        state.anInt581 = l;
++        state.decompressed = abyte0;
++        state.nextOut = i1;
++        state.length = j1;
++    }
++
++    private static void decompress(BZip2DecompressionState state) {
++        int gMinLen = 0;
++        int[] gLimit = null;
++        int[] gBase = null;
++        int[] gPerm = null;
++        state.anInt578 = 1;
++        if (BZip2DecompressionState.tt == null)
++            BZip2DecompressionState.tt = new int[state.anInt578 * 0x186a0];
++        boolean flag19 = true;
++        while (flag19) {
++            byte uc = getUnsignedChar(state);
++            if (uc == 23)
++                return;
++            uc = getUnsignedChar(state);
++            uc = getUnsignedChar(state);
++            uc = getUnsignedChar(state);
++            uc = getUnsignedChar(state);
++            uc = getUnsignedChar(state);
++            state.currentBlock++;
++            uc = getUnsignedChar(state);
++            uc = getUnsignedChar(state);
++            uc = getUnsignedChar(state);
++            uc = getUnsignedChar(state);
++            uc = getBit(state);
++            state.randomised = 0;
++            uc = getUnsignedChar(state);
++            state.randomised = state.randomised << 8 | uc & 0xff;
++            uc = getUnsignedChar(state);
++            state.randomised = state.randomised << 8 | uc & 0xff;
++            uc = getUnsignedChar(state);
++            state.randomised = state.randomised << 8 | uc & 0xff;
++            for (int j = 0; j < 16; j++) {
++                byte bit = getBit(state);
++                state.inUse16[j] = bit == 1;
++            }
++
++            for (int k = 0; k < 256; k++)
++                state.inUse[k] = false;
++
++            for (int l = 0; l < 16; l++)
++                if (state.inUse16[l]) {
++                    for (int i3 = 0; i3 < 16; i3++) {
++                        byte byte2 = getBit(state);
++                        if (byte2 == 1)
++                            state.inUse[l * 16 + i3] = true;
++                    }
++
++                }
++
++            makeMaps(state);
++            int alphabetSize = state.nInUse + 2;
++            /*
++             * number of different Huffman tables in use
++             */
++            int huffmanTableCount = getBits(3, state);
++            /*
++             * number of times that the Huffman tables are swapped (each 50 bytes)
++             */
++            int swapCount = getBits(15, state);
++            for (int i1 = 0; i1 < swapCount; i1++) {
++                int count = 0;
++                do {
++                    byte byte3 = getBit(state);
++                    if (byte3 == 0)
++                        break;
++                    count++;
++                } while (true);
++                state.selectorMtf[i1] = (byte) count;
++            }
++
++            byte[] pos = new byte[6];
++            for (byte v = 0; v < huffmanTableCount; v++)
++                pos[v] = v;
++
++            for (int j1 = 0; j1 < swapCount; j1++) {
++                byte v = state.selectorMtf[j1];
++                byte tmp = pos[v];
++                for (; v > 0; v--)
++                    pos[v] = pos[v - 1];
++
++                pos[0] = tmp;
++                state.selector[j1] = tmp;
++            }
++
++            for (int k3 = 0; k3 < huffmanTableCount; k3++) {
++                int l6 = getBits(5, state);
++                for (int k1 = 0; k1 < alphabetSize; k1++) {
++                    do {
++                        byte byte4 = getBit(state);
++                        if (byte4 == 0)
++                            break;
++                        byte4 = getBit(state);
++                        if (byte4 == 0)
++                            l6++;
++                        else
++                            l6--;
++                    } while (true);
++                    state.len[k3][k1] = (byte) l6;
++                }
++
++            }
++
++            for (int l3 = 0; l3 < huffmanTableCount; l3++) {
++                byte byte8 = 32;
++                int i = 0;
++                for (int l1 = 0; l1 < alphabetSize; l1++) {
++                    if (state.len[l3][l1] > i)
++                        i = state.len[l3][l1];
++                    if (state.len[l3][l1] < byte8)
++                        byte8 = state.len[l3][l1];
++                }
++
++                createDecodeTables(state.limit[l3], state.base[l3], state.perm[l3], state.len[l3], byte8, i, alphabetSize);
++                state.minLens[l3] = byte8;
++            }
++
++            int l4 = state.nInUse + 1;
++            int i5 = -1;
++            int j5 = 0;
++            for (int i2 = 0; i2 <= 255; i2++)
++                state.unzftab[i2] = 0;
++
++            int j9 = 4095;
++            for (int l8 = 15; l8 >= 0; l8--) {
++                for (int i9 = 15; i9 >= 0; i9--) {
++                    state.mtfa[j9] = (byte) (l8 * 16 + i9);
++                    j9--;
++                }
++
++                state.mtfbase[l8] = j9 + 1;
++            }
++
++            int i6 = 0;
++            if (j5 == 0) {
++                i5++;
++                j5 = 50;
++                byte byte12 = state.selector[i5];
++                gMinLen = state.minLens[byte12];
++                gLimit = state.limit[byte12];
++                gPerm = state.perm[byte12];
++                gBase = state.base[byte12];
++            }
++            j5--;
++            int i7 = gMinLen;
++            int l7;
++            byte byte9;
++            for (l7 = getBits(i7, state); l7 > gLimit[i7]; l7 = l7 << 1 | byte9) {
++                i7++;
++                byte9 = getBit(state);
++            }
++
++            for (int k5 = gPerm[l7 - gBase[i7]]; k5 != l4; )
++                if (k5 == 0 || k5 == 1) {
++                    int j6 = -1;
++                    int k6 = 1;
++                    do {
++                        if (k5 == 0)
++                            j6 += k6;
++                        else if (k5 == 1)
++                            j6 += 2 * k6;
++                        k6 *= 2;
++                        if (j5 == 0) {
++                            i5++;
++                            j5 = 50;
++                            byte byte13 = state.selector[i5];
++                            gMinLen = state.minLens[byte13];
++                            gLimit = state.limit[byte13];
++                            gPerm = state.perm[byte13];
++                            gBase = state.base[byte13];
++                        }
++                        j5--;
++                        int j7 = gMinLen;
++                        int i8;
++                        byte byte10;
++                        for (i8 = getBits(j7, state); i8 > gLimit[j7]; i8 = i8 << 1 | byte10) {
++                            j7++;
++                            byte10 = getBit(state);
++                        }
++
++                        k5 = gPerm[i8 - gBase[j7]];
++                    } while (k5 == 0 || k5 == 1);
++                    j6++;
++                    byte byte5 = state.seqToUnseq[state.mtfa[state.mtfbase[0]] & 0xff];
++                    state.unzftab[byte5 & 0xff] += j6;
++                    for (; j6 > 0; j6--) {
++                        BZip2DecompressionState.tt[i6] = byte5 & 0xff;
++                        i6++;
++                    }
++
++                } else {
++                    int j11 = k5 - 1;
++                    byte byte6;
++                    if (j11 < 16) {
++                        int j10 = state.mtfbase[0];
++                        byte6 = state.mtfa[j10 + j11];
++                        for (; j11 > 3; j11 -= 4) {
++                            int k11 = j10 + j11;
++                            state.mtfa[k11] = state.mtfa[k11 - 1];
++                            state.mtfa[k11 - 1] = state.mtfa[k11 - 2];
++                            state.mtfa[k11 - 2] = state.mtfa[k11 - 3];
++                            state.mtfa[k11 - 3] = state.mtfa[k11 - 4];
++                        }
++
++                        for (; j11 > 0; j11--)
++                            state.mtfa[j10 + j11] = state.mtfa[(j10 + j11) - 1];
++
++                        state.mtfa[j10] = byte6;
++                    } else {
++                        int l10 = j11 / 16;
++                        int i11 = j11 % 16;
++                        int k10 = state.mtfbase[l10] + i11;
++                        byte6 = state.mtfa[k10];
++                        for (; k10 > state.mtfbase[l10]; k10--)
++                            state.mtfa[k10] = state.mtfa[k10 - 1];
++
++                        state.mtfbase[l10]++;
++                        for (; l10 > 0; l10--) {
++                            state.mtfbase[l10]--;
++                            state.mtfa[state.mtfbase[l10]] = state.mtfa[(state.mtfbase[l10 - 1] + 16) - 1];
++                        }
++
++                        state.mtfbase[0]--;
++                        state.mtfa[state.mtfbase[0]] = byte6;
++                        if (state.mtfbase[0] == 0) {
++                            int i10 = 4095;
++                            for (int k9 = 15; k9 >= 0; k9--) {
++                                for (int l9 = 15; l9 >= 0; l9--) {
++                                    state.mtfa[i10] = state.mtfa[state.mtfbase[k9] + l9];
++                                    i10--;
++                                }
++
++                                state.mtfbase[k9] = i10 + 1;
++                            }
++
++                        }
++                    }
++                    state.unzftab[state.seqToUnseq[byte6 & 0xff] & 0xff]++;
++                    BZip2DecompressionState.tt[i6] = state.seqToUnseq[byte6 & 0xff] & 0xff;
++                    i6++;
++                    if (j5 == 0) {
++                        i5++;
++                        j5 = 50;
++                        byte byte14 = state.selector[i5];
++                        gMinLen = state.minLens[byte14];
++                        gLimit = state.limit[byte14];
++                        gPerm = state.perm[byte14];
++                        gBase = state.base[byte14];
++                    }
++                    j5--;
++                    int k7 = gMinLen;
++                    int j8;
++                    byte byte11;
++                    for (j8 = getBits(k7, state); j8 > gLimit[k7]; j8 = j8 << 1 | byte11) {
++                        k7++;
++                        byte11 = getBit(state);
++                    }
++
++                    k5 = gPerm[j8 - gBase[k7]];
++                }
++
++            state.anInt574 = 0;
++            state.aByte573 = 0;
++            state.cftab[0] = 0;
++            for (int j2 = 1; j2 <= 256; j2++)
++                state.cftab[j2] = state.unzftab[j2 - 1];
++
++            for (int k2 = 1; k2 <= 256; k2++)
++                state.cftab[k2] += state.cftab[k2 - 1];
++
++            for (int l2 = 0; l2 < i6; l2++) {
++                byte byte7 = (byte) (BZip2DecompressionState.tt[l2] & 0xff);
++                BZip2DecompressionState.tt[state.cftab[byte7 & 0xff]] |= l2 << 8;
++                state.cftab[byte7 & 0xff]++;
++            }
++
++            state.anInt581 = BZip2DecompressionState.tt[state.randomised] >> 8;
++            state.anInt584 = 0;
++            state.anInt581 = BZip2DecompressionState.tt[state.anInt581];
++            state.anInt582 = (byte) (state.anInt581 & 0xff);
++            state.anInt581 >>= 8;
++            state.anInt584++;
++            state.anInt601 = i6;
++            method226(state);
++            flag19 = state.anInt584 == state.anInt601 + 1 && state.anInt574 == 0;
++        }
++    }
++
++    private static byte getUnsignedChar(BZip2DecompressionState state) {
++        return (byte) getBits(8, state);
++    }
++
++    private static byte getBit(BZip2DecompressionState state) {
++        return (byte) getBits(1, state);
++    }
++
++    private static int getBits(int i, BZip2DecompressionState state) {
++        int j;
++        do {
++            if (state.bsLive >= i) {
++                int k = state.bsBuff >> state.bsLive - i & (1 << i) - 1;
++                state.bsLive -= i;
++                j = k;
++                break;
++            }
++            state.bsBuff = state.bsBuff << 8 | state.compressed[state.nextIn] & 0xff;
++            state.bsLive += 8;
++            state.nextIn++;
++            state.decompressedLength--;
++            state.totalInLo32++;
++            if (state.totalInLo32 == 0)
++                state.totalInHi32++;
++        } while (true);
++        return j;
++    }
++
++    private static void makeMaps(BZip2DecompressionState state) {
++        state.nInUse = 0;
++        for (int i = 0; i < 256; i++)
++            if (state.inUse[i]) {
++                state.seqToUnseq[state.nInUse] = (byte) i;
++                state.nInUse++;
++            }
++
++    }
++
++    private static void createDecodeTables(int[] limit, int[] base, int[] perm, byte[] length, int i, int maxLength, int alphabetSize) {
++        int pp = 0;
++        for (int i1 = i; i1 <= maxLength; i1++) {
++            for (int l2 = 0; l2 < alphabetSize; l2++) {
++                if (length[l2] == i1) {
++                    perm[pp] = l2;
++                    pp++;
++                }
++            }
++        }
++
++        for (int j1 = 0; j1 < 23; j1++)
++            base[j1] = 0;
++
++        for (int k1 = 0; k1 < alphabetSize; k1++)
++            base[length[k1] + 1]++;
++
++        for (int l1 = 1; l1 < 23; l1++)
++            base[l1] += base[l1 - 1];
++
++        for (int i2 = 0; i2 < 23; i2++)
++            limit[i2] = 0;
++
++        int vec = 0;
++        for (int j2 = i; j2 <= maxLength; j2++) {
++            vec += base[j2 + 1] - base[j2];
++            limit[j2] = vec - 1;
++            vec <<= 1;
++        }
++
++        for (int k2 = i + 1; k2 <= maxLength; k2++)
++            base[k2] = (limit[k2 - 1] + 1 << 1) - base[k2];
++
++    }
++
++}
++
+Index: ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportAcceptListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportAcceptListener.java b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportAcceptListener.java
+new file mode 100644
+--- /dev/null	(date 1671021389021)
++++ b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportAcceptListener.java	(date 1671021389021)
+@@ -0,0 +1,58 @@
++package com.elvarg.net.packet.impl;
++
++import com.elvarg.game.World;
++import com.elvarg.game.content.teleporting.RequestType;
++import com.elvarg.game.entity.impl.player.Player;
++import com.elvarg.net.packet.Packet;
++import com.elvarg.net.packet.PacketExecutor;
++import com.elvarg.util.Misc;
++
++import java.util.Optional;
++
++/**
++ * @author Ynneh | 09/12/2022 - 11:02
++ * <https://github.com/drhenny>
++ */
++public class TeleportAcceptListener implements PacketExecutor {
++
++    @Override
++    public void execute(Player player, Packet packet) {
++        int typeIndex = packet.readByte();
++
++        if (typeIndex > RequestType.values().length)
++            return;
++
++        RequestType type = RequestType.values()[typeIndex - 1];
++
++        if (type == null) {
++            return;
++        }
++
++        Long nameHash = packet.readLong();
++
++        if (nameHash == null) {
++            System.err.println("invalid namehash..");
++            return;
++        }
++
++        String name = Misc.longToString(nameHash);
++
++        if (name == null)
++            return;
++
++        Optional<Player> p = World.getPlayers().stream().filter(n -> n != null).filter(n -> n.getUsername().equalsIgnoreCase(name)).findFirst();
++
++        if (p == null || !p.isPresent()) {
++            player.teleportRequestManager.remove(name, type);
++            return;
++        }
++
++        Player requester = p.get();
++
++        if (requester == null)
++            return;
++
++        player.teleportRequestManager.onAccept(player, requester, type);
++
++    }
++}
+Index: ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportRequestListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportRequestListener.java b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportRequestListener.java
+new file mode 100644
+--- /dev/null	(date 1671021389021)
++++ b/ElvargServer/src/main/java/com/elvarg/net/packet/impl/TeleportRequestListener.java	(date 1671021389021)
+@@ -0,0 +1,60 @@
++package com.elvarg.net.packet.impl;
++
++import com.elvarg.game.World;
++import com.elvarg.game.entity.impl.player.Player;
++import com.elvarg.game.model.PlayerRelations;
++import com.elvarg.net.packet.Packet;
++import com.elvarg.net.packet.PacketExecutor;
++import com.elvarg.util.Misc;
++
++import java.util.List;
++import java.util.Optional;
++
++/**
++ * @author Ynneh | 08/12/2022 - 11:16
++ * <https://github.com/drhenny>
++ */
++public class TeleportRequestListener implements PacketExecutor {
++
++    @Override
++    public void execute(Player player, Packet packet) {
++
++        Long usernameHash = packet.readLong();
++
++        if (usernameHash == null)
++            return;
++
++        String username = Misc.longToString(usernameHash);
++
++        if (username == null)
++            return;
++
++        Optional<Player> searchedPlayer = World.getPlayers().stream().filter(p -> p != null).filter(p -> p.getUsername().equalsIgnoreCase(username)).findFirst();
++
++        if (searchedPlayer == null) {
++            /**
++             * Null
++             */
++            System.err.println("here 1..");
++            return;
++        }
++
++        Player friend = searchedPlayer.get();
++
++        if (friend == null) {
++            /**
++             * TODO message w offline blabla
++             */
++            System.err.println("here 2..");
++            return;
++        }
++
++        boolean teleportToRequest = packet.readByte() == 1;
++
++        if (friend.getRelations().getStatus().equals(PlayerRelations.PrivateChatStatus.OFF)) {
++            /** Should only appear for the requester a.k.a player **/
++            return;
++        }
++        player.teleportRequestManager.request(player, friend, teleportToRequest);
++    }
++}
+\ No newline at end of file
+Index: ElvargServer/src/main/java/com/elvarg/game/GameConstants.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/GameConstants.java b/ElvargServer/src/main/java/com/elvarg/game/GameConstants.java
+--- a/ElvargServer/src/main/java/com/elvarg/game/GameConstants.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/game/GameConstants.java	(date 1671023995949)
+@@ -37,6 +37,9 @@
+ 	 */
+ 	public static final String DEFINITIONS_DIRECTORY = "./data/definitions/";
+ 
++
++	public static final String CACHE_DIRECTORY = "./data/cache/";
++
+ 	/**
+ 	 * The directory of the clipping files.
+ 	 */
+Index: ElvargServer/src/main/java/com/elvarg/game/content/morphing/MorphSelection.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/morphing/MorphSelection.java b/ElvargServer/src/main/java/com/elvarg/game/content/morphing/MorphSelection.java
+new file mode 100644
+--- /dev/null	(date 1671034041906)
++++ b/ElvargServer/src/main/java/com/elvarg/game/content/morphing/MorphSelection.java	(date 1671034041906)
+@@ -0,0 +1,46 @@
++package com.elvarg.game.content.morphing;
++
++import com.elvarg.game.content.skill.slayer.SlayerTask;
++import com.elvarg.game.entity.impl.player.Player;
++import com.elvarg.game.model.Flag;
++import com.elvarg.game.model.UpdateFlag;
++import com.elvarg.game.model.dialogues.builders.DynamicDialogueBuilder;
++import com.elvarg.game.model.dialogues.entries.impl.NpcDialogue;
++import com.elvarg.game.model.dialogues.entries.impl.OptionDialogue;
++import com.elvarg.util.NpcIdentifiers;
++
++/**
++ * @author Ynneh | 13/12/2022 - 10:02
++ * <https://github.com/drhenny>
++ */
++public class MorphSelection extends DynamicDialogueBuilder {
++
++    @Override
++    public void build(Player player) {
++        add(new OptionDialogue(0, (option) -> {
++            player.getPacketSender().sendInterfaceRemoval();
++            switch (option) {
++                case FIRST_OPTION:
++                    RingOfMorphing.transform(player, MorphInfo.GHOSTS);
++                    break;
++                case SECOND_OPTION:
++                    RingOfMorphing.transform(player, MorphInfo.HILL_GIANT);
++                    break;
++                case THIRD_OPTION:
++                    if (player.slayerMorph == null)
++                        return;
++                    if (player.getCombat().getTarget() != null) {
++                        player.getPacketSender().sendMessage("You cannot unmorph while in combat!");
++                        return;
++                    }
++                    player.slayerMorph = null;
++                    player.setNpcTransformationId(-1);
++                    player.getUpdateFlag().flag(Flag.APPEARANCE);
++                    break;
++                default:
++                    player.getPacketSender().sendInterfaceRemoval();
++                    break;
++            }
++        }, "Ghost", "Hill Giant", "Un-morph", "Never mind.."));
++    }
++}
+\ No newline at end of file
+Index: ElvargServer/src/main/java/com/elvarg/game/content/Emotes.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/Emotes.java b/ElvargServer/src/main/java/com/elvarg/game/content/Emotes.java
+--- a/ElvargServer/src/main/java/com/elvarg/game/content/Emotes.java	(revision 99eaae35753799fdf88c5c292505c6a886ba2a52)
++++ b/ElvargServer/src/main/java/com/elvarg/game/content/Emotes.java	(date 1671034834692)
+@@ -68,6 +68,9 @@
+             return;
+         }
+ 
++        if (player.slayerMorph != null)
++            return;
++
+         //Stop skilling..
+         player.getSkillManager().stopSkillable();
+ 
+Index: ElvargServer/src/main/java/com/elvarg/game/content/morphing/MorphInfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/morphing/MorphInfo.java b/ElvargServer/src/main/java/com/elvarg/game/content/morphing/MorphInfo.java
+new file mode 100644
+--- /dev/null	(date 1671024451744)
++++ b/ElvargServer/src/main/java/com/elvarg/game/content/morphing/MorphInfo.java	(date 1671024451744)
+@@ -0,0 +1,26 @@
++package com.elvarg.game.content.morphing;
++
++/**
++ * @author Ynneh | 13/12/2022 - 11:53
++ * <https://github.com/drhenny>
++ */
++public enum MorphInfo {
++
++    GHOSTS(85, 1, 5539, 5538, 1),
++    HILL_GIANT(2098, 1, 4649, 4650, 2),
++
++    ;
++
++    public int npcId;
++    public int slayerLevelRequired;
++    public int walkAnim, standAnim;
++
++    public int size;
++    MorphInfo(int npcId, int slayerLevelRequired, int walkAnim, int standAnim, int size) {
++        this.npcId = npcId;
++        this.slayerLevelRequired = slayerLevelRequired;
++        this.walkAnim = walkAnim;
++        this.standAnim = standAnim;
++        this.size = size;
++    }
++}
+Index: ElvargServer/src/main/java/com/elvarg/game/definition/NPCDef.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/definition/NPCDef.java b/ElvargServer/src/main/java/com/elvarg/game/definition/NPCDef.java
+new file mode 100644
+--- /dev/null	(date 1671033468686)
++++ b/ElvargServer/src/main/java/com/elvarg/game/definition/NPCDef.java	(date 1671033468686)
+@@ -0,0 +1,367 @@
++package com.elvarg.game.definition;
++
++import com.elvarg.game.GameConstants;
++import com.elvarg.game.cache.FileArchive;
++import com.elvarg.game.collision.Buffer;
++import com.elvarg.util.FileUtil;
++
++/**
++ * @author Ynneh | 13/12/2022 - 12:58
++ * <https://github.com/drhenny>
++ */
++public final class NPCDef {
++    public static int anInt56;
++    public static Buffer dataBuf;
++    public static int[] offsets;
++
++    public static NPCDef[] cache;
++    public int turn90CCWAnimIndex;
++    public int varBitID;
++    public int turn180AnimIndex;
++    public int settingId;
++    public int combatLevel;
++    public String name;
++    public String[] actions;
++    public int walkAnim;
++    public int size;
++    public int[] recolourTarget;
++    public int[] additionalModels;
++    public int headIcon;
++    public int[] recolourOriginal;
++    public int standAnim;
++    public long interfaceType;
++    public int degreesToTurn;
++    public int turn90CWAnimIndex;
++    public boolean clickable;
++    public int lightModifier;
++    public int scaleY;
++    public boolean drawMinimapDot;
++    public int[] childrenIDs;
++    public byte[] description;
++    public int scaleXZ;
++    public int shadowModifier;
++    public boolean priorityRender;
++    public int[] modelId;
++    public int id;
++
++    public NPCDef() {
++        turn90CCWAnimIndex = -1;
++        varBitID = -1;
++        turn180AnimIndex = -1;
++        settingId = -1;
++        combatLevel = -1;
++        walkAnim = -1;
++        size = 1;
++        headIcon = -1;
++        standAnim = -1;
++        interfaceType = -1L;
++        degreesToTurn = 32;
++        turn90CWAnimIndex = -1;
++        clickable = true;
++        scaleY = 128;
++        drawMinimapDot = true;
++        scaleXZ = 128;
++        priorityRender = false;
++    }
++
++    /**
++     * Lookup an NpcDefinition by its id
++     *
++     * @param id
++     */
++    public static NPCDef lookup(int id) {
++        for (int index = 0; index < 20; index++)
++            if (cache[index].interfaceType == (long) id)
++                return cache[index];
++
++        anInt56 = (anInt56 + 1) % 20;
++        NPCDef definition = cache[anInt56] = new NPCDef();
++        dataBuf.offset = offsets[id];
++        definition.interfaceType = id;
++        definition.id = id;
++        definition.decode(dataBuf);
++
++        switch (id) {
++            // Pets
++            case 497: // Callisto pet
++                definition.scaleXZ = 45;
++                definition.size = 2;
++                break;
++            case 6609: // Callisto
++                definition.size = 4;
++                break;
++            case 995:
++                definition.recolourOriginal = new int[2];
++                definition.recolourTarget = new int[2];
++                definition.recolourOriginal[0] = 528;
++                definition.recolourTarget[0] = 926;
++                break;
++            case 7456:
++                definition.actions = new String[] { "Repairs", null, null, null, null, null, null };
++                break;
++            case 1274:
++                definition.combatLevel = 35;
++                break;
++            case 2660:
++                definition.combatLevel = 0;
++                definition.actions = new String[] { "Trade", null, null, null, null, null, null };
++                definition.name = "Pker";
++                break;
++            case 6477:
++                definition.combatLevel = 210;
++                break;
++            case 6471:
++                definition.combatLevel = 131;
++                break;
++            case 5816:
++                definition.combatLevel = 38;
++                break;
++            case 100:
++                definition.drawMinimapDot = true;
++                break;
++            case 1306:
++                definition.actions = new String[] { "Make-over", null, null, null, null, null, null };
++                break;
++            case 3309:
++                definition.name = "Mage";
++                definition.actions = new String[] { "Trade", null, "Equipment", "Runes", null, null, null };
++                break;
++            case 1158:
++                definition.name = "@or1@Maxed bot";
++                definition.combatLevel = 126;
++                definition.actions = new String[] { null, "Attack", null, null, null, null, null };
++                definition.modelId[5] = 268; // platelegs rune
++                definition.modelId[0] = 18954; // Str cape
++                definition.modelId[1] = 21873; // Head - neitznot
++                definition.modelId[8] = 15413; // Shield rune defender
++                definition.modelId[7] = 5409; // weapon whip
++                definition.modelId[4] = 13307; // Gloves barrows
++                definition.modelId[6] = 3704; // boots climbing
++                definition.modelId[9] = 290; // amulet glory
++                break;
++            case 1200:
++                definition.copy(lookup(1158));
++                definition.modelId[7] = 539; // weapon dds
++                break;
++            case 4096:
++                definition.name = "@or1@Archer bot";
++                definition.combatLevel = 90;
++                definition.actions = new String[] { null, "Attack", null, null, null, null, null };
++                definition.modelId[0] = 20423; // cape avas
++                definition.modelId[1] = 21873; // Head - neitznot
++                definition.modelId[7] = 31237; // weapon crossbow
++                definition.modelId[4] = 13307; // Gloves barrows
++                definition.modelId[6] = 3704; // boots climbing
++                definition.modelId[5] = 20139; // platelegs zammy hides
++                definition.modelId[2] = 20157; // platebody zammy hides
++                definition.standAnim = 7220;
++                definition.walkAnim = 7223;
++                definition.turn180AnimIndex = 7220;
++                definition.turn90CCWAnimIndex = 7220;
++                definition.turn90CWAnimIndex = 7220;
++                break;
++            case 1576:
++                definition.actions = new String[] { "Trade", null, "Equipment", "Ammunition", null, null, null };
++                break;
++            case 3343:
++                definition.actions = new String[] { "Trade", null, "Heal", null, null, null, null };
++                break;
++            case 506:
++            case 526:
++                definition.actions = new String[] { "Trade", null, null, null, null, null, null };
++                break;
++            case 315:
++                definition.actions = new String[] { "Talk-to", null, "Trade", "Sell Emblems", "Request Skull", null, null };
++                break;
++
++        }
++        return definition;
++    }
++
++    public static int TOTAL_NPCS;
++
++    public static void init() {
++
++        dataBuf = new Buffer(FileUtil.readFile(GameConstants.CACHE_DIRECTORY + "npc.dat"));
++
++        Buffer idxBuf = new Buffer(FileUtil.readFile(GameConstants.CACHE_DIRECTORY + "npc.idx"));
++
++        int size = idxBuf.readUShort();
++
++        TOTAL_NPCS = size;
++
++        offsets = new int[size];
++
++        int offset = 2;
++
++        for (int count = 0; count < size; count++) {
++            offsets[count] = offset;
++            offset += idxBuf.readUShort();
++        }
++
++        cache = new NPCDef[20];
++
++        for (int count = 0; count < 20; count++) {
++            cache[count] = new NPCDef();
++        }
++
++        System.out.println("Loaded: " + size + " mobs");
++    }
++
++    private void copy(NPCDef copy) {
++        size = copy.size;
++        degreesToTurn = copy.degreesToTurn;
++        walkAnim = copy.walkAnim;
++        turn180AnimIndex = copy.turn180AnimIndex;
++        turn90CWAnimIndex = copy.turn90CWAnimIndex;
++        turn90CCWAnimIndex = copy.turn90CCWAnimIndex;
++        varBitID = copy.varBitID;
++        settingId = copy.settingId;
++        combatLevel = copy.combatLevel;
++        name = copy.name;
++        description = copy.description;
++        headIcon = copy.headIcon;
++        clickable = copy.clickable;
++        lightModifier = copy.lightModifier;
++        scaleY = copy.scaleY;
++        scaleXZ = copy.scaleXZ;
++        drawMinimapDot = copy.drawMinimapDot;
++        shadowModifier = copy.shadowModifier;
++        actions = new String[copy.actions.length];
++        for (int i = 0; i < actions.length; i++) {
++            actions[i] = copy.actions[i];
++        }
++        modelId = new int[copy.modelId.length];
++        for (int i = 0; i < modelId.length; i++) {
++            modelId[i] = copy.modelId[i];
++        }
++        priorityRender = copy.priorityRender;
++    }
++
++    public void decode(Buffer buffer) {
++
++        while(true) {
++            int opcode = buffer.readUnsignedByte();
++            if (opcode == 0) {
++                return;
++            } else if (opcode == 1) {
++                int len = buffer.readUnsignedByte();
++                modelId = new int[len];
++                for (int i = 0; i < len; i++) {
++                    modelId[i] = buffer.readUShort();
++                }
++            } else if (opcode == 2) {
++                name = buffer.readString();
++            } else if (opcode == 12) {
++                size = buffer.readUnsignedByte();
++            } else if (opcode == 13) {
++                standAnim = buffer.readUShort();
++            } else if (opcode == 14) {
++                walkAnim = buffer.readUShort();
++            } else if (opcode == 15) {
++                buffer.readUShort();
++            } else if (opcode == 16) {
++                buffer.readUShort();
++            } else if (opcode == 17) {
++                walkAnim = buffer.readUShort();
++                turn180AnimIndex = buffer.readUShort();
++                turn90CWAnimIndex = buffer.readUShort();
++                turn90CCWAnimIndex = buffer.readUShort();
++                if (turn180AnimIndex == 65535) {
++                    turn180AnimIndex = walkAnim;
++                }
++                if (turn90CWAnimIndex == 65535) {
++                    turn90CWAnimIndex = walkAnim;
++                }
++                if (turn90CCWAnimIndex == 65535) {
++                    turn90CCWAnimIndex = walkAnim;
++                }
++            } else if (opcode >= 30 && opcode < 35) {
++                if (actions == null) {
++                    actions = new String[5];
++                }
++
++                actions[opcode - 30] = buffer.readString();
++
++                if (actions[opcode - 30].equalsIgnoreCase("Hidden")) {
++                    actions[opcode - 30] = null;
++                }
++            } else if (opcode == 40) {
++                int len = buffer.readUnsignedByte();
++                recolourOriginal = new int[len];
++                recolourTarget = new int[len];
++                for (int i = 0; i < len; i++) {
++                    recolourOriginal[i] = buffer.readUShort();
++                    recolourTarget[i] = buffer.readUShort();
++                }
++
++            } else if (opcode == 41) {
++                int len = buffer.readUnsignedByte();
++
++                for (int i = 0; i < len; i++) {
++                    buffer.readUShort(); // textures
++                    buffer.readUShort();
++                }
++            } else if (opcode == 60) {
++                int len = buffer.readUnsignedByte();
++                additionalModels = new int[len];
++                for (int i = 0; i < len; i++) {
++                    additionalModels[i] = buffer.readUShort();
++                }
++            } else if (opcode == 93) {
++                drawMinimapDot = false;
++            } else if (opcode == 95)
++                combatLevel = buffer.readUShort();
++            else if (opcode == 97)
++                scaleXZ = buffer.readUShort();
++            else if (opcode == 98)
++                scaleY = buffer.readUShort();
++            else if (opcode == 99)
++                priorityRender = true;
++            else if (opcode == 100)
++                lightModifier = buffer.readSignedByte();
++            else if (opcode == 101)
++                shadowModifier = buffer.readSignedByte();
++            else if (opcode == 102)
++                headIcon = buffer.readUShort();
++            else if (opcode == 103)
++                degreesToTurn = buffer.readUShort();
++            else if (opcode == 106 || opcode == 118) {
++                varBitID = buffer.readUShort();
++
++                if (varBitID == 65535) {
++                    varBitID = -1;
++                }
++
++                settingId = buffer.readUShort();
++
++                if (settingId == 65535) {
++                    settingId = -1;
++                }
++
++                int value = -1;
++
++                if (opcode == 118) {
++                    value = buffer.readUShort();
++                }
++
++                int len = buffer.readUnsignedByte();
++                childrenIDs = new int[len + 2];
++                for (int i = 0; i <= len; i++) {
++                    childrenIDs[i] = buffer.readUShort();
++                    if (childrenIDs[i] == 65535) {
++                        childrenIDs[i] = -1;
++                    }
++                }
++                childrenIDs[len + 1] = value;
++            } else if (opcode == 109) {
++                clickable = false;
++            } else if (opcode == 107 || opcode == 111) {
++
++            } else {
++                System.out.println(String.format("npc def invalid opcode: %d", opcode));
++            }
++        }
++    }
++}
++
+Index: ElvargServer/src/main/java/com/elvarg/game/content/morphing/RingOfMorphing.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ElvargServer/src/main/java/com/elvarg/game/content/morphing/RingOfMorphing.java b/ElvargServer/src/main/java/com/elvarg/game/content/morphing/RingOfMorphing.java
+new file mode 100644
+--- /dev/null	(date 1671034326571)
++++ b/ElvargServer/src/main/java/com/elvarg/game/content/morphing/RingOfMorphing.java	(date 1671034326571)
+@@ -0,0 +1,93 @@
++package com.elvarg.game.content.morphing;
++
++import com.elvarg.game.definition.NpcDefinition;
++import com.elvarg.game.entity.impl.player.Player;
++import com.elvarg.game.model.Flag;
++import com.elvarg.game.model.Skill;
++
++/**
++ * @author Ynneh | 13/12/2022 - 09:57
++ * <https://github.com/drhenny>
++ */
++public class RingOfMorphing {
++
++    private Player player;
++
++    private int lastDrainTick = 2;
++
++    public RingOfMorphing(Player player) {
++        this.player = player;
++    }
++
++    public void tick() {
++        /**
++         * Doesn't execute IF no morph
++         */
++        if (player.slayerMorph == null)
++            return;
++        /**
++         * Processes formula for slayer level.
++         */
++        if (lastDrainTick > 0) {
++            lastDrainTick--;
++            if (lastDrainTick == 0) {
++                /**
++                 * Executes formula
++                 */
++                int tickDelay = 1;
++                int level = player.getSkillManager().getMaxLevel(Skill.SLAYER);
++                tickDelay += (level * 6) / 100;
++                lastDrainTick = tickDelay;
++                drain(1);
++                if (level == 0) {
++                    player.slayerMorph = null;
++                    player.setNpcTransformationId(-1);
++                    player.getUpdateFlag().flag(Flag.APPEARANCE);
++                    player.getPacketSender().sendMessage("Oh no! you ran out of Slayer Points!");
++                }
++            }
++        }
++    }
++
++    private void drain(int amount) {
++        /**
++         * Drains based on amount
++         */
++        int currentLevel = player.getSkillManager().getCurrentLevel(Skill.SLAYER);
++        player.getSkillManager().setCurrentLevel(Skill.SLAYER, currentLevel - amount);
++    }
++
++    public static void transform(Player player, MorphInfo morph) {
++
++        final int levelRequired = morph.slayerLevelRequired;
++
++        if (player.getSkillManager().getMaxLevel(Skill.SLAYER) < levelRequired) {
++            player.getPacketSender().sendMessage("You need a Slayer Level of "+levelRequired+" to Morph into this NPC.");
++            return;
++        }
++
++        String npcName = morph.name().toLowerCase().replaceAll("_", " ");
++
++        if (npcName == null)
++            return;
++
++        NpcDefinition def = NpcDefinition.forId(morph.npcId);
++
++        if (def == null) {
++            /**
++             * No defs for npc..
++             */
++            player.getPacketSender().sendMessage("This NPC doesn't have definitions!");
++            return;
++        }
++
++        if (player.getSkillManager().getCurrentLevel(Skill.SLAYER) <= 0) {
++            /**
++             * Slayer level as prayer points
++             */
++            player.getPacketSender().sendMessage("You don't have enough Slayer Points to Morph into this NPC.");
++            return;
++        }
++        player.setSlayerMorph(morph);
++    }
++}
