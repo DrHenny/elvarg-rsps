@@ -1,5 +1,8 @@
 package com.elvarg.game.content.combat;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 import com.elvarg.game.Sound;
@@ -341,6 +344,8 @@ public class CombatFactory {
 			return true;
 		}
 
+		boolean isMoving = target.getMovementQueue().isMoving();
+
 		// Walk back if npc is too far away from spawn position.
 		if (attacker.isNpc()) {
 			NPC npc = attacker.getAsNpc();
@@ -377,14 +382,19 @@ public class CombatFactory {
             }
         }
 
+		if (attacker.getMovementQueue().isMoving() && isMoving && method.type() == CombatType.MELEE) {
+			requiredDistance++;
+		}
+
         // Too far away from the target
 		if (distance > requiredDistance) {
 		    return false;
 		}
 
 		// Don't allow diagonal attacks for smaller entities
-		if (method.type() == CombatType.MELEE && attacker.size() == 1 && target.size() == 1) {
-			if (PathFinder.isInDiagonalBlock(attackerPosition, targetPosition)) {
+		if (method.type() == CombatType.MELEE && attacker.size() == 1 && target.size() == 1 && !isMoving && !target.getMovementQueue().isMoving()) {
+			if (PathFinder.isDiagonalLocation(attacker, target)) {
+				stepOut(attacker, target);
 				return false;
 			}
 		}
@@ -395,6 +405,17 @@ public class CombatFactory {
 		}
 
 		return true;
+	}
+
+	private static void stepOut(Mobile attacker, Mobile target) {
+		List<Location> tiles = Arrays.asList(
+				new Location(target.getLocation().getX() - 1, target.getLocation().getY()),
+				new Location(target.getLocation().getX() + 1, target.getLocation().getY()),
+				new Location(target.getLocation().getX(), target.getLocation().getY() + 1),
+				new Location(target.getLocation().getX(), target.getLocation().getY() - 1));
+		/** If a tile is present it will step out **/
+		tiles.stream().filter(t -> !RegionManager.blocked(t, attacker.getPrivateArea())).min(Comparator.comparing(attacker.getLocation()::getDistance)).ifPresent(tile ->
+			PathFinder.calculateWalkRoute(attacker, tile.getX(), tile.getY()));
 	}
 
 	/**

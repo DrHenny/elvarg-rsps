@@ -541,6 +541,8 @@ public abstract class Mobile extends Entity {
     public void setFollowing(Mobile following) {
         this.following = following;
     }
+
+	public Mobile combatFollowing;
     
     public int getIndex() {
         return index;

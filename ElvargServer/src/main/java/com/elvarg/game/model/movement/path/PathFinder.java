@@ -25,12 +25,27 @@ public class PathFinder {
             NORTHEAST = 0x12801e0, NORTHWEST = 0x1280138;
 
     public final static boolean isInDiagonalBlock(Location attacker, Location attacked) {
-        return attacked.getX() - 1 == attacker.getX() && attacked.getY() + 1 == attacker.getY()
-                || attacker.getX() - 1 == attacked.getX() && attacker.getY() + 1 == attacked.getY()
+        return
+                attacked.getX() - 1 == attacker.getX() && attacked.getY() + 1 == attacker.getY()
                 || attacked.getX() + 1 == attacker.getX() && attacked.getY() - 1 == attacker.getY()
-                || attacker.getX() + 1 == attacked.getX() && attacker.getY() - 1 == attacked.getY()
                 || attacked.getX() + 1 == attacker.getX() && attacked.getY() + 1 == attacker.getY()
-                || attacker.getX() + 1 == attacked.getX() && attacker.getY() + 1 == attacked.getY();
+                || attacker.getX() - 1 == attacked.getX() && attacker.getY() + 1 == attacked.getY()
+                || attacker.getX() + 1 == attacked.getX() && attacker.getY() - 1 == attacked.getY()
+                || attacker.getX() + 1 == attacked.getX() && attacker.getY() + 1 == attacked.getY()
+
+
+                ;
+    }
+
+    public final static boolean isDiagonalLocation(Mobile att, Mobile def) {
+        Location attacker = att.getLocation().clone();
+        Location attacked = def.getLocation().clone();
+        boolean isDia = attacker.getX() - 1 == attacked.getX() && attacker.getY() + 1 == attacked.getY()//top left
+                || attacker.getX() + 1 == attacked.getX() && attacker.getY() - 1 == attacked.getY()//bottom right
+                || attacker.getX() + 1 == attacked.getX() && attacker.getY() + 1 == attacked.getY()//top right
+                || attacker.getX() - 1 == attacked.getX() && attacker.getY() - 1 == attacked.getY()//bottom right
+                ;
+        return isDia;
     }
 
     public static void calculateCombatRoute(Mobile player, Mobile target) {

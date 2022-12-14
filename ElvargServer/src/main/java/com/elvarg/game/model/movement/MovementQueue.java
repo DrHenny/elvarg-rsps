@@ -258,9 +258,9 @@ public final class MovementQueue {
             return;
         }
 
-        //if (character.getFollowing() != null) {
-        //   processFollowing();
-        // }
+        if (character.combatFollowing != null) {
+            processCombatFollowing();
+        }
 
         // Poll through the actual movement queue and
         // begin moving.
@@ -397,8 +397,8 @@ public final class MovementQueue {
     /**
      * Processes following.
      */
-    public void processFollowing() {
-        final Mobile following = character.getFollowing();
+    public void processCombatFollowing() {
+        final Mobile following = character.combatFollowing;
         final int size = character.size();
         final int followingSize = following.size();
 
@@ -411,17 +411,15 @@ public final class MovementQueue {
             return;
         }
 
-        boolean combatFollow = character.getCombat().getTarget() == following;
+        boolean combatFollow = character.getCombat().getTarget().equals(following);
         final CombatMethod method = CombatFactory.getMethod(character);
 
         if (combatFollow && CombatFactory.canReach(character, method, following)) {
             reset();
             return;
         }
-
         // If we're way too far away from eachother, simply reset following completely.
         if (!character.getLocation().isViewableFrom(following.getLocation()) || !following.isRegistered() || following.getPrivateArea() != character.getPrivateArea()) {
-
             boolean reset = true;
 
             // Handle pets, they should teleport to their owner
@@ -460,20 +458,18 @@ public final class MovementQueue {
                     character.getCombat().reset();
                 }
                 character.getMovementQueue().reset();
-                character.setFollowing(null);
+                character.combatFollowing = null;
                 character.setMobileInteraction(null);
                 return;
             }
         }
-
-        final boolean dancing = (!combatFollow && character.isPlayer() && following.isPlayer() && following.getFollowing() == character);
+        final boolean dancing = (!combatFollow && character.isPlayer() && following.isPlayer() && following.combatFollowing == character);
         final boolean basicPathing = (combatFollow && character.isNpc() && !((NPC) character).canUsePathFinding());
         final Location current = character.getLocation();
         Location destination = following.getLocation();
         if (dancing) {
             destination = following.getAsPlayer().getOldPosition();
         }
-
         if (!dancing) {
             if (!combatFollow && character.calculateDistance(following) == 1 && !RS317PathFinder.isInDiagonalBlock(current, destination)) {
                 return;
@@ -604,7 +600,6 @@ public final class MovementQueue {
             }
         }
         PathFinder.calculateWalkRoute(character, destination.getX(), destination.getY());
-
         //RS317PathFinder.findPath(character, destination.getX(), destination.getY(), character.isPlayer(), 1, 1);
     }
 
