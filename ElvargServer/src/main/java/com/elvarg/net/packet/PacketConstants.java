@@ -155,8 +155,5 @@ public class PacketConstants {
 
 		PACKETS[TRADE_REQUEST_OPCODE] = new TradeRequestPacketListener();
 		PACKETS[CREATION_MENU_OPCODE] = new CreationMenuPacketListener();
-
-		PACKETS[190] = new TeleportRequestListener();
-		PACKETS[191] = new TeleportAcceptListener();
 	}
 }

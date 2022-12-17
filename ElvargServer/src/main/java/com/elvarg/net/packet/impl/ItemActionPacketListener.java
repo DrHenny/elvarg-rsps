@@ -6,8 +6,6 @@ import com.elvarg.game.content.Gambling;
 import com.elvarg.game.content.PotionConsumable;
 import com.elvarg.game.content.combat.CombatSpecial;
 import com.elvarg.game.content.minigames.Barrows;
-import com.elvarg.game.content.morphing.MorphSelection;
-import com.elvarg.game.content.morphing.RingOfMorphing;
 import com.elvarg.game.content.skill.skillable.impl.Herblore;
 import com.elvarg.game.content.skill.skillable.impl.Prayer;
 import com.elvarg.game.content.skill.skillable.impl.Runecrafting;
@@ -87,10 +85,6 @@ public class ItemActionPacketListener implements PacketExecutor {
 				}
 			});
 			break;
-			case 773: {
-				player.getDialogueManager().start(new MorphSelection());
-				return;
-			}
 		case Gambling.MITHRIL_SEEDS:
 			Gambling.plantFlower(player);
 			break;

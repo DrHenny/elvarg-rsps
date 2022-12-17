@@ -191,11 +191,6 @@ public final class ItemDefinition {
                 itemDef.actions[1] = "Wield";
                 itemDef.actions[2] = "Check";
                 break;
-            case 773:
-                itemDef.actions = new String[5];
-                itemDef.name = "Ring of Morphing";
-                itemDef.actions[0] = "Morph";
-                break;
         }
         return itemDef;
     }

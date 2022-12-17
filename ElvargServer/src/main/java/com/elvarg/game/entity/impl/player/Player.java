@@ -32,8 +32,6 @@ import com.elvarg.game.content.combat.hit.PendingHit;
 import com.elvarg.game.content.combat.magic.Autocasting;
 import com.elvarg.game.content.minigames.Barrows;
 import com.elvarg.game.content.minigames.Barrows.Brother;
-import com.elvarg.game.content.morphing.MorphInfo;
-import com.elvarg.game.content.morphing.RingOfMorphing;
 import com.elvarg.game.content.presets.Presetable;
 import com.elvarg.game.content.presets.Presetables;
 import com.elvarg.game.content.skill.SkillManager;
@@ -41,9 +39,7 @@ import com.elvarg.game.content.skill.skillable.Skillable;
 import com.elvarg.game.content.skill.skillable.impl.Runecrafting.Pouch;
 import com.elvarg.game.content.skill.skillable.impl.Runecrafting.PouchContainer;
 import com.elvarg.game.content.skill.slayer.ActiveSlayerTask;
-import com.elvarg.game.content.teleporting.TeleportRequestManager;
 import com.elvarg.game.definition.ItemDefinition;
-import com.elvarg.game.definition.NpcDefinition;
 import com.elvarg.game.definition.PlayerBotDefinition;
 import com.elvarg.game.entity.impl.Mobile;
 import com.elvarg.game.entity.impl.npc.NPC;
@@ -133,26 +129,10 @@ public class Player extends Mobile {
 	private final Trading trading = new Trading(this);
 	private final Dueling dueling = new Dueling(this);
 	private final DialogueManager dialogueManager = new DialogueManager(this);
-
-	public RingOfMorphing ringOfMorphing = new RingOfMorphing(this);
-
 	// Presets
 	private Presetable currentPreset;
 	private Presetable[] presets = new Presetable[Presetables.MAX_PRESETS];
 	private boolean openPresetsOnDeath = true;
-
-	public TeleportRequestManager teleportRequestManager = new TeleportRequestManager(this);
-
-	public MorphInfo slayerMorph;
-
-	public void setSlayerMorph(MorphInfo morph) {
-		this.slayerMorph = morph;
-		this.setNpcTransformationId(morph.npcId);
-	}
-
-	public NpcDefinition getMorphDef() {
-		return NpcDefinition.forId(slayerMorph.npcId);
-	}
 
 	private String username;
 	private String passwordHashWithSalt;
@@ -309,8 +289,7 @@ public class Player extends Mobile {
 
 	@Override
 	public int getAttackAnim() {
-		NpcDefinition def = getMorphDef();
-		return def == null ? getFightType().getAnimation() : def.getAttackAnim();
+		return getFightType().getAnimation();
 	}
 
 	@Override
@@ -323,8 +302,7 @@ public class Player extends Mobile {
 		final Item shield = getEquipment().getItems()[Equipment.SHIELD_SLOT];
 		final Item weapon = getEquipment().getItems()[Equipment.WEAPON_SLOT];
 		ItemDefinition definition = shield.getId() > 0 ? shield.getDefinition() : weapon.getDefinition();
-		NpcDefinition def = getMorphDef();
-		return def == null ? definition.getBlockAnim() : def.getDefenceAnim();
+		return definition.getBlockAnim();
 	}
 
 	@Override
@@ -436,8 +414,6 @@ public class Player extends Mobile {
 
 		// Process Bounty Hunter
 		BountyHunter.process(this);
-
-		ringOfMorphing.tick();
 
 		// Updates inventory if an update
 		// has been requested

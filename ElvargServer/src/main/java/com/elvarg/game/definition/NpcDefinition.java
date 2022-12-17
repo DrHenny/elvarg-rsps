@@ -2,7 +2,6 @@ package com.elvarg.game.definition;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Represents an npc's definition.
@@ -56,13 +55,6 @@ public class NpcDefinition {
      */
     public static NpcDefinition forId(int item) {
         return definitions.getOrDefault(item, DEFAULT);
-    }
-
-    public static NpcDefinition get(String name) {
-        Optional<Map.Entry<Integer, NpcDefinition>> defs = definitions.entrySet().stream().filter(d -> d.getValue().getName().toLowerCase().equalsIgnoreCase(name.toLowerCase())).findFirst();
-        if (!defs.isPresent())
-            return null;
-        return defs.get().getValue();
     }
 
     public int getId() {

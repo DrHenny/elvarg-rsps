@@ -37,9 +37,6 @@ public class GameConstants {
 	 */
 	public static final String DEFINITIONS_DIRECTORY = "./data/definitions/";
 
-
-	public static final String CACHE_DIRECTORY = "./data/cache/";
-
 	/**
 	 * The directory of the clipping files.
 	 */
