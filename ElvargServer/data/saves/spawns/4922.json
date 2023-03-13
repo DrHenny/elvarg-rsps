@@ -1,0 +1,878 @@
+[
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 1243,
+        "y": 10083,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 1243,
+        "y": 10091,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 1251,
+        "y": 10083,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 1251,
+        "y": 10091,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12067,
+        "y": 3555,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 5553,
+    "position": [
+      {
+        "x": 1228,
+        "y": 3743,
+        "plane": 0
+      }
+    ],
+    "description": "Black warlock - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH_EAST",
+    "id": 5554,
+    "position": [
+      {
+        "x": 1223,
+        "y": 3722,
+        "plane": 0
+      }
+    ],
+    "description": "Snowy knight - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8591,
+    "position": [
+      {
+        "x": 1224,
+        "y": 3750,
+        "plane": 0
+      }
+    ],
+    "description": "Rabbit - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 1839,
+    "position": [
+      {
+        "x": 1225,
+        "y": 3730,
+        "plane": 0
+      }
+    ],
+    "description": "Duck - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH_WEST",
+    "id": 2001,
+    "position": [
+      {
+        "x": 1226,
+        "y": 3729,
+        "plane": 0
+      }
+    ],
+    "description": "Duckling - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 1838,
+    "position": [
+      {
+        "x": 1226,
+        "y": 3731,
+        "plane": 0
+      }
+    ],
+    "description": "Duck - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 2003,
+    "position": [
+      {
+        "x": 1224,
+        "y": 3730,
+        "plane": 0
+      }
+    ],
+    "description": "Duck - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 235,
+    "position": [
+      {
+        "x": 1229,
+        "y": 3722,
+        "plane": 0
+      }
+    ],
+    "description": "Butterfly - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH",
+    "id": 8595,
+    "position": [
+      {
+        "x": 1229,
+        "y": 3724,
+        "plane": 0
+      }
+    ],
+    "description": "Felfiz Yaryus - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "WEST",
+    "id": 8588,
+    "position": [
+      {
+        "x": 1230,
+        "y": 3728,
+        "plane": 0
+      }
+    ],
+    "description": "Arno - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8592,
+    "position": [
+      {
+        "x": 1230,
+        "y": 3737,
+        "plane": 0
+      }
+    ],
+    "description": "Rabbit - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8534,
+    "position": [
+      {
+        "x": 1234,
+        "y": 3731,
+        "plane": 0
+      }
+    ],
+    "description": "Rosie - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH_EAST",
+    "id": 5553,
+    "position": [
+      {
+        "x": 1238,
+        "y": 3742,
+        "plane": 0
+      }
+    ],
+    "description": "Black warlock - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH",
+    "id": 8593,
+    "position": [
+      {
+        "x": 1240,
+        "y": 3726,
+        "plane": 0
+      }
+    ],
+    "description": "Rabbit - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12067,
+        "y": 3563,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "WEST",
+    "id": 8536,
+    "position": [
+      {
+        "x": 1234,
+        "y": 3753,
+        "plane": 0
+      }
+    ],
+    "description": "Alexandra - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH_EAST",
+    "id": 11940,
+    "position": [
+      {
+        "x": 1238,
+        "y": 3728,
+        "plane": 0
+      }
+    ],
+    "description": "Master Farmer - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 0,
+    "position": [
+      {
+        "x": 1236,
+        "y": 3732,
+        "plane": 0
+      }
+    ],
+    "description": "Tool Leprechaun - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 8591,
+    "position": [
+      {
+        "x": 1238,
+        "y": 3733,
+        "plane": 0
+      }
+    ],
+    "description": "Rabbit - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH",
+    "id": 5555,
+    "position": [
+      {
+        "x": 1239,
+        "y": 3740,
+        "plane": 0
+      }
+    ],
+    "description": "Sapphire glacialis - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH_EAST",
+    "id": 5556,
+    "position": [
+      {
+        "x": 1238,
+        "y": 3743,
+        "plane": 0
+      }
+    ],
+    "description": "Ruby harvest - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 5554,
+    "position": [
+      {
+        "x": 1238,
+        "y": 3740,
+        "plane": 0
+      }
+    ],
+    "description": "Snowy knight - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "WEST",
+    "id": 234,
+    "position": [
+      {
+        "x": 1242,
+        "y": 3721,
+        "plane": 0
+      }
+    ],
+    "description": "Butterfly - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH",
+    "id": 8591,
+    "position": [
+      {
+        "x": 1237,
+        "y": 3752,
+        "plane": 0
+      }
+    ],
+    "description": "Rabbit - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8533,
+    "position": [
+      {
+        "x": 1241,
+        "y": 3755,
+        "plane": 0
+      }
+    ],
+    "description": "Nikkie - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12059,
+        "y": 3555,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 235,
+    "position": [
+      {
+        "x": 1241,
+        "y": 3740,
+        "plane": 0
+      }
+    ],
+    "description": "Butterfly - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "WEST",
+    "id": 8599,
+    "position": [
+      {
+        "x": 1245,
+        "y": 3719,
+        "plane": 0
+      }
+    ],
+    "description": "Soldier - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8592,
+    "position": [
+      {
+        "x": 1246,
+        "y": 3754,
+        "plane": 0
+      }
+    ],
+    "description": "Rabbit - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8601,
+    "position": [
+      {
+        "x": 1245,
+        "y": 3718,
+        "plane": 0
+      }
+    ],
+    "description": "Ranger - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 8530,
+    "position": [
+      {
+        "x": 1246,
+        "y": 3739,
+        "plane": 0
+      }
+    ],
+    "description": "Amelia - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH_EAST",
+    "id": 8629,
+    "position": [
+      {
+        "x": 1247,
+        "y": 3754,
+        "plane": 0
+      }
+    ],
+    "description": "Taylor - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 3103,
+    "position": [
+      {
+        "x": 1248,
+        "y": 3737,
+        "plane": 0
+      }
+    ],
+    "description": "Garden supplier - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH_WEST",
+    "id": 5730,
+    "position": [
+      {
+        "x": 1243,
+        "y": 3747,
+        "plane": 0
+      }
+    ],
+    "description": "Master Farmer - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH_EAST",
+    "id": 8586,
+    "position": [
+      {
+        "x": 1248,
+        "y": 3728,
+        "plane": 0
+      }
+    ],
+    "description": "Guildmaster Jane - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12067,
+        "y": 3563,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH_EAST",
+    "id": 10725,
+    "position": [
+      {
+        "x": 1251,
+        "y": 3717,
+        "plane": 0
+      }
+    ],
+    "description": "Sergeant - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH_EAST",
+    "id": 8599,
+    "position": [
+      {
+        "x": 1253,
+        "y": 3719,
+        "plane": 0
+      }
+    ],
+    "description": "Soldier - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH",
+    "id": 8531,
+    "position": [
+      {
+        "x": 1249,
+        "y": 3735,
+        "plane": 0
+      }
+    ],
+    "description": "Allanna - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 234,
+    "position": [
+      {
+        "x": 1255,
+        "y": 3745,
+        "plane": 0
+      }
+    ],
+    "description": "Butterfly - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8591,
+    "position": [
+      {
+        "x": 1248,
+        "y": 3744,
+        "plane": 0
+      }
+    ],
+    "description": "Rabbit - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "WEST",
+    "id": 8593,
+    "position": [
+      {
+        "x": 1254,
+        "y": 3752,
+        "plane": 0
+      }
+    ],
+    "description": "Rabbit - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 0,
+    "position": [
+      {
+        "x": 1252,
+        "y": 3756,
+        "plane": 0
+      }
+    ],
+    "description": "Tool Leprechaun - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH",
+    "id": 8537,
+    "position": [
+      {
+        "x": 1255,
+        "y": 3751,
+        "plane": 0
+      }
+    ],
+    "description": "Latlink Fastbell - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12067,
+        "y": 3555,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 235,
+    "position": [
+      {
+        "x": 1256,
+        "y": 3737,
+        "plane": 0
+      }
+    ],
+    "description": "Butterfly - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8594,
+    "position": [
+      {
+        "x": 1256,
+        "y": 3758,
+        "plane": 0
+      }
+    ],
+    "description": "Cat - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH_EAST",
+    "id": 235,
+    "position": [
+      {
+        "x": 1255,
+        "y": 3723,
+        "plane": 0
+      }
+    ],
+    "description": "Butterfly - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "WEST",
+    "id": 238,
+    "position": [
+      {
+        "x": 1251,
+        "y": 3744,
+        "plane": 0
+      }
+    ],
+    "description": "Butterfly - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 5555,
+    "position": [
+      {
+        "x": 1260,
+        "y": 3750,
+        "plane": 0
+      }
+    ],
+    "description": "Sapphire glacialis - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12059,
+        "y": 3563,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 238,
+    "position": [
+      {
+        "x": 1261,
+        "y": 3741,
+        "plane": 0
+      }
+    ],
+    "description": "Butterfly - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH",
+    "id": 5553,
+    "position": [
+      {
+        "x": 1260,
+        "y": 3749,
+        "plane": 0
+      }
+    ],
+    "description": "Black warlock - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 0,
+    "position": [
+      {
+        "x": 1262,
+        "y": 3731,
+        "plane": 0
+      }
+    ],
+    "description": "Tool Leprechaun - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 8592,
+    "position": [
+      {
+        "x": 1267,
+        "y": 3731,
+        "plane": 0
+      }
+    ],
+    "description": "Rabbit - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "NORTH",
+    "id": 5731,
+    "position": [
+      {
+        "x": 1262,
+        "y": 3726,
+        "plane": 0
+      }
+    ],
+    "description": "Master Farmer - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "EAST",
+    "id": 8535,
+    "position": [
+      {
+        "x": 1265,
+        "y": 3734,
+        "plane": 0
+      }
+    ],
+    "description": "Alan - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12059,
+        "y": 3555,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12067,
+        "y": 3563,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12059,
+        "y": 3563,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8583,
+    "position": [
+      {
+        "x": 12062,
+        "y": 3558,
+        "plane": 0
+      }
+    ],
+    "description": "Hespori - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8584,
+    "position": [
+      {
+        "x": 12059,
+        "y": 3555,
+        "plane": 0
+      }
+    ],
+    "description": "Flower - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8584,
+    "position": [
+      {
+        "x": 12059,
+        "y": 3563,
+        "plane": 0
+      }
+    ],
+    "description": "Flower - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8584,
+    "position": [
+      {
+        "x": 12067,
+        "y": 3555,
+        "plane": 0
+      }
+    ],
+    "description": "Flower - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8584,
+    "position": [
+      {
+        "x": 12067,
+        "y": 3563,
+        "plane": 0
+      }
+    ],
+    "description": "Flower - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12059,
+        "y": 3555,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12059,
+        "y": 3563,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  },
+  {
+    "facing": "SOUTH",
+    "id": 8585,
+    "position": [
+      {
+        "x": 12067,
+        "y": 3555,
+        "plane": 0
+      }
+    ],
+    "description": "\u003ccol\u003d00ffff\u003eFlower\u003c/col\u003e - #Ynneh\u0027s NPC-SPAWN-DUMPER Plugin"
+  }
+]

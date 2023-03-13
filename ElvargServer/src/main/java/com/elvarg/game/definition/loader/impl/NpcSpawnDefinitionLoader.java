@@ -22,6 +22,7 @@ public class NpcSpawnDefinitionLoader extends DefinitionLoader {
             World.getAddNPCQueue().add(npc);
         }
         reader.close();
+        NPCSpawnLoader.loadJson();
     }
 
     @Override
