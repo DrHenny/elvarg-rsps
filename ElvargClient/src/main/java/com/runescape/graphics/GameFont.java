@@ -108,9 +108,10 @@ public final class GameFont extends Rasterizer2D {
         return j;
     }
 
-    public void render(int i, String s, int j, int l) {
+    public void render(int i, String s, int j, int l) {//string, y, x
         if (s == null)
             return;
+
         j -= verticalSpace;
         for (int i1 = 0; i1 < s.length(); i1++) {
             char c = s.charAt(i1);
@@ -162,20 +163,20 @@ public final class GameFont extends Rasterizer2D {
         }
     }
 
-    public void drawTextWithPotentialShadow(boolean flag1, int i, int j, String s, int k) {
+    public void drawTextWithPotentialShadow(boolean flag1, int i, int j, String message, int k) {
         aBoolean1499 = false;
         int l = i;
-        if (s == null)
+        if (message == null)
             return;
         k -= verticalSpace;
-        for (int i1 = 0; i1 < s.length(); i1++)
-            if (s.charAt(i1) == '@' && i1 + 4 < s.length() && s.charAt(i1 + 4) == '@') {
-                int j1 = getColorByName(s.substring(i1 + 1, i1 + 4));
+        for (int i1 = 0; i1 < message.length(); i1++)
+            if (message.charAt(i1) == '@' && i1 + 4 < message.length() && message.charAt(i1 + 4) == '@') {
+                int j1 = getColorByName(message.substring(i1 + 1, i1 + 4));
                 if (j1 != -1)
                     j = j1;
                 i1 += 4;
             } else {
-                char c = s.charAt(i1);
+                char c = message.charAt(i1);
                 if (c != ' ') {
                     if (flag1)
                         method392(aByteArrayArray1491[c], i + anIntArray1494[c] + 1, k + anIntArray1495[c] + 1, anIntArray1492[c], anIntArray1493[c], 0);

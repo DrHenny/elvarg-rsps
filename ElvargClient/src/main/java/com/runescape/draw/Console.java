@@ -14,6 +14,7 @@ import com.runescape.cache.def.NpcDefinition;
 import com.runescape.cache.def.ObjectDefinition;
 import com.runescape.graphics.GameFont;
 import com.runescape.graphics.RSFont;
+import com.runescape.graphics.sprite.Sprite;
 import com.runescape.graphics.widget.Widget;
 
 public class Console {
@@ -127,6 +128,13 @@ public class Console {
 			Configuration.displayFps = !Configuration.displayFps;
 			printMessage("FPS " + (Configuration.displayFps ? "on" : "off"), 1);
 			break;
+			case "togglemode":
+				Client.oldMode = !Client.oldMode;
+				if (!Client.oldMode) {
+					client().compass = new Sprite(client().mediaArchive, "compass", 0);
+				}
+				printMessage("2006 Mode: " + (Client.oldMode ? "On" : "Off"), 1);
+				break;
 		case "data":
 			Configuration.clientData = !Configuration.clientData;
 			printMessage("Data " + (Configuration.clientData ? "on" : "off"), 1);

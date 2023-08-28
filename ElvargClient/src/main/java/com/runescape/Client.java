@@ -310,7 +310,9 @@ public class Client extends GameApplet {
     private static final String validUserPassChars =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"\243$%^&*()-_=+[{]};:'@#~,<.>/?\\| ";
     public static final SpriteCache spriteCache = new SpriteCache();
-    public static ScreenMode frameMode = ScreenMode.RESIZABLE;
+    public static ScreenMode frameMode = ScreenMode.FIXED;
+
+    public static boolean oldMode = true;
 
     /**
      * Utility function to get the current dimensions of the client frame.
@@ -427,8 +429,10 @@ public class Client extends GameApplet {
             modeNamesX = {26, 84, 146, 206, 278, 339, 408, 465},
             modeNamesY = {158, 158, 153, 153, 153, 153, 153, 158},
             channelButtonsX = {5, 69, 133, 197, 261, 325, 389, 453};
-    private final String[] modeNames =
-            {"All", "Game", "Public", "Private", "Clan", "Trade", "Yell", "Report"};
+    private final String[][] modeNames =
+            {{"All", "Game", "Public", "Private", "Clan", "Trade", "Yell", "Report"},
+                    {"Public chat", "Private chat", "Trade/compete", "Report abuse"}
+            };
     private final int[] hitmarks562 = {31, 32, 33, 34};
     private final int[] tabClickX = {38, 33, 33, 33, 33, 33, 38, 38, 33, 33, 33, 33, 33, 38},
             tabClickStart = {522, 560, 593, 625, 659, 692, 724, 522, 560, 593, 625, 659, 692,
@@ -753,7 +757,7 @@ public class Client extends GameApplet {
     private ProducingGraphicsBuffer aRSImageProducer_1115;
     private int membersInt;
     private String aString1121;
-    private Sprite compass;
+    public Sprite compass;
     private ProducingGraphicsBuffer chatSettingImageProducer;
     private int cameraY;
     private int menuActionRow;
@@ -1053,9 +1057,11 @@ public class Client extends GameApplet {
         frameMode = screenMode;
         frameWidth = frameDimension().width;
         frameHeight = frameDimension().height;
+        boolean oldSupport = false;
         if (screenMode == ScreenMode.FIXED) {
             cameraZoom = 600;
             SceneGraph.viewDistance = 9;
+            oldSupport = true;
         } else if (screenMode == ScreenMode.RESIZABLE) {
             cameraZoom = 850;
             SceneGraph.viewDistance = 10;
@@ -1064,6 +1070,10 @@ public class Client extends GameApplet {
             SceneGraph.viewDistance = 10;
             frameWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
             frameHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+        }
+        if (Client.oldMode && !oldSupport) {
+            Client.oldMode = false;
+            sendMessage("This display mode is not compatible with 2006 game frame.", 1, "Warning");
         }
         rebuildFrameSize(screenMode, frameWidth, frameHeight);
         setBounds();
@@ -1784,7 +1794,66 @@ public class Client extends GameApplet {
         }
     }
 
-    public void drawChannelButtons() {
+    private void old317Chatbox() {
+        final int yOffset = frameMode == ScreenMode.FIXED ? 0 : frameHeight - 165;
+        //spriteCache.draw(49, 0, 143 + yOffset);
+
+        switch (cButtonCPos) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                // spriteCache.draw(671, channelButtonsX[cButtonCPos], 143 + yOffset);
+                break;
+        }
+        if (cButtonHPos == cButtonCPos) {
+            switch (cButtonHPos) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    //spriteCache.draw(673, channelButtonsX[cButtonHPos], 143 + yOffset);
+                    break;
+            }
+        } else {
+            switch (cButtonHPos) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                    // spriteCache.draw(671, channelButtonsX[cButtonHPos], 143 + yOffset);
+                    break;
+                case 7:
+                    //spriteCache.draw(674, channelButtonsX[cButtonHPos], 143 + yOffset);
+                    break;
+            }
+        }
+        /** Names **/
+        int[] chatTypes = {publicChatMode, privateChatMode, tradeMode, 0};
+        int[] modeOffsetX = {22, 149, 282, 422};
+        int[] modeOffsetY = {143, 143, 143, 148};
+        for (int i = 0; i < modeNames[1].length; i++) {
+            regularText.drawTextWithPotentialShadow(true, modeOffsetX[i], 0xffffff, modeNames[1][i], modeOffsetY[i] + yOffset);
+        }
+        int[] toggleOffsetX = {55, 180, 320, 450};
+        String[] text = {"On", "Friends", "Off"};
+        int[] textColor = {65280, 0xffff00, 0xff0000, 65535};
+        for (int i = 0; i < modeNames[1].length - 1; i++) {
+            regularText.method382(textColor[chatTypes[i]], toggleOffsetX[i], text[chatTypes[i]], 155 + yOffset, true);
+        }
+    }
+
+    public void osrsChatbox() {
         final int yOffset = frameMode == ScreenMode.FIXED ? 0 : frameHeight - 165;
         spriteCache.draw(49, 0, 143 + yOffset);
         String[] text = {"On", "Friends", "Off", "Hide"};
@@ -1830,12 +1899,19 @@ public class Client extends GameApplet {
             }
         }
         int[] modes = {publicChatMode, privateChatMode, clanChatMode, tradeMode, yellMode};
-        for (int i = 0; i < modeNamesX.length; i++) {
-            smallText.drawTextWithPotentialShadow(true, modeNamesX[i], 0xffffff, modeNames[i], modeNamesY[i] + yOffset);
+        for (int i = 0; i < modeNames[0].length; i++) {
+            smallText.drawTextWithPotentialShadow(true, modeNamesX[i], 0xffffff, modeNames[0][i], modeNamesY[i] + yOffset);
         }
         for (int i = 0; i < modeX.length; i++) {
             smallText.method382(textColor[modes[i]], modeX[i], text[modes[i]], 164 + yOffset, true);
         }
+    }
+
+    public void drawChatboxButtons() {
+        if (oldMode) {
+            old317Chatbox();
+        } else
+            osrsChatbox();
     }
 
     private boolean chatStateCheck() {
@@ -1850,17 +1926,17 @@ public class Client extends GameApplet {
         Rasterizer3D.scanOffsets = anIntArray1180;
         if (chatStateCheck()) {
             showChatComponents = true;
-            spriteCache.draw(20, 0, yOffset);
+            spriteCache.draw(oldMode ? 61 : 20, 0, yOffset);
         }
         if (showChatComponents) {
             if ((changeChatArea && frameMode != ScreenMode.FIXED) && !chatStateCheck()) {
-                Rasterizer2D.drawHorizontalLine(7, 7 + yOffset, 506, 0x575757);
+                Rasterizer2D.drawHorizontalLine(7, 7 + yOffset, 506, 0x575757);//THIS
                 Rasterizer2D.fillGradientRectangle(7, 7 + yOffset, 510, 130, 0x00000000, 0x5A000000);
             } else {
-                spriteCache.draw(20, 0, yOffset);
+                spriteCache.draw(oldMode ? 61 : 20, 0, yOffset);
             }
         }
-        drawChannelButtons();
+        drawChatboxButtons();
         GameFont font = regularText;
         if (messagePromptRaised) {
             newBoldFont.drawCenteredString(aString1121, 259, 60 + yOffset, 0, -1);
@@ -1896,7 +1972,9 @@ public class Client extends GameApplet {
             int j77 = -3;
             int j = 0;
             int shadow = (changeChatArea && frameMode != ScreenMode.FIXED) ? 0 : -1;
-            Rasterizer2D.setDrawingArea(122 + yOffset, 8, 497, 7 + yOffset);
+            yOffset -= oldMode ? 27 : 0;//not connection
+            int xOffset2 = oldMode ? 5 : 0;//not connection
+            Rasterizer2D.setDrawingArea(122 + yOffset, 8, 497, oldMode ? 18 : (7 + yOffset));//chat offset
             for (int k = 0; k < 500; k++) {
                 if (chatMessages[k] != null) {
                     ChatMessage msg = chatMessages[k];
@@ -1909,8 +1987,7 @@ public class Client extends GameApplet {
 
                     if (type == 0) {
                         if (chatTypeView == 5 || chatTypeView == 0) {
-                            newRegularFont.drawBasicString(message, 11,
-                                    yPos + yOffset, (changeChatArea && frameMode != ScreenMode.FIXED) ? 0xFFFFFF : 0, shadow);
+                            newRegularFont.drawBasicString(message, xOffset2 + 11, yPos + yOffset + (oldMode ? -5 : 0), (changeChatArea && frameMode != ScreenMode.FIXED) ? 0xFFFFFF : 0, shadow);
                             j++;
                             j77++;
                         }
@@ -1924,16 +2001,16 @@ public class Client extends GameApplet {
                             for (ChatCrown c : crowns) {
                                 Sprite sprite = spriteCache.lookup(c.getSpriteId());
                                 if (sprite != null) {
-                                    sprite.drawSprite(xPos + 1, yPos - 12 + yOffset);
+                                    sprite.drawSprite(xOffset2 + xPos + 1, yPos - 12 + yOffset);
                                     xPos += sprite.myWidth + 2;
                                 }
                             }
 
-                            newRegularFont.drawBasicString(name + ":", xPos,
-                                    yPos + yOffset, (changeChatArea && frameMode != ScreenMode.FIXED) ? 0xFFFFFF : 0, shadow);
+                            newRegularFont.drawBasicString(name + ":", xOffset2 + xPos,
+                                    (oldMode ? -5 : 0) + yPos + yOffset, (changeChatArea && frameMode != ScreenMode.FIXED) ? 0xFFFFFF : 0, shadow);
                             xPos += font.getTextWidth(name) + 8;
-                            newRegularFont.drawBasicString(message, xPos,
-                                    yPos + yOffset,
+                            newRegularFont.drawBasicString(message, xOffset2 + xPos,
+                                    (oldMode ? -5 : 0) + yPos + yOffset,
                                     (changeChatArea && frameMode != ScreenMode.FIXED) ? 0x7FA9FF : 255, shadow);
                             j++;
                             j77++;
@@ -1945,7 +2022,7 @@ public class Client extends GameApplet {
                             || privateChatMode == 1
                             && isFriendOrSelf(name))) {
                         if (chatTypeView == 2 || chatTypeView == 0) {
-                            int k1 = 11;
+                            int k1 = 11 + xOffset2;
                             newRegularFont.drawBasicString("From", k1, yPos + yOffset,
                                     (changeChatArea && frameMode != ScreenMode.FIXED) ? 0xFFFFFF : 0, shadow);
                             k1 += font.getTextWidth("From ");
@@ -1971,7 +2048,7 @@ public class Client extends GameApplet {
                             || tradeMode == 1 && isFriendOrSelf(name))) {
                         if (chatTypeView == 3 || chatTypeView == 0) {
                             newRegularFont.drawBasicString(name + " " + message,
-                                    11, yPos + yOffset, 0x800080, shadow);
+                                    xOffset2 + 11, yPos + yOffset, 0x800080, shadow);
                             j++;
                             j77++;
                         }
@@ -1979,7 +2056,7 @@ public class Client extends GameApplet {
                     if (type == 5 && splitPrivateChat == 0 && privateChatMode < 2) {
                         if (chatTypeView == 2 || chatTypeView == 0) {
                             newRegularFont.drawBasicString(name + " " + message,
-                                    11, yPos + yOffset, 0x800080, shadow);
+                                    xOffset2 + 11, yPos + yOffset, 0x800080, shadow);
                             j++;
                             j77++;
                         }
@@ -1987,11 +2064,11 @@ public class Client extends GameApplet {
                     if (type == 6 && (splitPrivateChat == 0 || chatTypeView == 2)
                             && privateChatMode < 2) {
                         if (chatTypeView == 2 || chatTypeView == 0) {
-                            newRegularFont.drawBasicString("To " + name + ":", 11,
+                            newRegularFont.drawBasicString("To " + name + ":", xOffset2 + 11,
                                     yPos + yOffset, (changeChatArea && frameMode != ScreenMode.FIXED) ? 0xFFFFFF : 0,
                                     shadow);
                             newRegularFont.drawBasicString(message,
-                                    15 + font.getTextWidth("To :" + name),
+                                    xOffset2 + 15 + font.getTextWidth("To :" + name),
                                     yPos + yOffset, 0x800000, shadow);
                             j++;
                             j77++;
@@ -2001,21 +2078,21 @@ public class Client extends GameApplet {
                             || tradeMode == 1 && isFriendOrSelf(name))) {
                         if (chatTypeView == 3 || chatTypeView == 0) {
                             newRegularFont.drawBasicString(name + " " + message,
-                                    11, yPos + yOffset, 0x7e3200, shadow);
+                                    xOffset2 + 11, yPos + yOffset, 0x7e3200, shadow);
                             j++;
                             j77++;
                         }
                         if (type == 11 && (clanChatMode == 0)) {
                             if (chatTypeView == 11) {
                                 newRegularFont.drawBasicString(
-                                        name + " " + message, 11,
+                                        name + " " + message, xOffset2 + 11,
                                         yPos + yOffset, 0x7e3200, shadow);
                                 j++;
                                 j77++;
                             }
                             if (type == 12) {
                                 newRegularFont.drawBasicString(message + "",
-                                        11, yPos + yOffset, 0x7e3200, shadow);
+                                        xOffset2 + 11, yPos + yOffset, 0x7e3200, shadow);
                                 j++;
                             }
                         }
@@ -2023,7 +2100,7 @@ public class Client extends GameApplet {
                     if (type == 16) {
                         if (chatTypeView == 11 || chatTypeView == 0) {
 
-                            newRegularFont.drawBasicString(message, 10, yPos + yOffset,
+                            newRegularFont.drawBasicString(message, xOffset2 + 10, yPos + yOffset,
                                     changeChatArea ? 0x7FA9FF : 255, shadow);
 
                             j++;
@@ -2033,7 +2110,7 @@ public class Client extends GameApplet {
                     if (type == 21 && (yellMode == 0 || yellMode == 1 && isFriendOrSelf(name))) {
                         if (chatTypeView == 12 || chatTypeView == 0) {
                             newRegularFont.drawBasicString(message,
-                                    11, yPos + yOffset, 0x000000, shadow);
+                                    xOffset2 + 11, yPos + yOffset, 0x000000, shadow);
                             j++;
                             j77++;
                         }
@@ -2045,7 +2122,8 @@ public class Client extends GameApplet {
             if (anInt1211 < 111) {
                 anInt1211 = 111;
             }
-            drawScrollbar(114, anInt1211 - anInt1089 - 113, 7 + yOffset, 496, anInt1211, (changeChatArea && frameMode != ScreenMode.FIXED));
+            drawScrollbar(114, anInt1211 - anInt1089 - 113, 7 + yOffset, oldMode ? 480 : 496, anInt1211, (changeChatArea && frameMode != ScreenMode.FIXED));
+
             String s;
             if (localPlayer != null && localPlayer.name != null) {
                 s = localPlayer.name;
@@ -2053,7 +2131,10 @@ public class Client extends GameApplet {
                 s = StringUtils.formatText(capitalize(myUsername));
             }
             Rasterizer2D.setDrawingArea(140 + yOffset, 8, 509, 120 + yOffset);
-            int xOffset = 10;
+            int xOffset = xOffset2 + 10;
+            if (oldMode) {
+                xOffset++;
+            }
             // Draw crowns in typing area
             for (ChatCrown c : ChatCrown.get(myPrivilege, donatorPrivilege)) {
                 Sprite sprite = spriteCache.lookup(c.getSpriteId());
@@ -2068,7 +2149,7 @@ public class Client extends GameApplet {
             newRegularFont.drawBasicString(inputString + "*",
                     xOffset + font.getTextWidth(s + ": "), 133 + yOffset,
                     (changeChatArea && frameMode != ScreenMode.FIXED) ? 0x7FA9FF : 255, shadow);
-            Rasterizer2D.drawHorizontalLine(7, 121 + yOffset, 506, (changeChatArea && frameMode != ScreenMode.FIXED) ? 0x575757 : 0x807660);
+            Rasterizer2D.drawHorizontalLine(7, 121 + yOffset, 506, (changeChatArea && frameMode != ScreenMode.FIXED) ? 0x575757 : oldMode ? 0x000000 : 0x807660);
             Rasterizer2D.defaultDrawingAreaSize();
         }
         if (menuOpen) {
@@ -3939,6 +4020,14 @@ public class Client extends GameApplet {
     }
 
     public void drawSideIcons() {
+        if (oldMode) {
+            draw317SideIcons();
+        } else {
+            drawOSRSSideIcons();
+        }
+    }
+
+    private void drawOSRSSideIcons() {
         int xOffset = frameMode == ScreenMode.FIXED ? 0 : frameWidth - 247;
         int yOffset = frameMode == ScreenMode.FIXED ? 0 : frameHeight - 336;
         if (frameMode == ScreenMode.FIXED || frameMode != ScreenMode.FIXED && !stackSideStones) {
@@ -3992,7 +4081,14 @@ public class Client extends GameApplet {
     }
 
     private void drawRedStones() {
+        if (oldMode) {
+            draw317Redstones();
+        } else {
+            drawOSRSRedstones();
+        }
+    }
 
+    private void drawOSRSRedstones() {
         final int[] redStonesX =
                 {6, 44, 77, 110, 143, 176, 209, 6, 44, 77, 110, 143, 176, 209},
                 redStonesY = {0, 0, 0, 0, 0, 0, 0, 298, 298, 298, 298, 298, 298, 298},
@@ -4024,6 +4120,95 @@ public class Client extends GameApplet {
         }
     }
 
+    private void draw317Redstones() {
+        int[] redStonesX = new int[]{22, 54, 82, 110, 154, 182, 209, 22, 54, 81, 110, 154, 182, 209};
+        int[] redStonesY = new int[]{3, 1, 1, 0, 1, 1, 2, 298, 299, 297, 299, 298, 298, 298};
+        int[] redStonesId = new int[]{702, 707, 707, 704, 709, 709, 703, 705, 710, 710, 708, 711, 711, 706};
+
+        int xOffset = frameMode == ScreenMode.FIXED ? 0 : frameWidth - 247;
+        int yOffset = frameMode == ScreenMode.FIXED ? 0 : frameHeight - 336;
+        if (frameMode == ScreenMode.FIXED || frameMode != ScreenMode.FIXED && !stackSideStones) {
+            if (tabInterfaceIDs[tabId] != -1 && tabId != 15) {
+                spriteCache.draw(redStonesId[tabId], redStonesX[tabId] + xOffset,
+                        redStonesY[tabId] + yOffset);
+            }
+        } else if (stackSideStones && frameWidth < 1000) {
+            int[] stoneX = {226, 194, 162, 130, 99, 65, 34, 219, 195, 161, 130, 98, 65, 33};
+            int[] stoneY = {73, 73, 73, 73, 73, 73, 73, -1, 37, 37, 37, 37, 37, 37, 37};
+            if (tabInterfaceIDs[tabId] != -1 && tabId != 10 && showTabComponents) {
+                if (tabId == 7) {
+                    spriteCache.draw(39, frameWidth - 130, frameHeight - 37);
+                }
+                spriteCache.draw(39, frameWidth - stoneX[tabId],
+                        frameHeight - stoneY[tabId]);
+            }
+        } else if (stackSideStones && frameWidth >= 1000) {
+            int[] stoneX =
+                    {417, 385, 353, 321, 289, 256, 224, 129, 193, 161, 130, 98, 65, 33};
+            if (tabInterfaceIDs[tabId] != -1 && tabId != 10 && showTabComponents) {
+                spriteCache.draw(39, frameWidth - stoneX[tabId], frameHeight - 37);
+            }
+        }
+    }
+
+    private void draw317SideIcons() {
+        int[] sideIconsX = new int[]{34, 57, 87, 117, 156, 184, 212, 32, 58, 85, 121, 156, 188, 212};
+        int[] sideIconsY = new int[]{11, 8, 9, 5, 5, 5, 11, 303, 306, 306, 303, 304, 302, 302, 300};
+        int xOffset = frameMode == ScreenMode.FIXED ? 0 : frameWidth - 247;
+        int yOffset = frameMode == ScreenMode.FIXED ? 0 : frameHeight - 336;
+        if (frameMode == ScreenMode.FIXED || frameMode != ScreenMode.FIXED && !stackSideStones) {
+            for (int i = 0; i < sideIconsTab.length; i++) {
+                if (tabInterfaceIDs[sideIconsTab[i]] != -1) {
+                    if (sideIconsId[i] != -1) {
+                        Sprite sprite = sideIcons[sideIconsId[i]];
+                        if (i == 13) {
+                            spriteCache.draw(360, sideIconsX[i] + xOffset, sideIconsY[i] + yOffset, true);
+                        } else {
+                            sprite.drawSprite(sideIconsX[i] + xOffset, sideIconsY[i] + yOffset);
+                        }
+
+                    }
+                }
+            }
+        } else if (stackSideStones && frameWidth < 1000) {
+            int[] iconId = {0, 1, 2, 3, 4, 5, 6, -1, 8, 9, 7, 11, 12, 13};
+            int[] iconX = {219, 189, 156, 126, 94, 62, 30, 219, 189, 156, 124, 92, 59, 28};
+            int[] iconY = {67, 69, 67, 69, 72, 72, 69, 32, 29, 29, 32, 30, 33, 31, 32};
+            for (int i = 0; i < sideIconsTab.length; i++) {
+                if (tabInterfaceIDs[sideIconsTab[i]] != -1) {
+                    if (iconId[i] != -1) {
+                        Sprite sprite = sideIcons[iconId[i]];
+                        if (i == 13) {
+                            spriteCache.draw(360, frameWidth - iconX[i] + 2, frameHeight - iconY[i] + 1, true);
+                        } else {
+                            sprite.drawSprite(frameWidth - iconX[i], frameHeight - iconY[i]);
+                        }
+                    }
+                }
+            }
+        } else if (stackSideStones && frameWidth >= 1000) {
+            int[] iconId = {0, 1, 2, 3, 4, 5, 6, -1, 8, 9, 7, 11, 12, 13};
+            int[] iconX = {50, 80, 114, 143, 176, 208, 240, 242, 273, 306, 338, 370, 404, 433};
+            int[] iconY = {30, 32, 30, 32, 34, 34, 32, 32, 29, 29, 32, 31, 32, 32, 32};
+            for (int i = 0; i < sideIconsTab.length; i++) {
+                if (tabInterfaceIDs[sideIconsTab[i]] != -1) {
+                    if (iconId[i] != -1) {
+                        Sprite sprite = sideIcons[iconId[i]];
+                        if (i == 13) {
+                            spriteCache.draw(360, frameWidth - 461 + iconX[i] + 2, frameHeight - iconY[i] + 1, true);
+                        } else {
+                            sprite.drawSprite(frameWidth - 461 + iconX[i], frameHeight - iconY[i]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isResized() {
+        return frameMode == ScreenMode.RESIZABLE;
+    }
+
     private void drawTabArea() {
         final int xOffset = frameMode == ScreenMode.FIXED ? 0 : frameWidth - 241;
         final int yOffset = frameMode == ScreenMode.FIXED ? 0 : frameHeight - 336;
@@ -4032,10 +4217,11 @@ public class Client extends GameApplet {
         }
         Rasterizer3D.scanOffsets = anIntArray1181;
         if (frameMode == ScreenMode.FIXED) {
-            spriteCache.draw(21, 0, 0);
+            spriteCache.draw(oldMode ? 62 : 21, 0, 0);
         } else if (!stackSideStones) {
+            /** Draws frame box **/
             Rasterizer2D.drawTransparentBox(frameWidth - 217, frameHeight - 304, 195, 270, 0x3E3529, transparentTabArea ? 80 : 256);
-            spriteCache.draw(47, xOffset, yOffset);
+            spriteCache.draw(oldMode ? 678 : 47, xOffset, yOffset);
         } else {
             if (frameWidth >= 1000) {
                 if (showTabComponents) {
@@ -4492,6 +4678,8 @@ public class Client extends GameApplet {
         processMusic();
     }
 
+    public FileArchive mediaArchive;
+
     void startUp() {
 
         drawLoadingText(20, "Starting up");
@@ -4527,7 +4715,7 @@ public class Client extends GameApplet {
             midi_player = new JavaMidiPlayer();
             FileArchive configArchive = createArchive(2, "config", "config", 30);
             FileArchive interfaceArchive = createArchive(3, "interface", "interface", 35);
-            FileArchive mediaArchive = createArchive(4, "2d graphics", "media", 40);
+            mediaArchive = createArchive(4, "2d graphics", "media", 40);
             FileArchive streamLoader_6 = createArchive(5, "update list", "versionlist", 60);
             this.mediaStreamLoader = mediaArchive;
             FileArchive textureArchive = createArchive(6, "textures", "textures", 45);
@@ -4710,6 +4898,7 @@ public class Client extends GameApplet {
             if (indices[0] != null)
                 buffer = indices[0].decompress(file);
         } catch (Exception _ex) {
+
         }
 
         // Compare crc...
@@ -6596,11 +6785,12 @@ public class Client extends GameApplet {
             updateChatbox = true;
         }
 
+        System.err.println("Action=" + action);
+
         // public chat "hide" option
         if (action == 997) {
             publicChatMode = 3;
             updateChatbox = true;
-
             packetSender.sendChatConfigurations(publicChatMode, privateChatMode, tradeMode);
         }
 
@@ -6630,6 +6820,16 @@ public class Client extends GameApplet {
 
         // public chat main click
         if (action == 993) {
+
+            if (oldMode) {
+                if (++publicChatMode > 2) {
+                    publicChatMode = 0;
+                }
+                updateChatbox = true;
+                packetSender.sendChatConfigurations(publicChatMode, privateChatMode, tradeMode);
+                return;
+            }
+
             cButtonCPos = 2;
             chatTypeView = 1;
             updateChatbox = true;
@@ -6639,7 +6839,6 @@ public class Client extends GameApplet {
         if (action == 992) {
             privateChatMode = 2;
             updateChatbox = true;
-
             packetSender.sendChatConfigurations(publicChatMode, privateChatMode, tradeMode);
         }
 
@@ -6661,6 +6860,14 @@ public class Client extends GameApplet {
 
         // private chat main click
         if (action == 989) {
+            if (oldMode) {
+                if (++privateChatMode > 2) {
+                    privateChatMode = 0;
+                }
+                updateChatbox = true;
+                packetSender.sendChatConfigurations(publicChatMode, privateChatMode, tradeMode);
+                return;
+            }
             cButtonCPos = 3;
             chatTypeView = 2;
             updateChatbox = true;
@@ -6692,6 +6899,14 @@ public class Client extends GameApplet {
 
         // trade message privacy option main click
         if (action == 984) {
+            if (oldMode) {
+                if (++tradeMode > 2) {
+                    tradeMode = 0;
+                }
+                updateChatbox = true;
+                packetSender.sendChatConfigurations(publicChatMode, privateChatMode, tradeMode);
+                return;
+            }
             cButtonCPos = 5;
             chatTypeView = 3;
             updateChatbox = true;
@@ -7789,6 +8004,12 @@ public class Client extends GameApplet {
                     }
 
                     if (inputString.startsWith("::")) {
+                        if (inputString.equals("::togglemode")) {
+                            Client.oldMode = !Client.oldMode;
+                            sendMessage("Your frame has been " + (Client.oldMode ? "switched to 2006 mode." : "reverted back to OSRS"), 2, "Notice");
+                            inputString = "";
+                            return;
+                        }
                         packetSender.sendCommand(inputString.substring(2));
                     } else {
                         String text = inputString.toLowerCase();
@@ -8955,20 +9176,18 @@ public class Client extends GameApplet {
     }
 
     public void rightClickChatButtons() {
+        if (oldMode) {
+            create317RightClickButtons();
+        } else {
+            createOSRSRightClickButtons();
+        }
+    }
+
+    private void createOSRSRightClickButtons() {
+        int yPosition = frameHeight - 22;
+        int defaultY = frameHeight;
         if (mouseY >= frameHeight - 22 && mouseY <= frameHeight) {
-            if (super.mouseX >= 5 && super.mouseX <= 61) {
-                menuActionText[1] = "View all";
-                menuActionTypes[1] = 999;
-                menuActionRow = 2;
-            } else if (super.mouseX >= 69 && super.mouseX <= 125) {
-                menuActionText[1] = "@yel@Game: @whi@Clear history";
-                menuActionTypes[1] = 1008;
-                menuActionText[2] = "@yel@Game: @whi@Switch tab";
-                menuActionTypes[2] = 998;
-                menuActionRow = 3;
-            } else if (super.mouseX >= 133 && super.mouseX <= 189) {
-                menuActionText[1] = "@yel@Public: @whi@Clear history";
-                menuActionTypes[1] = 1009;
+            if (super.mouseX >= 13 && super.mouseX <= 97) {
                 menuActionText[2] = "@yel@Public: @whi@Hide";
                 menuActionTypes[2] = 997;
                 menuActionText[3] = "@yel@Public: @whi@Off";
@@ -9026,8 +9245,30 @@ public class Client extends GameApplet {
                 menuActionText[4] = "@yel@Yell: @whi@Switch tab";
                 menuActionTypes[4] = 974;
                 menuActionRow = 5;
-            } else if (super.mouseX >= 453 && super.mouseX <= 509) {
+            } else if (super.mouseX >= 417 && super.mouseX <= 501) {
                 menuActionText[1] = "Report";
+                menuActionTypes[1] = 606;
+                menuActionRow = 2;
+            }
+        }
+    }
+
+    private void create317RightClickButtons() {
+        if (mouseY >= 466 && mouseY <= 494) {
+            if (super.mouseX >= 12 && super.mouseX <= 96) {
+                menuActionText[1] = "@yel@Public: @whi@";
+                menuActionTypes[1] = 993;
+                menuActionRow = 2;
+            } else if (super.mouseX >= 141 && super.mouseX <= 225) {
+                menuActionText[1] = "@yel@Private: @whi@";
+                menuActionTypes[1] = 989;
+                menuActionRow = 2;
+            } else if (super.mouseX >= 281 && super.mouseX <= 366) {
+                menuActionText[1] = "@yel@Trade: @whi@";
+                menuActionTypes[1] = 984;
+                menuActionRow = 2;
+            } else if (super.mouseX >= 416 && super.mouseX <= 504) {
+                menuActionText[1] = "Report abuse";
                 menuActionTypes[1] = 606;
                 menuActionRow = 2;
             }
@@ -9160,10 +9401,8 @@ public class Client extends GameApplet {
             updateChatbox = true;
             anInt1500 = anInt1315;
         }
-        if (super.mouseX > 4 && super.mouseY > 480 && super.mouseX < 516
-                && super.mouseY < frameHeight) {
-            rightClickChatButtons();
-        }
+        rightClickChatButtons();
+
         processMinimapActions();
         boolean flag = false;
         while (!flag) {
@@ -12860,7 +13099,8 @@ public class Client extends GameApplet {
     }
 
     private void loadAllOrbs() {
-
+        if (oldMode)
+            return;
         boolean fixed = frameMode == ScreenMode.FIXED;
         boolean specOrb = Configuration.enableSpecOrb;
         int xOffset = fixed ? 0 : frameWidth - 217;
@@ -12883,6 +13123,7 @@ public class Client extends GameApplet {
         int offSprite = Configuration.expCounterOpen ? 53 : 22;
         int onSprite = Configuration.expCounterOpen ? 54 : 23;
         spriteCache.draw(expCounterHover ? onSprite : offSprite, fixed ? 0 : frameWidth - 216, 21);
+
     }
 
     private void loadHpOrb(int xOffset) {

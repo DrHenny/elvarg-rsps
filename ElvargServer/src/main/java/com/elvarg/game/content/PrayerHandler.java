@@ -92,6 +92,7 @@ public class PrayerHandler {
      * @param buttonId The button the player is clicking.
      */
     public static boolean togglePrayer(Player player, final int buttonId) {
+        player.sendMessage("button="+buttonId);
         PrayerData prayerData = PrayerData.actionButton.get(buttonId);
         if (prayerData != null) {
             if (!player.getPrayerActive()[prayerData.ordinal()])

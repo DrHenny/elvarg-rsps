@@ -427,9 +427,9 @@ public class Widget {
 		// questTab(textDrawingAreas);
 		teleportTab();
 		presets();
-		magicInterfaces();
+		//magicInterfaces();
 		editSkillTab();
-		
+		editPrayers();
 		clanSetup();
 		barrowsRewards();
 		godwarsDungeon();
@@ -505,6 +505,33 @@ public class Widget {
 		createTooltip(27656, 62, 30, fonts, "Total XP: 0");
 		
 		widget.child(55, 27656, 127, 220);
+	}
+
+	public static void editPrayers() {
+		remove(interfaceCache[19812]);
+		remove(interfaceCache[19814]);
+		remove(interfaceCache[19816]);
+		remove(interfaceCache[19818]);
+		remove(interfaceCache[19821]);
+		remove(interfaceCache[19823]);
+		remove(interfaceCache[28001]);
+		remove(interfaceCache[19825]);
+		remove(interfaceCache[19827]);
+		remove(interfaceCache[28004]);
+		remove(interfaceCache[28007]);
+	}
+
+	private static void remove(Widget widget) {
+		widget.hidden = true;
+		widget.width = 0;
+		widget.height = 0;
+		widget.invisible = true;
+		widget.tooltip = "";
+		if (widget.type == TYPE_SPRITE) {
+			widget.spriteOpacity = -1;
+			widget.enabledSprite = null;
+			widget.disabledSprite = null;
+		}
 	}
 
 	public static void magicInterfaces() {
