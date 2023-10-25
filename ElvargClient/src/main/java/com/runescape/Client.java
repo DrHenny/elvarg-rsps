@@ -434,11 +434,13 @@ public class Client extends GameApplet {
                     {"Public chat", "Private chat", "Trade/compete", "Report abuse"}
             };
     private final int[] hitmarks562 = {31, 32, 33, 34};
-    private final int[] tabClickX = {38, 33, 33, 33, 33, 33, 38, 38, 33, 33, 33, 33, 33, 38},
-            tabClickStart = {522, 560, 593, 625, 659, 692, 724, 522, 560, 593, 625, 659, 692,
-                    724},
-            tabClickY = {169, 169, 169, 169, 169, 169, 169, 466, 466, 466, 466, 466, 466,
-                    466};
+    private final int[]
+            tabClickX = {29, 28, 27, 45, 29, 25, 34,
+            31, 26, 26, 43, 28, 25, 30},
+            tabClickStart = {540, 569, 598, 626, 669, 699, 724,
+                    540, 572, 599, 626, 670, 699, 725},
+            tabClickY = {169, 169, 169, 169, 169, 169, 169,
+                    463, 463, 463, 466, 463, 463, 463};
     private final int[] quakeMagnitudes;
     private final boolean[] quakeDirectionActive;
     private final int maxPlayers;
@@ -1183,6 +1185,7 @@ public class Client extends GameApplet {
     }
 
     public void setInterfaceTab(int id) {
+        System.err.println("from - "+new Throwable().getStackTrace()[1].toString());
         tabId = id;
         tabAreaAltered = true;
         packetSender.sendInterfaceTab(id);
@@ -8822,23 +8825,20 @@ public class Client extends GameApplet {
     }
 
     private void processTabClick() {
+        System.err.println(super.mouseX+" "+super.mouseY);
         if (super.clickMode3 == 1) {
-            if (frameMode == ScreenMode.FIXED
-                    || frameMode != ScreenMode.FIXED && !stackSideStones) {
+            if (frameMode == ScreenMode.FIXED || frameMode != ScreenMode.FIXED && !stackSideStones) {
                 int xOffset = frameMode == ScreenMode.FIXED ? 0 : frameWidth - 765;
                 int yOffset = frameMode == ScreenMode.FIXED ? 0 : frameHeight - 503;
-                for (int i = 0; i < tabClickX.length; i++) {
-                    if (super.mouseX >= tabClickStart[i] + xOffset
-                            && super.mouseX <= tabClickStart[i] + tabClickX[i]
-                            + xOffset
-                            && super.mouseY >= tabClickY[i] + yOffset
-                            && super.mouseY < tabClickY[i] + 37 + yOffset
-                            && tabInterfaceIDs[i] != -1) {
-                        setInterfaceTab(i);
-
+                for (int index = 0; index < tabClickX.length; index++) {
+                    if (super.mouseX >= tabClickStart[index] + xOffset
+                            && super.mouseX <= tabClickStart[index] + tabClickX[index] + xOffset
+                            && super.mouseY >= tabClickY[index] + yOffset
+                            && super.mouseY < tabClickY[index] + 36 + yOffset
+                            && tabInterfaceIDs[index] != -1) {
+                        setInterfaceTab(index);
                         //Spawn tab
                         searchingSpawnTab = tabId == 2;
-
                         break;
                     }
                 }
@@ -8867,7 +8867,6 @@ public class Client extends GameApplet {
                         showTabComponents = true;
                     }
                     setInterfaceTab(1);
-
                 }
                 if (super.saveClickX >= frameWidth - 162
                         && super.saveClickX <= frameWidth - 131
@@ -15887,6 +15886,7 @@ public class Client extends GameApplet {
             menuActionTypes[1] = 696;
             menuActionRow = 2;
         }
+        //System.err.println("X="+super.mouseX+" Y="+super.mouseY+" "+frameWidth+" "+frameHeight);
         if (frameMode != ScreenMode.FIXED && stackSideStones) {
             if (super.mouseX >= frameWidth - 26 && super.mouseX <= frameWidth - 1 && super.mouseY >= 2 && super.mouseY <= 24) {
                 menuActionText[1] = "Logout";
