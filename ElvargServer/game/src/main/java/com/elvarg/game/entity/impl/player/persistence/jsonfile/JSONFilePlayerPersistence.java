@@ -19,7 +19,7 @@ import java.util.logging.Level;
 
 public class JSONFilePlayerPersistence extends PlayerPersistence {
 
-    private static final String PATH = "../data/saves/characters/";
+    private static final String PATH = "./data/saves/characters/";
     private static final Gson BUILDER = new GsonBuilder().create();
 
     @Override
