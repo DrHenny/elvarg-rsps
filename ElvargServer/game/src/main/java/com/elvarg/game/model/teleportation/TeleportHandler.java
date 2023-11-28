@@ -8,6 +8,7 @@ import com.elvarg.game.model.EffectTimer;
 import com.elvarg.game.model.Location;
 import com.elvarg.game.model.areas.Area;
 import com.elvarg.game.model.areas.AreaManager;
+import com.elvarg.game.model.areas.impl.DuelArenaArea;
 import com.elvarg.game.model.areas.impl.WildernessArea;
 import com.elvarg.game.task.Task;
 import com.elvarg.game.task.TaskManager;
@@ -24,8 +25,15 @@ public class TeleportHandler {
 	 * @param teleportType
 	 *            The type of teleport.
 	 */
-	public static void teleport(Player player, Location targetLocation, TeleportType teleportType,
-			boolean wildernessWarning) {
+	public static void teleport(Player player, Location targetLocation, TeleportType teleportType, boolean wildernessWarning) {
+
+		DuelArenaArea.inBounds(targetLocation);
+
+		if (!DuelArenaArea.inBounds(targetLocation)) {
+			player.getPacketSender().sendMessage("You cannot leave the Duel Arena.");
+			return;
+		}
+
 		if (wildernessWarning) {
 			StringBuilder warning = new StringBuilder();
 			Area area = AreaManager.get(targetLocation);
