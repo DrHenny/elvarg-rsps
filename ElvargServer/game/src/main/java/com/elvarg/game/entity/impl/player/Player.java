@@ -62,6 +62,7 @@ import com.elvarg.game.model.SecondsTimer;
 import com.elvarg.game.model.Skill;
 import com.elvarg.game.model.SkullType;
 import com.elvarg.game.model.areas.AreaManager;
+import com.elvarg.game.model.areas.impl.DuelArenaArea;
 import com.elvarg.game.model.container.impl.Bank;
 import com.elvarg.game.model.container.impl.Equipment;
 import com.elvarg.game.model.container.impl.Inventory;
@@ -120,6 +121,10 @@ public class Player extends Mobile {
 	private final List<String> recentKills = new ArrayList<String>(); // Contains ip addresses of recent kills
 	private final Queue<ChatMessage> chatMessageQueue = new ConcurrentLinkedQueue<>();
 	public boolean choosingMusic;
+
+	public int duelWins, duelLosses;
+
+	public int duelWinStreak, duelLossStreak, duelWinStreakHighest, duelLossStreakHighest;
 	private ChatMessage currentChatMessage;
 	// Logout
 	private final SecondsTimer forcedLogoutTimer = new SecondsTimer();
@@ -583,6 +588,13 @@ public class Player extends Mobile {
 		}
 	}
 
+	public void checkLocation() {
+		if (!DuelArenaArea.inBounds(this)) {
+			this.moveTo(GameConstants.DEFAULT_LOCATION);
+			this.getPacketSender().sendMessage("You cannot leave the Duel Arena.");
+		}
+	}
+
 	/**
 	 * Called by the world's login queue!
 	 */
@@ -605,7 +617,7 @@ public class Player extends Mobile {
 			totalExp += getSkillManager().getExperience(skill);
 		}
 		getPacketSender().sendTotalExp(totalExp);
-
+		checkLocation();
 		// Send friends and ignored players lists...
 		getRelations().setPrivateMessageId(1).onLogin(this).updateLists(true);
 
