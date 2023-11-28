@@ -29,6 +29,8 @@ public class PlayerSave {
     private MagicSpellbook spellBook;
     private FightType fightType;
     private boolean autoRetaliate;
+
+    private int duelWins, duelLosses, duelWinStreak, duelLossStreak, duelWinStreakHighest, duelLossStreakHighest;
     private boolean xpLocked;
     private String clanChat;
     private boolean targetTeleportUnlocked;
@@ -599,6 +601,12 @@ public class PlayerSave {
                 player.setBank(i, new Bank(player)).getBank(i).addItems(bankItems, false);
             }
         }
+        player.duelWins = this.duelWins;
+        player.duelLosses = this.duelLosses;
+        player.duelLossStreak = this.duelLossStreak;
+        player.duelWinStreak = this.duelWinStreak;
+        player.duelWinStreakHighest = this.duelWinStreakHighest;
+        player.duelLossStreakHighest = this.duelLossStreakHighest;
     }
 
     public static PlayerSave fromPlayer(Player player) {
@@ -682,6 +690,12 @@ public class PlayerSave {
             }
         }
         playerSave.banks = banks;
+        playerSave.duelWins = player.duelWins;
+        playerSave.duelLosses = player.duelLosses;
+        playerSave.duelLossStreak = player.duelLossStreak;
+        playerSave.duelWinStreak = player.duelWinStreak;
+        playerSave.duelWinStreakHighest = player.duelWinStreakHighest;
+        playerSave.duelLossStreakHighest = player.duelLossStreakHighest;
 
         return playerSave;
     }
