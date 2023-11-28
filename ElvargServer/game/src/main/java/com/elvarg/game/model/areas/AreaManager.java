@@ -7,11 +7,7 @@ import com.elvarg.game.entity.impl.Mobile;
 import com.elvarg.game.entity.impl.player.Player;
 import com.elvarg.game.model.Boundary;
 import com.elvarg.game.model.Location;
-import com.elvarg.game.model.areas.impl.BarrowsArea;
-import com.elvarg.game.model.areas.impl.DuelArenaArea;
-import com.elvarg.game.model.areas.impl.GodwarsDungeonArea;
-import com.elvarg.game.model.areas.impl.KingBlackDragonArea;
-import com.elvarg.game.model.areas.impl.WildernessArea;
+import com.elvarg.game.model.areas.impl.*;
 
 import java.util.ArrayList;
 import java.util.List;
