@@ -170,6 +170,10 @@ public class Misc {
         return NumberFormat.getInstance().format(num);
     }
 
+    public static String format(double num) {
+        return new DecimalFormat("0.00").format(num);
+    }
+
     public static String formatText(String s) {
         for (int i = 0; i < s.length(); i++) {
             if (i == 0) {
