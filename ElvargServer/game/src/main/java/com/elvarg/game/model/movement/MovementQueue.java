@@ -353,6 +353,9 @@ public final class MovementQueue {
             processCombatFollowing();
         }
 
+        if (character.isPlayer()) {
+            character.getAsPlayer().checkLocation();
+        }
         // Poll through the actual movement queue and
         // begin moving.
         Point walkPoint = null;
