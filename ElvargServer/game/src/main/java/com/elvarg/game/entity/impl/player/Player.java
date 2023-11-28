@@ -689,9 +689,9 @@ public class Player extends Mobile {
 					continue;
 				}
 
-				PlayerBot playerBot = new PlayerBot(definition);
+				//PlayerBot playerBot = new PlayerBot(definition);
 
-				World.getPlayerBots().put(definition.getUsername(), playerBot);
+				//World.getPlayerBots().put(definition.getUsername(), playerBot);
 			}
 
 			System.out.println(GameConstants.PLAYER_BOTS.length + " player bots now online.");
