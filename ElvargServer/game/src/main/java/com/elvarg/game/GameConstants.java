@@ -11,6 +11,7 @@ import com.elvarg.game.entity.impl.playerbot.fightstyle.impl.*;
 import com.elvarg.game.entity.impl.player.persistence.PlayerPersistence;
 import com.elvarg.game.model.Location;
 import com.elvarg.game.model.rights.PlayerRights;
+import com.elvarg.util.Misc;
 
 import java.util.*;
 
@@ -35,12 +36,12 @@ public class GameConstants {
 	/**
 	 * The directory of the definition files.
 	 */
-	public static final String DEFINITIONS_DIRECTORY = "../data/definitions/";
+	public static final String DEFINITIONS_DIRECTORY = "./data/definitions/";
 
 	/**
 	 * The directory of the clipping files.
 	 */
-	public static final String CLIPPING_DIRECTORY = "../data/clipping/";
+	public static final String CLIPPING_DIRECTORY = "./data/clipping/";
 
 	/**
 	 * The method used to save/load players.
@@ -72,7 +73,7 @@ public class GameConstants {
 	 * The default position, where players will spawn upon logging in for the first
 	 * time.
 	 */
-	public static final Location DEFAULT_LOCATION = new Location(3089, 3524);
+	public static final Location DEFAULT_LOCATION = new Location(Misc.random(3365, 3367), Misc.random(3264, 3268));
 
 	/**
 	 * Should the inventory be refreshed immediately on switching items or should it
