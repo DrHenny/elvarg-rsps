@@ -1,8 +1,10 @@
 package com.elvarg.game.model.areas.impl;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
+import com.elvarg.game.GameConstants;
 import com.elvarg.game.content.Dueling.DuelRule;
 import com.elvarg.game.content.Dueling.DuelState;
 import com.elvarg.game.content.combat.CombatFactory.CanAttackResponse;
@@ -17,8 +19,22 @@ import com.elvarg.util.timers.TimerKey;
 
 public class DuelArenaArea extends Area {
 
+    private static final List<Boundary> area = Arrays.asList(
+            new Boundary(3324, 3399, 3253, 3266),//massive square around the whole duel arena
+            new Boundary(3345, 3382, 3265, 3329),//main building + building behind
+            new Boundary(3312, 3327, 3224, 3247));//entrance
+
+    public static boolean inBounds(Player player) {
+        Location loc = player.getLocation();
+        return area.stream().anyMatch(f -> f.inside(loc));
+    }
+
+    public static boolean inBounds(Location location) {
+        return area.stream().anyMatch(f -> f.inside(location));
+    }
+
     public DuelArenaArea() {
-        super(Arrays.asList(new Boundary(3326, 3383, 3197, 3295)));
+        super(area);
     }
 
     @Override
@@ -27,11 +43,6 @@ public class DuelArenaArea extends Area {
             Player player = character.getAsPlayer();
             player.getPacketSender().sendInteractionOption("Challenge", 1, false);
             player.getPacketSender().sendInteractionOption("null", 2, true);
-        }
-
-        if (character.isPlayerBot() && this.getPlayers().size() == 0) {
-            // Allow this PlayerBot to wait for players for 5 minutes
-            character.getAsPlayerBot().getTimers().register(TimerKey.BOT_WAIT_FOR_PLAYERS);
         }
     }
 
@@ -45,15 +56,13 @@ public class DuelArenaArea extends Area {
             player.getPacketSender().sendInteractionOption("null", 2, true);
             player.getPacketSender().sendInteractionOption("null", 1, false);
 
-            if (getPlayers().size() == 0 && getPlayerBots().size() > 0) {
-                // Last player has left duel arena and there are bots
-                getPlayerBots().stream().forEach((pb) -> pb.getTimers().register(TimerKey.BOT_WAIT_FOR_PLAYERS));
-            }
+
         }
     }
 
     @Override
     public void process(Mobile character) {
+
     }
 
     @Override
@@ -149,21 +158,6 @@ public class DuelArenaArea extends Area {
 
     @Override
     public boolean handleObjectClick(Player player, GameObject object, int type) {
-        return false;
-    }
-
-    @Override
-    public boolean canPlayerBotIdle(PlayerBot playerBot) {
-        if (this.getPlayers().size() > 0) {
-            // Player bots can idle here if there are any real players here
-            return true;
-        }
-
-        if (playerBot.getTimers().has(TimerKey.BOT_WAIT_FOR_PLAYERS)) {
-            // Player bot can idle here while waiting for players
-            return true;
-        }
-
         return false;
     }
 }
