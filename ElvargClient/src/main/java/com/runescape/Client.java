@@ -1971,7 +1971,7 @@ public class Client extends GameApplet {
             } catch (Exception ex) {
 
             }
-        } else if (showChatComponents) {
+        } else if (showChatComponents) {//TODO.. mesages for type 16 = clan chat.. looks ass
             int j77 = -3;
             int j = 0;
             int shadow = (changeChatArea && frameMode != ScreenMode.FIXED) ? 0 : -1;
@@ -2004,7 +2004,7 @@ public class Client extends GameApplet {
                             for (ChatCrown c : crowns) {
                                 Sprite sprite = spriteCache.lookup(c.getSpriteId());
                                 if (sprite != null) {
-                                    sprite.drawSprite(xOffset2 + xPos + 1, yPos - 12 + yOffset);
+                                    sprite.drawSprite(xOffset2 + xPos + 1, yPos - 15 + yOffset);
                                     xPos += sprite.myWidth + 2;
                                 }
                             }
@@ -2094,7 +2094,7 @@ public class Client extends GameApplet {
                                 j77++;
                             }
                             if (type == 12) {
-                                newRegularFont.drawBasicString(message + "",
+                                newRegularFont.drawBasicString(message + " ",
                                         xOffset2 + 11, yPos + yOffset, 0x7e3200, shadow);
                                 j++;
                             }
@@ -2121,11 +2121,24 @@ public class Client extends GameApplet {
                 }
             }
             Rasterizer2D.defaultDrawingAreaSize();
-            anInt1211 = j * 14 + 7 + 5;
-            if (anInt1211 < 111) {
-                anInt1211 = 111;
+            anInt1211 = j * 14 + 7;
+            if (anInt1211 < 78) {
+                anInt1211 = 78;
             }
-            drawScrollbar(114, anInt1211 - anInt1089 - 113, 7 + yOffset, oldMode ? 480 : 496, anInt1211, (changeChatArea && frameMode != ScreenMode.FIXED));
+            int x = (oldMode ? 480 : 496);
+
+            int y = oldMode ? 15 : 7 + yOffset;
+
+            int unk1 = anInt1211 - anInt1089 - 110;
+
+            int maxScroll = anInt1211;
+
+            //System.err.println(y+" "+yOffset+" "+unk1+" "+anInt1211);
+
+            //drawScrollbar(childInterface.height, childInterface.scrollPosition, currentY, _x + childInterface.width, childInterface.scrollMax, false);
+
+            //7 + yOffset;
+            drawScrollbar(79, unk1, y, x, maxScroll, (changeChatArea && frameMode != ScreenMode.FIXED));
 
             String s;
             if (localPlayer != null && localPlayer.name != null) {
@@ -2134,25 +2147,25 @@ public class Client extends GameApplet {
                 s = StringUtils.formatText(capitalize(myUsername));
             }
             Rasterizer2D.setDrawingArea(140 + yOffset, 8, 509, 120 + yOffset);
-            int xOffset = xOffset2 + 10;
+            int xOffsetDisplayName = xOffset2 + 10;
             if (oldMode) {
-                xOffset++;
+                xOffsetDisplayName++;
             }
             // Draw crowns in typing area
-            for (ChatCrown c : ChatCrown.get(myPrivilege, donatorPrivilege)) {
+            /*for (ChatCrown c : ChatCrown.get(myPrivilege, donatorPrivilege)) {
                 Sprite sprite = spriteCache.lookup(c.getSpriteId());
                 if (sprite != null) {
                     sprite.drawSprite(xOffset, 122 + yOffset);
                     xOffset += sprite.myWidth + 2;
                 }
-            }
+            }*/
 
-            newRegularFont.drawBasicString(s + ":", xOffset, 133 + yOffset,
+            newRegularFont.drawBasicString(s + ":", xOffsetDisplayName, 133 + yOffset,
                     (changeChatArea && frameMode != ScreenMode.FIXED) ? 0xFFFFFF : 0, shadow);
             newRegularFont.drawBasicString(inputString + "*",
-                    xOffset + font.getTextWidth(s + ": "), 133 + yOffset,
+                    xOffsetDisplayName + font.getTextWidth(s + ": "), 133 + yOffset,
                     (changeChatArea && frameMode != ScreenMode.FIXED) ? 0x7FA9FF : 255, shadow);
-            Rasterizer2D.drawHorizontalLine(7, 121 + yOffset, 506, (changeChatArea && frameMode != ScreenMode.FIXED) ? 0x575757 : oldMode ? 0x000000 : 0x807660);
+            Rasterizer2D.drawHorizontalLine(7, (oldMode ? 120 : 121) + yOffset, oldMode ? 488 : 506, (changeChatArea && frameMode != ScreenMode.FIXED) ? 0x575757 : oldMode ? 0x000000 : 0x807660);
             Rasterizer2D.defaultDrawingAreaSize();
         }
         if (menuOpen) {
@@ -3155,6 +3168,28 @@ public class Client extends GameApplet {
         } else {
             scrollBar1.drawSprite(x, y);
             scrollBar2.drawSprite(x, (y + height) - 16);
+
+            int k1 = ((height - 32) * height) / maxScroll;
+            if (k1 < 8) {
+                k1 = 8;
+            }
+            int l1 = ((height - 32 - k1) * pos) / (maxScroll - height);
+
+
+            if (oldMode) {
+                Rasterizer2D.drawBox(x, y + 16, 16, height - 32, Configuration.anInt1002);
+
+                Rasterizer2D.drawBox(x, y + 16 + l1, 16, k1, Configuration.anInt1063);
+                Rasterizer2D.drawVerticalLine(x, y + 16 + l1, k1, Configuration.anInt902);
+                Rasterizer2D.drawVerticalLine(x + 1, y + 16 + l1, k1, Configuration.anInt902);
+                Rasterizer2D.drawHorizontalLine(x, y + 16 + l1, 16, Configuration.anInt902);
+                Rasterizer2D.drawHorizontalLine(x, y + 17 + l1, 16, Configuration.anInt902);
+                Rasterizer2D.drawVerticalLine(x + 15, y + 16 + l1, k1, Configuration.anInt927);
+                Rasterizer2D.drawVerticalLine(x + 14, y + 17 + l1, k1 - 1, Configuration.anInt927);
+                Rasterizer2D.drawHorizontalLine(x, y + 15 + l1 + k1, 16, Configuration.anInt927);
+                Rasterizer2D.drawHorizontalLine(x + 1, y + 14 + l1 + k1, 15, Configuration.anInt927);
+                return;
+            }
             Rasterizer2D.drawBox(x, y + 16, 16, height - 32, 0x000001);
             Rasterizer2D.drawBox(x, y + 16, 15, height - 32, 0x3d3426);
             Rasterizer2D.drawBox(x, y + 16, 13, height - 32, 0x342d21);
@@ -3162,11 +3197,7 @@ public class Client extends GameApplet {
             Rasterizer2D.drawBox(x, y + 16, 10, height - 32, 0x29241b);
             Rasterizer2D.drawBox(x, y + 16, 9, height - 32, 0x252019);
             Rasterizer2D.drawBox(x, y + 16, 1, height - 32, 0x000001);
-            int k1 = ((height - 32) * height) / maxScroll;
-            if (k1 < 8) {
-                k1 = 8;
-            }
-            int l1 = ((height - 32 - k1) * pos) / (maxScroll - height);
+
             Rasterizer2D.drawBox(x, y + 16 + l1, 16, k1, barFillColor);
             Rasterizer2D.drawVerticalLine(x, y + 16 + l1, k1, 0x000001);
             Rasterizer2D.drawVerticalLine(x + 1, y + 16 + l1, k1, 0x817051);
@@ -4125,15 +4156,14 @@ public class Client extends GameApplet {
 
     private void draw317Redstones() {
         int[] redStonesX = new int[]{22, 54, 82, 110, 154, 182, 209, 22, 54, 81, 110, 154, 182, 209};
-        int[] redStonesY = new int[]{3, 1, 1, 0, 1, 1, 2, 298, 299, 297, 299, 298, 298, 298};
-        int[] redStonesId = new int[]{702, 707, 707, 704, 709, 709, 703, 705, 710, 710, 708, 711, 711, 706};
+        int[] redStonesY = new int[]{2, 1, 1, 0, 1, 1, 2, 298, 299, 297, 299, 298, 298, 298};
+        int[] redStonesId = new int[] { 702, 707, 707, 704, 709, 709, 703, 705, 710, 710, 708, 711, 711, 706 };
 
         int xOffset = frameMode == ScreenMode.FIXED ? 0 : frameWidth - 247;
         int yOffset = frameMode == ScreenMode.FIXED ? 0 : frameHeight - 336;
         if (frameMode == ScreenMode.FIXED || frameMode != ScreenMode.FIXED && !stackSideStones) {
             if (tabInterfaceIDs[tabId] != -1 && tabId != 15) {
-                spriteCache.draw(redStonesId[tabId], redStonesX[tabId] + xOffset,
-                        redStonesY[tabId] + yOffset);
+                spriteCache.draw(redStonesId[tabId], redStonesX[tabId] + xOffset,redStonesY[tabId] + yOffset);
             }
         } else if (stackSideStones && frameWidth < 1000) {
             int[] stoneX = {226, 194, 162, 130, 99, 65, 34, 219, 195, 161, 130, 98, 65, 33};
@@ -4164,12 +4194,7 @@ public class Client extends GameApplet {
                 if (tabInterfaceIDs[sideIconsTab[i]] != -1) {
                     if (sideIconsId[i] != -1) {
                         Sprite sprite = sideIcons[sideIconsId[i]];
-                        if (i == 13) {
-                            spriteCache.draw(360, sideIconsX[i] + xOffset, sideIconsY[i] + yOffset, true);
-                        } else {
-                            sprite.drawSprite(sideIconsX[i] + xOffset, sideIconsY[i] + yOffset);
-                        }
-
+                        sprite.drawSprite(sideIconsX[i] + xOffset, sideIconsY[i] + yOffset);
                     }
                 }
             }
@@ -4796,8 +4821,8 @@ public class Client extends GameApplet {
             mapDotFriend = new Sprite(mediaArchive, "mapdots", 3);
             mapDotTeam = new Sprite(mediaArchive, "mapdots", 4);
             mapDotClan = new Sprite(mediaArchive, "mapdots", 5);
-            scrollBar1 = new Sprite(mediaArchive, "scrollbar", 0);
-            scrollBar2 = new Sprite(mediaArchive, "scrollbar", 1);
+            scrollBar1 = new Sprite(mediaArchive, "scrollbar", oldMode ? 6 : 0);
+            scrollBar2 = new Sprite(mediaArchive, "scrollbar", oldMode ? 7 : 1);
             Sprite sprite = new Sprite(mediaArchive, "screenframe", 0);
             leftFrame = new ProducingGraphicsBuffer(sprite.myWidth, sprite.myHeight);
             sprite.method346(0, 0);
@@ -6788,7 +6813,6 @@ public class Client extends GameApplet {
             updateChatbox = true;
         }
 
-        System.err.println("Action=" + action);
 
         // public chat "hide" option
         if (action == 997) {
@@ -8764,7 +8788,7 @@ public class Client extends GameApplet {
     }
 
     public void sendMessage(String message, int type, String name) {
-        List<ChatCrown> crowns = new ArrayList<ChatCrown>();
+        List<ChatCrown> crowns = new ArrayList<>();
         for (ChatCrown c : ChatCrown.values()) {
             boolean exists = false;
             if (message.contains(c.getIdentifier())) {
@@ -8825,7 +8849,6 @@ public class Client extends GameApplet {
     }
 
     private void processTabClick() {
-        System.err.println(super.mouseX+" "+super.mouseY);
         if (super.clickMode3 == 1) {
             if (frameMode == ScreenMode.FIXED || frameMode != ScreenMode.FIXED && !stackSideStones) {
                 int xOffset = frameMode == ScreenMode.FIXED ? 0 : frameWidth - 765;
@@ -14978,6 +15001,7 @@ public class Client extends GameApplet {
                 int type = incoming.readUnsignedByte();
                 String name = incoming.readString();
                 String message = incoming.readString();
+                System.err.println(name+" -- "+message);
                 sendMessage(message, type, name);
                 opcode = -1;
                 return true;

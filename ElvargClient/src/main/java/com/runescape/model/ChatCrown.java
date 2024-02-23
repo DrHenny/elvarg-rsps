@@ -9,8 +9,8 @@ public enum ChatCrown {
 	
 	MOD_CROWN("@cr1@", 618),
 	ADMIN_CROWN("@cr2@", 619),
-	OWNER_CROWN("@cr3@", 620),
-	DEVELOPER("@cr4@", 621),
+	OWNER_CROWN("@cr3@", 619),
+	DEVELOPER("@cr4@", 619),
 		
 	// Donators
 	DONATOR("@cr5@", 622),

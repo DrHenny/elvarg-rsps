@@ -158,6 +158,9 @@ public final class Configuration {
 
     }
 
+    public static final int anInt902 = 0x766654, anInt1063 = 0x4d4233, anInt927 = 0x332d25, anInt1002 = 0x23201b;;
+
+
     public static class DiscordConfiguration {
         public static final boolean ENABLE_DISCORD_OAUTH_LOGIN = true;
         public static final String CLIENT_ID = "1010001099815669811";

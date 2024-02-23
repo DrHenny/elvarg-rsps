@@ -1,5 +1,6 @@
 package com.runescape.draw;
 
+import com.runescape.Client;
 import com.runescape.collection.Cacheable;
 
 import java.awt.Graphics2D;
@@ -118,8 +119,10 @@ public class Rasterizer2D extends Cacheable {
         }
         if (leftX + width > bottomX)
             width = bottomX - leftX;
+
         if (topY + height > bottomY)
             height = bottomY - topY;
+
         int leftOver = Rasterizer2D.width - width;
         int pixelIndex = leftX + topY * Rasterizer2D.width;
         for (int rowIndex = 0; rowIndex < height; rowIndex++) {
